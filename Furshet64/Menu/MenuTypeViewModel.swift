@@ -19,7 +19,7 @@ class MenuTypeViewModel: NSObject  {
         super.init()
     }
     
-    func getMenuTypeProduct() {
+    func getMenuTypeProduct() { 
         DatabaseService.shared.getTypeProduct { [weak self] result in
             guard let self else { return }
             switch result {
