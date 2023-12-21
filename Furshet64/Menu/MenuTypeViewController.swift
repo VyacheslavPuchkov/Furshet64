@@ -11,9 +11,12 @@ import FirebaseStorage
 
 class MenuTypeViewController: BaseViewController {
     
+    // MARK: - ViewModel
     var viewModel: MenuTypeViewModel = .init()
+   // MARK: - Combine
     private var cancelable = Set<AnyCancellable>()
     
+    // MARK: - UI
     let collectViewTypeProduct : UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
@@ -43,20 +46,36 @@ class MenuTypeViewController: BaseViewController {
         
     }()
   
+    // MARK: - Life Cycle View Controller
     override func viewDidLoad() {
         super.viewDidLoad()
         setConstraint()
         viewModel.getMenuTypeProduct()
-        viewModel.getProduct()
+        viewModel.getProduct(productType: "Холодные закуски из морепродуктов")
         bindTypeProduct()
         bindProduct()
-        collectViewTypeProduct.delegate = self
-        collectViewTypeProduct.dataSource = self
+        setupCollectionTypeProduct()
+        setupCollectionProduct()
+    }
+
+}
+
+
+// MARK: - Private func
+private extension MenuTypeViewController {
+    
+    func setupCollectionProduct() {
         collectViewProduct.delegate = self
         collectViewProduct.dataSource = self
-   }
-
-    private func setConstraint() {
+    }
+    
+    func setupCollectionTypeProduct() {
+        collectViewTypeProduct.delegate = self
+        collectViewTypeProduct.dataSource = self
+    }
+    
+    // MARK: Constraints
+    func setConstraint() {
         view.addSubview(collectViewTypeProduct)
         NSLayoutConstraint.activate([
             collectViewTypeProduct.topAnchor.constraint(equalTo: typeOrganization.bottomAnchor,constant: 25),
@@ -73,29 +92,29 @@ class MenuTypeViewController: BaseViewController {
         ])
     }
     
-    private func bindTypeProduct() {
+    // MARK: - Combine
+    func bindTypeProduct() {
         viewModel.dataSourseTypeProduct.sink { [weak self] _ in
             guard let self else { return }
             self.collectViewTypeProduct.reloadData()
         }.store(in: &cancelable)
     }
     
-    private func bindProduct() {
+    func bindProduct() {
         viewModel.dataSourseProduct.sink { [weak self] test in
             guard let self else { return }
             self.collectViewProduct.reloadData()
         }.store(in: &cancelable)
     }
-    
 }
 
+// MARK: - UICollectionViewDelegate
 extension MenuTypeViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
      
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView == collectViewTypeProduct {
             return viewModel.dataSourseTypeProduct.value.count
         } else {
-            print(viewModel.dataSourseProduct.value)
             return viewModel.dataSourseProduct.value.count
         }
     }
@@ -123,8 +142,11 @@ extension MenuTypeViewController: UICollectionViewDelegate, UICollectionViewData
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-       
+        if collectionView == collectViewTypeProduct {
+            let selectedTypeProduct = viewModel.dataSourseTypeProduct.value[indexPath.row].title
+            viewModel.getProduct(productType: selectedTypeProduct)
+            
+        }
     }
     
 }
-

@@ -7,10 +7,10 @@
 
 import Foundation
 
-enum ProductType {
-    case childrenProduct
-    case essentialProduct
-}
+//enum ProductType {
+//    case childrenProduct
+//    case essentialProduct
+//}
 
 struct MenuType {
     let menuType: String

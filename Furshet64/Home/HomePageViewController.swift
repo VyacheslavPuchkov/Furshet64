@@ -11,9 +11,12 @@ import FirebaseAuth
 
 class HomePageViewController: BaseViewController {
    
+    // MARK: - ViewModel
     var viewModel: HomePageViewModel = .init()
+    // MARK: - Combine
     private var cancelable = Set<AnyCancellable>()
     
+    // MARK: - UI
     let furshetInfoCollectView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
@@ -24,6 +27,7 @@ class HomePageViewController: BaseViewController {
         return collectionView
     }()
     
+    // MARK: - Life Cycle View Controller
     override func loadView() {
         super.loadView()
         bind()
@@ -33,18 +37,28 @@ class HomePageViewController: BaseViewController {
         super.viewDidLoad()
         view.backgroundColor = .blue
         setConstraint()
-        furshetInfoCollectView.delegate = self
-        furshetInfoCollectView.dataSource = self
         print(Auth.auth().currentUser?.uid ?? "no user")
     }
+        
+}
+
+// MARK: - Private func
+private extension HomePageViewController {
     
-    private func bind () {
+    func setupFurshetInfoCollectionView() {
+        furshetInfoCollectView.delegate = self
+        furshetInfoCollectView.dataSource = self
+    }
+    
+    // MARK: - Combine
+    func bind () {
         viewModel.dataSourse.sink { [weak self] _ in
             self?.furshetInfoCollectView.reloadData()
         }.store(in: &cancelable)
     }
     
-    private func setConstraint() {
+    // MARK: - Constraints
+    func setConstraint() {
         view.addSubview(furshetInfoCollectView)
         NSLayoutConstraint.activate([
             furshetInfoCollectView.topAnchor.constraint(equalTo: view.topAnchor,constant: 150),
@@ -53,7 +67,7 @@ class HomePageViewController: BaseViewController {
             furshetInfoCollectView.bottomAnchor.constraint(equalTo: view.topAnchor, constant: 230)
         ])
     }
-        
+    
 }
 
 extension HomePageViewController: UICollectionViewDelegate, UICollectionViewDataSource {

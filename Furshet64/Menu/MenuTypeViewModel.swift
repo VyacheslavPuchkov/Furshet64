@@ -12,13 +12,16 @@ import FirebaseStorage
 
 class MenuTypeViewModel: NSObject  {
     
+    //MARK: - Combine
     var dataSourseTypeProduct = CurrentValueSubject<[MenuTypeProduct], Never>([])
     var dataSourseProduct = CurrentValueSubject<[Product], Never>([])
     
+    // MARK: - Init
     override init() {
         super.init()
     }
     
+    // MARK: - Func
     func getMenuTypeProduct() { 
         DatabaseService.shared.getTypeProduct { [weak self] result in
             guard let self else { return }
@@ -31,8 +34,8 @@ class MenuTypeViewModel: NSObject  {
         }
     }
     
-    func getProduct() {
-        DatabaseService.shared.getProduct { [weak self] result in
+    func getProduct(productType: String) {
+        DatabaseService.shared.getProduct(productType: productType) { [weak self] result in
             guard let self else { return }
             switch result {
             case .success(let products):

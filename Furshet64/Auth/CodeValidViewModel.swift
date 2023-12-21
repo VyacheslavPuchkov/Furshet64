@@ -12,17 +12,21 @@ import Combine
 
 class CodeValidViewModel: NSObject {
     
+    // MARK: - Variable
     var profileUser: ProfileUser = .init(id: UUID().uuidString, name: "", phone: "")
-    var alertSucceessTrigger = PassthroughSubject<UIAlertController, Never>()
     var verificCode: String = ""
     var verificId: String
+    // MARK: - Combine
+    var alertSucceessTrigger = PassthroughSubject<UIAlertController, Never>()
     
+    // MARK: - Init
     init(verificId: String, phone: String) {
         self.verificId = verificId
         self.profileUser.phone = phone
         super.init()
     }
 
+    // MARK: - Func
     func showCodeValid() {
         AuthService.shared.signUpPhone(verificationID: verificId, verificationCode: verificCode) { [weak self] result in
             guard let self else { return }
@@ -36,7 +40,8 @@ class CodeValidViewModel: NSObject {
             }
         }
     }
-                
+
+    // MARK: - Private func
     private func setProfile() {
         DatabaseService.shared.setProfile(user: profileUser) { [weak self] result in
             guard self != nil else { return }

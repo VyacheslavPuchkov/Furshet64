@@ -62,8 +62,6 @@
 		CA598CD22B0FAD430024B9CE /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA598CD12B0FAD430024B9CE /* AuthViewController.swift */; };
 		CA655EDE2B1F5C32000FBD2C /* MenuTypeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA655EDD2B1F5C32000FBD2C /* MenuTypeModel.swift */; };
 		CA655EE02B1F8B59000FBD2C /* StorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA655EDF2B1F8B59000FBD2C /* StorageService.swift */; };
-		CA655EE62B1F9ACA000FBD2C /* MenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA655EE52B1F9ACA000FBD2C /* MenuViewModel.swift */; };
-		CA655EE82B1F9AE1000FBD2C /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA655EE72B1F9AE1000FBD2C /* MenuViewController.swift */; };
 		CA6881B82B03B2EB005EB250 /* ProfileUserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA6881B72B03B2EB005EB250 /* ProfileUserViewModel.swift */; };
 		CA6DF6E72AEA9F8800AC6F22 /* ProfileUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA6DF6E62AEA9F8800AC6F22 /* ProfileUserViewController.swift */; };
 		CA6DF6E92AEAAE6600AC6F22 /* RegistrationUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA6DF6E82AEAAE6500AC6F22 /* RegistrationUserViewController.swift */; };
@@ -145,8 +143,6 @@
 		CA598CD12B0FAD430024B9CE /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
 		CA655EDD2B1F5C32000FBD2C /* MenuTypeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuTypeModel.swift; sourceTree = "<group>"; };
 		CA655EDF2B1F8B59000FBD2C /* StorageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageService.swift; sourceTree = "<group>"; };
-		CA655EE52B1F9ACA000FBD2C /* MenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewModel.swift; sourceTree = "<group>"; };
-		CA655EE72B1F9AE1000FBD2C /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		CA6881B72B03B2EB005EB250 /* ProfileUserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileUserViewModel.swift; sourceTree = "<group>"; };
 		CA6DF6E62AEA9F8800AC6F22 /* ProfileUserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileUserViewController.swift; sourceTree = "<group>"; };
 		CA6DF6E82AEAAE6500AC6F22 /* RegistrationUserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationUserViewController.swift; sourceTree = "<group>"; };
@@ -324,8 +320,6 @@
 				CA655EDD2B1F5C32000FBD2C /* MenuTypeModel.swift */,
 				CA81CA742AE56EFE00F4B4D9 /* MenuTypeViewModel.swift */,
 				CA81CA642AE54DC200F4B4D9 /* MenuTypeViewController.swift */,
-				CA655EE52B1F9ACA000FBD2C /* MenuViewModel.swift */,
-				CA655EE72B1F9AE1000FBD2C /* MenuViewController.swift */,
 				CA6881C02B03B56C005EB250 /* Components */,
 			);
 			path = Menu;
@@ -394,9 +388,9 @@
 			children = (
 				CAB255822AE053D1002EA4DB /* AppDelegate.swift */,
 				CAB255842AE053D1002EA4DB /* SceneDelegate.swift */,
-				CA12F7B72B0D199D00394CF5 /* BaseViewController.swift */,
 				CA81CA762AE56FCA00F4B4D9 /* ProductTypeModel.swift */,
 				CAB255862AE053D1002EA4DB /* MainTableBaRController.swift */,
+				CA12F7B72B0D199D00394CF5 /* BaseViewController.swift */,
 				CAF7328C2B11EA0000820E0D /* Auth */,
 				CA6881C12B03B5AB005EB250 /* BasketProduct */,
 				CA6881BF2B03B514005EB250 /* Menu */,
@@ -616,7 +610,6 @@
 				CAF7328E2B11EAD600820E0D /* AuthViewModel.swift in Sources */,
 				CA110FEC2AE5000700BD4C7C /* RFontStyle.swift in Sources */,
 				CA86CFCA2AFD06AB00149053 /* RegistrationModel.swift in Sources */,
-				CA655EE82B1F9AE1000FBD2C /* MenuViewController.swift in Sources */,
 				CAA5AE8B2AE06E8C00823018 /* StackExt.swift in Sources */,
 				CA12F7B62B0D17E300394CF5 /* HomePageViewModel.swift in Sources */,
 				CAF732922B12188500820E0D /* CodeValidViewController.swift in Sources */,
@@ -627,7 +620,6 @@
 				CA6DF6E92AEAAE6600AC6F22 /* RegistrationUserViewController.swift in Sources */,
 				CA5491822AF7E222000737B4 /* MenyProductCollectionViewCell.swift in Sources */,
 				CA598CD22B0FAD430024B9CE /* AuthViewController.swift in Sources */,
-				CA655EE62B1F9ACA000FBD2C /* MenuViewModel.swift in Sources */,
 				CA6DF6E72AEA9F8800AC6F22 /* ProfileUserViewController.swift in Sources */,
 				CA12F7BB2B0D1D2B00394CF5 /* FurshetInfoViewCell.swift in Sources */,
 				CA4E8C9D2AE99B7A00CE8D16 /* FurshetInfoModel.swift in Sources */,

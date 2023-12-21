@@ -11,14 +11,18 @@ import UIKit
 
 class RegistrationViewModel: NSObject {
     
-    var alertSucceessTrigger = PassthroughSubject<UIAlertController, Never>()
+    // MARK: - Variable
     var userRegistration: RegistrationModel = .init(password: "", passwordTwo: "", email: "")
     var userProfile: ProfileUser = .init(id: UUID().uuidString, name: "", phone: "")
+    // MARK: - Combine
+    var alertSucceessTrigger = PassthroughSubject<UIAlertController, Never>()
     
+    // MARK: - Init
     override init() {
         super.init()
     }
     
+    // MARK: Func
     func signUp() {
         AuthService.shared.signUpEmail(email: userRegistration.email, password: userRegistration.password) { [weak self] result in
             guard let self, self.userRegistration.password == self.userRegistration.passwordTwo else { return }
@@ -30,6 +34,7 @@ class RegistrationViewModel: NSObject {
             }
         }
     }
+    
     func setProfile() {
         DatabaseService.shared.setProfile(user: userProfile) { [weak self] result in
             guard self != nil else { return }
@@ -41,4 +46,5 @@ class RegistrationViewModel: NSObject {
             }
         }
     }
+    
 }

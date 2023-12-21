@@ -11,15 +11,17 @@ import FlagPhoneNumber
 import FirebaseAuth
 
 class AuthViewController: BaseViewController {
-
+    
+    // MARK: - ViewModel
     var viewModel: AuthViewModel = .init()
+    // MARK: - Private variable
     private var listController: FPNCountryListViewController!
     private var cancelable = Set<AnyCancellable>()
-    
     private var tField: UITextField {
         return phoneUserTextField
     }
-
+    
+    // MARK: - UI
     var authorizationLabel: UILabel = {
         let label: UILabel = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -33,7 +35,6 @@ class AuthViewController: BaseViewController {
     
     var phoneUserTextField: FPNTextField = {
         let textField: FPNTextField = FPNTextField()
-        //tf.placeholder = "Ваш номер"
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.layer.masksToBounds = true
         textField.backgroundColor = .clear
@@ -78,7 +79,7 @@ class AuthViewController: BaseViewController {
         return button
     }()
     
- 
+    // MARK: - Life Cycle View Controller
     override func viewDidLoad() {
         super.viewDidLoad()
         setConstraint()
@@ -88,6 +89,7 @@ class AuthViewController: BaseViewController {
         print(Auth.auth().currentUser?.uid ?? "no id")
     }
     
+    // MARK: - Func
     @objc func actionButton() {
         viewModel.singUpPhone()
     }
@@ -105,12 +107,17 @@ class AuthViewController: BaseViewController {
         }
     }
     
-    private func setupTextField() {
+}
+
+// MARK: - Private func
+private extension AuthViewController {
+    
+    func setupTextField() {
         tField.delegate = self
         tField.addTarget(self, action: #selector(textFieldAction), for: .editingChanged)
     }
     
-    private func setupConfig() {
+    func setupConfig() {
         authButton.alpha = 0.5
         authButton.isEnabled = false
         
@@ -124,16 +131,8 @@ class AuthViewController: BaseViewController {
         }
     }
     
-    private func bind() {
-        viewModel.authSuccessTrigger.sink(receiveValue: { [weak self] verificID in
-            guard let verificID, let phone = self?.phoneUserTextField.text else { return }
-            let vc = CodeValidViewController()
-            vc.viewModel = .init(verificId: verificID, phone: phone)
-            self?.navigationController?.pushViewController(vc, animated: true)
-        }).store(in: &cancelable)
-    }
-    
-    private func setConstraint() {
+    // MARK: - Constraints
+    func setConstraint() {
         let stack = UIStackView(views: [authButton, authEmailButton], axis: .vertical, spacing: 16)
         let finalStack = UIStackView(views: [phoneUserTextField, stack], axis: .vertical, spacing: 45)
         view.addSubview(finalStack)
@@ -144,8 +143,19 @@ class AuthViewController: BaseViewController {
         ])
     }
     
+    // MARK: - Combine
+    func bind() {
+        viewModel.authSuccessTrigger.sink(receiveValue: { [weak self] verificID in
+            guard let verificID, let phone = self?.phoneUserTextField.text else { return }
+            let vc = CodeValidViewController()
+            vc.viewModel = .init(verificId: verificID, phone: phone)
+            self?.navigationController?.pushViewController(vc, animated: true)
+        }).store(in: &cancelable)
+    }
+    
 }
 
+// MARK: - UITextFieldDelegate
 extension AuthViewController: UITextFieldDelegate, FPNTextFieldDelegate {
     
     func fpnDidSelectCountry(name: String, dialCode: String, code: String) {

@@ -11,13 +11,16 @@ import Combine
 
 class HomePageViewModel: NSObject {
     
+    // MARK: - Combine
     var dataSourse = CurrentValueSubject<[FurshetInfo], Never>([])
     
+    // MARK: - Init
     override init() {
         super.init()
         getFurshetInfo()
     }
     
+    // MARK: - Func
     func getFurshetInfo() {
         DatabaseService.shared.getFurshetInfo { [weak self] result in
             guard let self = self else { return }

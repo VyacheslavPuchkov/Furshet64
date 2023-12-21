@@ -9,20 +9,24 @@ import UIKit
 
 class FurshetInfoViewCell: UICollectionViewCell {
     
+    // MARK: - Static constants
     static let reuseID = "FurshetInfoViewCell"
     
+    // MARK: - UI
     let imageInfo: UIImageView = {
         let image: UIImageView = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
         return image
     }()
     
+    // MARK: - Init
     override init(frame: CGRect) {
         super.init(frame: frame)
         setConstraints()
     }
     
-    func setConstraints() {
+    // MARK: - Constraints
+    private func setConstraints() {
         contentView.addSubview(imageInfo)
         NSLayoutConstraint.activate([
             imageInfo.topAnchor.constraint(equalTo: contentView.topAnchor),
@@ -32,6 +36,7 @@ class FurshetInfoViewCell: UICollectionViewCell {
         ])
     }
     
+    // MARK: - Required init
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

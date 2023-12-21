@@ -12,13 +12,16 @@ import UIKit
 
 class ProfileUserViewModel: NSObject {
 
+    // MARK: - Combine
     var dataSourse = CurrentValueSubject<ProfileUser, Never>(.init(id: "", name: "", phone: ""))
     var alertSucceessTrigger = PassthroughSubject<UIAlertController, Never>()
     
+    // MARK: - Init
     override init() {
             super.init()
     }
     
+    // MARK: - Func
     func getProfile() {
         DatabaseService.shared.getProfile { [weak self] result in
             guard let self else { return }

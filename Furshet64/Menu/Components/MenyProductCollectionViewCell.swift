@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Combine
 
 class MenyProductCollectionViewCell: UICollectionViewCell {
     
@@ -45,16 +46,17 @@ class MenyProductCollectionViewCell: UICollectionViewCell {
         label.backgroundColor = .clear
         label.textColor = .white
         label.textAlignment = .center
-        label.text = "1 шт"
-        
+        label.text = "1"
+    
         return label
     }()
     
-    var addStepper: UIStepper = {
+    lazy var addStepper: UIStepper = {
         let stepper: UIStepper = UIStepper()
         stepper.backgroundColor = .white
         stepper.translatesAutoresizingMaskIntoConstraints = false
-        
+        stepper.addTarget(self, action: #selector(actionStepper), for: .valueChanged)
+        stepper.value = 1
         return stepper
     }()
     
@@ -77,14 +79,22 @@ class MenyProductCollectionViewCell: UICollectionViewCell {
         setConstaints()
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        imageProduct.image = UIImage()
+        countLabel.text = "1"
+        addStepper.value = 1
+    }
+    
     func setFoto(title: String) {
-        StorageService.shared.dowloadPicture(picName: title, ref: StorageService.shared.productRef) { pic in
-                DispatchQueue.main.async { [weak self] in
-                    guard let self else { return }
-                    self.imageProduct.image = pic.first
-                }
+        StorageService.shared.dowloadPicture(picName: title, ref: StorageService.shared.productRef) { [weak self] pic in
+            guard let self else { return }
+            DispatchQueue.main.async {
+                self.imageProduct.image = pic.first
             }
         }
+    }
     
     private func setConstaints() {
         contentView.addSubview(imageProduct)
@@ -104,6 +114,10 @@ class MenyProductCollectionViewCell: UICollectionViewCell {
             finalStack.rightAnchor.constraint(equalTo: contentView.rightAnchor),
             finalStack.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10)
         ])
+    }
+    
+    @objc func actionStepper(_ target: UIStepper) {
+        countLabel.text = "\(Int(target.value))"
     }
     
     required init?(coder: NSCoder) {

@@ -74,8 +74,9 @@ class DatabaseService {
         }
     }
     
-    func getProduct(completion: @escaping(Result<[Product], Error>) -> ()){
-        productRef.getDocuments { docSnapshot, error in
+    func getProduct(productType: String, completion: @escaping(Result<[Product], Error>) -> ()){
+        let predicate = NSPredicate(format: "typeProduct == %@", productType)
+        productRef.filter(using: predicate).getDocuments { docSnapshot, error in
             if let docSnapshot = docSnapshot {
                 var products = [Product]()
                 for doc in docSnapshot.documents {

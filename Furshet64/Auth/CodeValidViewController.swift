@@ -10,13 +10,16 @@ import Combine
 
 class CodeValidViewController: BaseViewController {
     
+    // MARK: - ViewModel
     var viewModel: CodeValidViewModel = .init(verificId: "", phone: "")
+    // MARK: - Combine
     private var cancelable = Set<AnyCancellable>()
-    
+    // MARK: - Private variable
     private var textField: UITextField {
         return codeTextField
     }
     
+    // MARK: - UI
     var codeTextField: UITextField = {
         let textField: UITextField = UITextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
@@ -52,7 +55,8 @@ class CodeValidViewController: BaseViewController {
         
         return button
     }()
-
+    
+    // MARK: - Life Cycle View Controller
     override func viewDidLoad() {
         super.viewDidLoad()
         print(viewModel.verificCode)
@@ -62,6 +66,7 @@ class CodeValidViewController: BaseViewController {
         bind()
     }
     
+    // MARK: - Func
     @objc func actionButton() {
         viewModel.showCodeValid()
     }
@@ -74,22 +79,18 @@ class CodeValidViewController: BaseViewController {
         }
     }
     
-    private func setupTextView() {
+}
+
+// MARK: - Private func
+private extension CodeValidViewController {
+   
+    func setupTextView() {
         textField.delegate = self
         textField.addTarget(self, action: #selector(textFieldAction), for: .editingChanged)
     }
     
-    private func bind() {
-        viewModel.alertSucceessTrigger.sink(receiveValue: { alert in
-            let action = UIAlertAction(title: "К профилю", style: .default) { _ in
-                self.navigationController?.tabBarController?.selectedIndex = 2
-            }
-            alert.addAction(action)
-            self.present(alert, animated: true)
-         }).store(in: &cancelable)
-    }
-    
-    private func setConstraint() {
+    // MARK: - Constraints
+    func setConstraint() {
         let stack = UIStackView(views: [codeTextField, sendButton], axis: .vertical, spacing: 35)
         view.addSubview(stack)
         stack.translatesAutoresizingMaskIntoConstraints = false
@@ -99,8 +100,20 @@ class CodeValidViewController: BaseViewController {
         ])
     }
     
+    // MARK: - Combine
+    func bind() {
+        viewModel.alertSucceessTrigger.sink(receiveValue: { alert in
+            let action = UIAlertAction(title: "К профилю", style: .default) { _ in
+                self.navigationController?.tabBarController?.selectedIndex = 2
+            }
+            alert.addAction(action)
+            self.present(alert, animated: true)
+         }).store(in: &cancelable)
+    }
+    
 }
 
+// MARK: - UITextFieldDelegate
 extension CodeValidViewController: UITextFieldDelegate {
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {

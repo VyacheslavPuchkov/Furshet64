@@ -38,5 +38,23 @@ struct MenuTypeProduct: Identifiable {
     
 }
 
+//extension MenuTypeProduct {
+//    
+//    var typeProductValue: TypeProduct {
+//        get {
+//            if title == "Холодные закуски из сыра и овощей" {
+//                return .snackWegetablesCheese
+//            } else if title == "Холодные закуски из морепродуктов" {
+//                return .snackSeafood
+//            } else if title == "Канапе, брускеты, закуски мясные" {
+//                return .snackMeat
+//            } else {
+//                return .all
+//            }
+//        }
+//    }
+//    
+//}
+
 
 

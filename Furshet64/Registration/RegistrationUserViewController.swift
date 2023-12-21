@@ -10,13 +10,16 @@ import Combine
 
 class RegistrationUserViewController: BaseViewController {
     
+    // MARK: - ViewModel
     var viewModel: RegistrationViewModel = .init()
+    // MARK: - Combine
     private var cancelable = Set<AnyCancellable>()
-    
+    // MARK: - Private variable
     private var textField: [UITextField] {
         return [mailUserTextField, passwordUserTextField, passwordTwoUserTextField]
     }
     
+    // MARK: - UI
     var registrationLabel: UILabel = {
         let label: UILabel = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -66,6 +69,7 @@ class RegistrationUserViewController: BaseViewController {
         return button
     }()
     
+    // MARK: - Life Cycle View Controller
     override func viewDidLoad() {
         super.viewDidLoad()
         setConstraint()
@@ -73,6 +77,7 @@ class RegistrationUserViewController: BaseViewController {
         bind()
     }
     
+    // MARK: - Func
     @objc func entranceActionButton() {
        let vc = EntranceUserViewController()
         self.navigationController?.pushViewController(vc, animated: true)
@@ -95,14 +100,20 @@ class RegistrationUserViewController: BaseViewController {
         }
     }
     
-    private func setupTextField() {
+}
+
+// MARK: - Private func
+private extension RegistrationUserViewController {
+    
+    func setupTextField() {
         textField.forEach { textField in
             textField.delegate = self
             textField.addTarget(self, action: #selector(textFieldAction), for: .editingChanged)
         }
     }
     
-    private func bind() {
+    // MARK: - Combine
+    func bind() {
         viewModel.alertSucceessTrigger.sink(receiveValue: { alert in
             let action = UIAlertAction(title: "К профилю", style: .default) { _ in
                 self.navigationController?.tabBarController?.selectedIndex = 2
@@ -112,7 +123,8 @@ class RegistrationUserViewController: BaseViewController {
          }).store(in: &cancelable)
     }
     
-    private func setConstraint() {
+    // MARK: - Constraints
+    func setConstraint() {
         let stack = UIStackView(views: [mailUserTextField, passwordUserTextField, passwordTwoUserTextField], axis: .vertical, spacing: 10)
         let stackButton = UIStackView(views: [registrationButton, entranceButton], axis: .vertical, spacing: 10)
         let stackFinal = UIStackView(views: [registrationLabel, stack, stackButton], axis: .vertical, spacing: 30)
@@ -123,9 +135,9 @@ class RegistrationUserViewController: BaseViewController {
             stackFinal.centerYAnchor.constraint(equalTo:view.centerYAnchor)
         ])
     }
-    
 }
 
+// MARK: - UITextFieldDelegate
 extension RegistrationUserViewController: UITextFieldDelegate {
 
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {

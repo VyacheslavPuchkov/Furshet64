@@ -10,12 +10,15 @@ import Combine
 
 class EntranceUserViewController: BaseViewController {
     
+    // MARK: - ViewModel
     var viewModel: EntranceViewModel?
     
+    // MARK: - Private variable
     private var arrayTF: Array<UITextField> {
         return [mailUserTextField, passwordUserTextField]
     }
 
+    // MARK: - UI
     var authorizationLabel: UILabel = {
         let label: UILabel = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -79,13 +82,15 @@ class EntranceUserViewController: BaseViewController {
         
         return button
     }()
- 
+    
+    // MARK: - Life Cycle View Controller
     override func viewDidLoad() {
         super.viewDidLoad()
         setConstraint()
         setupTextField()
     }
     
+    // MARK: - Func
     @objc func actionButton() {
         viewModel?.signIn()
     }
@@ -110,14 +115,20 @@ class EntranceUserViewController: BaseViewController {
         }
     }
     
-    private func setupTextField() {
+}
+
+// MARK: - Private func
+private extension EntranceUserViewController {
+    
+    func setupTextField() {
         arrayTF.forEach { textField in
             textField.delegate = self
             textField.addTarget(self, action: #selector(textFieldAction), for: .editingChanged)
         }
     }
     
-    private func setConstraint() {
+    // MARK: - Constraints
+    func setConstraint() {
         let stack = UIStackView(views: [mailUserTextField, passwordUserTextField], axis: .vertical, spacing: 10)
         let stackButton = UIStackView(views: [entranceButton, registrationButton, authPhoneButton], axis: .vertical, spacing: 10)
         let stackFinal = UIStackView(views: [authorizationLabel, stack, stackButton], axis: .vertical, spacing: 45)
@@ -131,6 +142,7 @@ class EntranceUserViewController: BaseViewController {
     
 }
 
+// MARK: - UITextFieldDelegate
 extension EntranceUserViewController: UITextFieldDelegate {
 
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {

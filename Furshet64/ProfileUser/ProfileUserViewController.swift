@@ -12,11 +12,11 @@ import FirebaseAuth
 
 class ProfileUserViewController: BaseViewController, ObservableObject {
     
+    // MARK: - ViewModel
     var viewModel: ProfileUserViewModel = .init()
-    private var cancelable = Set<AnyCancellable>()
+    // MARK: - Private variable
     private var listController: FPNCountryListViewController!
     private var profileUser: ProfileUser = .init(id: "", name: "", phone: "")
-    
     private var signUp: Bool = true {
         willSet {
             if newValue {
@@ -26,7 +26,10 @@ class ProfileUserViewController: BaseViewController, ObservableObject {
             }
         }
     }
+    // MARK: - Combine
+    private var cancelable = Set<AnyCancellable>()
     
+    // MARK: - UI
     let nameUserTextField = UITextField(placeholderText: "Как вас зовут? Желательно с фамилией")
     
     var phoneUserTextField: FPNTextField = {
@@ -76,6 +79,7 @@ class ProfileUserViewController: BaseViewController, ObservableObject {
         return button
     }()
     
+    // MARK: - Life Cycle View Controller
     override func viewDidLoad() {
         super.viewDidLoad()
         setConstraint()
@@ -91,6 +95,7 @@ class ProfileUserViewController: BaseViewController, ObservableObject {
         }
     }
     
+    // MARK: - Func
     @objc func exitActionButton() {
         viewModel.singOot()
         nameUserTextField.text = ""
@@ -113,7 +118,12 @@ class ProfileUserViewController: BaseViewController, ObservableObject {
         }
     }
     
-    private func setupConfig() {
+}
+
+// MARK: - Private func
+private extension ProfileUserViewController {
+    
+    func setupConfig() {
         nameUserTextField.isEnabled = false
         phoneUserTextField.isEnabled = false
         
@@ -127,7 +137,8 @@ class ProfileUserViewController: BaseViewController, ObservableObject {
         }
     }
     
-    private func setConstraint() {
+    // MARK: - Contraints
+    func setConstraint() {
         let stack = UIStackView(views: [nameUserTextField, phoneUserTextField, saveButton], axis: .vertical, spacing: 5)
         stack.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(stack)
@@ -142,7 +153,8 @@ class ProfileUserViewController: BaseViewController, ObservableObject {
         ])
     }
     
-    private func bind() {
+    // MARK: - Combine
+    func bind() {
         viewModel.alertSucceessTrigger.sink { alert in
             let oKaction = UIAlertAction(title: "Авторизиваться", style: .default) { _ in
                 let vc = AuthViewController()
@@ -157,7 +169,7 @@ class ProfileUserViewController: BaseViewController, ObservableObject {
         }.store(in: &cancelable)
     }
     
-    private func myProfile() {
+    func myProfile() {
         viewModel.dataSourse.sink { [weak self] user in
             guard let self else { return }
             self.profileUser = user
