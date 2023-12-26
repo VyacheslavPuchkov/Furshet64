@@ -74,7 +74,6 @@ private extension HomePageViewController {
 extension HomePageViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        print (viewModel.dataSourse.value.count)
         return viewModel.dataSourse.value.count
     }
     

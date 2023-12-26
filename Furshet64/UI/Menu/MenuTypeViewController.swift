@@ -145,9 +145,9 @@ extension MenuTypeViewController: UICollectionViewDelegate, UICollectionViewData
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MenyProductCollectionViewCell.reuseID, for: indexPath) as? MenyProductCollectionViewCell
             let item = viewModel.dataSourseProduct.value[indexPath.row]
             cell?.tapPublisher.sink(receiveValue: { [weak self, weak cell] _ in
-                guard let self else { return }
+                guard self != nil else { return }
                 let order: OrderModel = .init(id: UUID().uuidString, product: item, count: cell?.count ?? .zero)
-                self.viewModel.addOrder(order)
+                BasketProductManager.shared.addOrder(order)
             }).store(in: &cancelable)
             cell?.setFoto(title: item.imageUrl)
             cell?.priceLabel.text = "\(item.price) р."
@@ -165,7 +165,6 @@ extension MenuTypeViewController: UICollectionViewDelegate, UICollectionViewData
         if collectionView == collectViewTypeProduct {
             let selectedTypeProduct = viewModel.dataSourseTypeProduct.value[indexPath.row].title
             viewModel.getProduct(productType: selectedTypeProduct)
-            
         }
     }
     

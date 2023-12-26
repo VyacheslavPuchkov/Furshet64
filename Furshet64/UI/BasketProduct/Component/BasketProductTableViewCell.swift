@@ -20,7 +20,7 @@ class BasketProductTableViewCell: UITableViewCell {
         label.textColor = .black
         label.textAlignment = .left
         label.backgroundColor = .clear
-        label.font = .mobileH3
+        label.font = .bodyLarge2
         return label
     }()
     
@@ -31,8 +31,8 @@ class BasketProductTableViewCell: UITableViewCell {
         label.textColor = .black
         label.textAlignment = .center
         label.backgroundColor = .clear
-        label.font = .mobileH3
-        label.widthAnchor.constraint(equalToConstant: 50).isActive = true
+        label.font = .bodyLarge2
+        label.widthAnchor.constraint(equalToConstant: 70).isActive = true
         return label
     }()
     
@@ -41,9 +41,9 @@ class BasketProductTableViewCell: UITableViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 5
         label.textColor = .black
-        label.textAlignment = .center
+        label.textAlignment = .right
         label.backgroundColor = .clear
-        label.font = .mobileH3
+        label.font = .bodyLarge2
         label.widthAnchor.constraint(equalToConstant: 70).isActive = true
         return label
     }()

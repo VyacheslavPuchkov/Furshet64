@@ -153,7 +153,8 @@ extension BasketProductViewController: UITableViewDataSource, UITableViewDelegat
         let cell = tableView.dequeueReusableCell(withIdentifier: BasketProductTableViewCell.reuseID, for: indexPath) as? BasketProductTableViewCell
         cell?.productTitle.text = viewModel.orders[indexPath.row].product.title
         cell?.productPrice.text = "\(viewModel.orders[indexPath.row].cost) р."
-        cell?.productQuantity.text = "\(viewModel.orders[indexPath.row].count) шт."
+        cell?.productQuantity.text = "\(viewModel.orders[indexPath.row].count) шт"
+        cell?.backgroundColor = .clear
         return cell ?? UITableViewCell()
     }
     

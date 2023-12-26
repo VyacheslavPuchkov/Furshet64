@@ -12,10 +12,6 @@ import FirebaseStorage
 
 class MenuTypeViewModel: NSObject  {
     
-    //MARK: - Variable
-    var products: [Product] = []
-    var count = 1
-    
     // MARK: - Combine
     var dataSourseTypeProduct = CurrentValueSubject<[MenuTypeProduct], Never>([])
     var dataSourseProduct = CurrentValueSubject<[Product], Never>([])
@@ -43,7 +39,6 @@ class MenuTypeViewModel: NSObject  {
             guard let self else { return }
             switch result {
             case .success(let products):
-                self.products = products
                 self.dataSourseProduct.send(products)
             case .failure(let error):
                 print(error.localizedDescription)
@@ -51,9 +46,9 @@ class MenuTypeViewModel: NSObject  {
         }
     }
     
-    func addOrder(_ order: OrderModel) {
-        BasketProductManager.shared.addOrder(order)
-        }
-    
+//    func addOrder(_ order: OrderModel) {
+//        BasketProductManager.shared.addOrder(order)
+//        }
+//    
 }
 
