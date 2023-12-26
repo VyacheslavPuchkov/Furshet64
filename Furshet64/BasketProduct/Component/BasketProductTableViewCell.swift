@@ -17,11 +17,10 @@ class BasketProductTableViewCell: UITableViewCell {
         let label: UILabel = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 5
-        label.textColor = .white
-        label.textAlignment = .center
+        label.textColor = .black
+        label.textAlignment = .left
         label.backgroundColor = .clear
-        label.font = .mobileH5
-        
+        label.font = .mobileH3
         return label
     }()
     
@@ -29,11 +28,11 @@ class BasketProductTableViewCell: UITableViewCell {
         let label: UILabel = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 5
-        label.textColor = .white
+        label.textColor = .black
         label.textAlignment = .center
         label.backgroundColor = .clear
-        label.font = .mobileH5
-        
+        label.font = .mobileH3
+        label.widthAnchor.constraint(equalToConstant: 50).isActive = true
         return label
     }()
     
@@ -41,11 +40,11 @@ class BasketProductTableViewCell: UITableViewCell {
         let label: UILabel = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 5
-        label.textColor = .white
+        label.textColor = .black
         label.textAlignment = .center
         label.backgroundColor = .clear
-        label.font = .mobileH5
-        
+        label.font = .mobileH3
+        label.widthAnchor.constraint(equalToConstant: 70).isActive = true
         return label
     }()
     
@@ -58,15 +57,14 @@ class BasketProductTableViewCell: UITableViewCell {
     
     //MARK: - Constraints
     private func setConstaints() {
-        let stack = UIStackView(views: [productTitle, productQuantity, productPrice], axis: .horizontal, spacing: 1)
+        let stack = UIStackView(views: [productTitle, productQuantity, productPrice], axis: .horizontal, spacing: 2)
         contentView.addSubview(stack)
         stack.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             stack.leftAnchor.constraint(equalTo: contentView.leftAnchor),
             stack.rightAnchor.constraint(equalTo: contentView.rightAnchor),
             stack.topAnchor.constraint(equalTo: contentView.topAnchor),
-            stack.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-            stack.centerYAnchor.constraint(equalTo: contentView.centerYAnchor)
+            stack.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
         ])
     }
     

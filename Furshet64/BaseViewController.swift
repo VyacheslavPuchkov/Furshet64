@@ -24,7 +24,7 @@ class BaseViewController: UIViewController {
         label.text = "Фуршет 64"
         label.textAlignment = .center
         label.font = .mobileH1
-        label.textColor = .white
+        label.textColor = .black
         label.backgroundColor = .clear
         
         return label
@@ -36,7 +36,7 @@ class BaseViewController: UIViewController {
         label.text = "КЕЙТЕРИНГОВАЯ КОМПАНИЯ В САРАТОВЕ"
         label.font = .mobileH6
         label.textAlignment = .center
-        label.textColor = .white
+        label.textColor = .black
         label.backgroundColor = .clear
         return label
     }()

@@ -13,7 +13,7 @@ class MenuTypeViewController: BaseViewController {
     
     // MARK: - ViewModel
     var viewModel: MenuTypeViewModel = .init()
-   // MARK: - Combine
+    // MARK: - Combine
     private var cancelable = Set<AnyCancellable>()
     
     // MARK: - UI
@@ -34,7 +34,7 @@ class MenuTypeViewController: BaseViewController {
     let collectViewProduct: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
-        layout.itemSize = CGSize(width: 170, height: 295)
+        layout.itemSize = CGSize(width: 170, height: 330)
         layout.sectionInset = .init(top: .zero, left: 16, bottom: .zero, right: 16)
         layout.minimumLineSpacing = 10
         layout.minimumInteritemSpacing = 10
@@ -45,24 +45,36 @@ class MenuTypeViewController: BaseViewController {
         return collectionView
         
     }()
-  
+    
     // MARK: - Life Cycle View Controller
     override func viewDidLoad() {
         super.viewDidLoad()
         setConstraint()
-        viewModel.getMenuTypeProduct()
-        viewModel.getProduct(productType: "Холодные закуски из морепродуктов")
-        bindTypeProduct()
-        bindProduct()
+        viewModelFunc()
+        combineFunc()
         setupCollectionTypeProduct()
         setupCollectionProduct()
     }
-
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+    }
+    
 }
 
 
 // MARK: - Private func
 private extension MenuTypeViewController {
+    
+    func combineFunc() {
+        bindTypeProduct()
+        bindProduct()
+    }
+
+    func viewModelFunc() {
+        viewModel.getMenuTypeProduct()
+        viewModel.getProduct(productType: "Холодные закуски из морепродуктов")
+    }
     
     func setupCollectionProduct() {
         collectViewProduct.delegate = self
@@ -101,11 +113,12 @@ private extension MenuTypeViewController {
     }
     
     func bindProduct() {
-        viewModel.dataSourseProduct.sink { [weak self] test in
+        viewModel.dataSourseProduct.sink { [weak self] _ in
             guard let self else { return }
             self.collectViewProduct.reloadData()
         }.store(in: &cancelable)
     }
+    
 }
 
 // MARK: - UICollectionViewDelegate
@@ -126,19 +139,26 @@ extension MenuTypeViewController: UICollectionViewDelegate, UICollectionViewData
             cell?.titleMenyTypeLabel.text = item.title
             cell?.layer.cornerRadius = 5
             cell?.layer.borderWidth = 2
-            cell?.layer.borderColor = UIColor.white.cgColor
+            cell?.layer.borderColor = UIColor.black.cgColor
             return cell ?? UICollectionViewCell()
         } else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MenyProductCollectionViewCell.reuseID, for: indexPath) as? MenyProductCollectionViewCell
             let item = viewModel.dataSourseProduct.value[indexPath.row]
+            cell?.tapPublisher.sink(receiveValue: { [weak self, weak cell] _ in
+                guard let self else { return }
+                let order: OrderModel = .init(id: UUID().uuidString, product: item, count: cell?.count ?? .zero)
+                cell?.priceLabel.text = "\(item.price)  р."
+                self.viewModel.addOrder(order)
+            }).store(in: &cancelable)
             cell?.setFoto(title: item.imageUrl)
-            cell?.priceLabel.text = "\(item.price) р."
             cell?.titleLabel.text = item.title
             cell?.layer.cornerRadius = 8
             cell?.layer.borderWidth = 2
             cell?.layer.borderColor = UIColor.white.cgColor
+            cell?.backgroundColor = .black.withAlphaComponent(0.3)
             return cell ?? UICollectionViewCell()
         }
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

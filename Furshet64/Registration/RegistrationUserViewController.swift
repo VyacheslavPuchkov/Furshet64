@@ -26,7 +26,7 @@ class RegistrationUserViewController: BaseViewController {
         label.text = "Регистрация"
         label.textAlignment = .center
         label.font = .defaultLargeTitleBold
-        label.textColor = .white
+        label.textColor = .black
         label.backgroundColor = .clear
         return label
     }()
@@ -40,9 +40,9 @@ class RegistrationUserViewController: BaseViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.layer.masksToBounds = true
         button.setTitle("Зарегистрироваться", for: .normal)
-        button.backgroundColor = .white.withAlphaComponent(0.8)
+        button.backgroundColor = .black.withAlphaComponent(0.8)
         button.titleLabel?.font = .bodyLarge2
-        button.setTitleColor(.black, for: .normal)
+        button.setTitleColor(.white, for: .normal)
         button.widthAnchor.constraint(equalToConstant: 350).isActive = true
         button.heightAnchor.constraint(equalToConstant: 50).isActive = true
         button.layer.cornerRadius = 6
@@ -58,12 +58,12 @@ class RegistrationUserViewController: BaseViewController {
         button.setTitle("Уже есть аккаунт?", for: .normal)
         button.backgroundColor = .clear
         button.titleLabel?.font = .bodyLarge2
-        button.setTitleColor(.white, for: .normal)
+        button.setTitleColor(.black, for: .normal)
         button.widthAnchor.constraint(equalToConstant: 350).isActive = true
         button.heightAnchor.constraint(equalToConstant: 50).isActive = true
         button.layer.cornerRadius = 6
         button.layer.borderWidth = 2
-        button.layer.borderColor = UIColor.white.cgColor
+        button.layer.borderColor = UIColor.black.cgColor
         button.addTarget(self, action: #selector(entranceActionButton), for: .touchUpInside)
         
         return button

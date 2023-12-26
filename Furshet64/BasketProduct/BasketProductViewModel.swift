@@ -6,11 +6,15 @@
 //
 
 import UIKit
+import Combine
 
 class BasketProductViewModel: NSObject {
     
+    // MARK: - Static constant
+    static let shared = BasketProductViewModel()
+    
     // MARK: - Variable
-    var orders: [OrderModel] = .init()
+    @Published var orders: [OrderModel] = []
     
     var cost: Int {
         var sum = 0
@@ -19,11 +23,12 @@ class BasketProductViewModel: NSObject {
             sum += order.cost
         }
         return sum
+        
     }
-
-    // MARK: - Init
-    override init() {
-        super.init()
+    
+    // MARK: - Func
+    func addOrder(_ order: OrderModel) {
+        self.orders.append(order)
     }
     
 }

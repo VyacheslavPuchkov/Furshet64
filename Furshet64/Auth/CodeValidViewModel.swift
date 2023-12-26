@@ -27,7 +27,7 @@ class CodeValidViewModel: NSObject {
     }
 
     // MARK: - Func
-    func showCodeValid() {
+   @objc func showCodeValid() {
         AuthService.shared.signUpPhone(verificationID: verificId, verificationCode: verificCode) { [weak self] result in
             guard let self else { return }
             switch result {

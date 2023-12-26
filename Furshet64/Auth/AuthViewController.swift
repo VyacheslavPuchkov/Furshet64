@@ -22,25 +22,25 @@ class AuthViewController: BaseViewController {
     }
     
     // MARK: - UI
-    var authorizationLabel: UILabel = {
-        let label: UILabel = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Введите номер телефона"
-        label.textAlignment = .center
-        label.font = .defaultLargeTitleBold
-        label.textColor = .white
-        label.backgroundColor = .clear
-        return label
-    }()
+//    var authorizationLabel: UILabel = {
+//        let label: UILabel = UILabel()
+//        label.translatesAutoresizingMaskIntoConstraints = false
+//        label.text = "Введите номер телефона"
+//        label.textAlignment = .center
+//        label.font = .defaultLargeTitleBold
+//        label.textColor = .black
+//        label.backgroundColor = .clear
+//        return label
+//    }()
     
     var phoneUserTextField: FPNTextField = {
         let textField: FPNTextField = FPNTextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.layer.masksToBounds = true
+        textField.attributedPlaceholder = NSAttributedString(string: "  Ваш номер", attributes: [NSAttributedString.Key.foregroundColor: UIColor.black])
         textField.backgroundColor = .clear
         textField.layer.borderWidth = 2
-        textField.layer.borderColor = UIColor.white.cgColor
-        textField.textColor = .white
+        textField.layer.borderColor = UIColor.black.cgColor
         textField.heightAnchor.constraint(equalToConstant: 50).isActive = true
         textField.widthAnchor.constraint(equalToConstant: 350).isActive = true
         textField.layer.cornerRadius = 10
@@ -52,9 +52,9 @@ class AuthViewController: BaseViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.layer.masksToBounds = true
         button.setTitle("Получить код", for: .normal)
-        button.backgroundColor = .white.withAlphaComponent(0.8)
+        button.backgroundColor = .black
         button.titleLabel?.font = .bodyLarge2
-        button.setTitleColor(.black, for: .normal)
+        button.setTitleColor(.white, for: .normal)
         button.widthAnchor.constraint(equalToConstant: 350).isActive = true
         button.heightAnchor.constraint(equalToConstant: 50).isActive = true
         button.layer.cornerRadius = 6
@@ -68,9 +68,9 @@ class AuthViewController: BaseViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.layer.masksToBounds = true
         button.setTitle("Авторизоваться с помощью e-mail", for: .normal)
-        button.backgroundColor = .white.withAlphaComponent(0.8)
+        button.backgroundColor = .black.withAlphaComponent(0.8)
         button.titleLabel?.font = .bodyLarge
-        button.setTitleColor(.black, for: .normal)
+        button.setTitleColor(.white, for: .normal)
         button.widthAnchor.constraint(equalToConstant: 350).isActive = true
         button.heightAnchor.constraint(equalToConstant: 50).isActive = true
         button.layer.cornerRadius = 6
@@ -118,7 +118,7 @@ private extension AuthViewController {
     }
     
     func setupConfig() {
-        authButton.alpha = 0.5
+        authButton.alpha = 0.6
         authButton.isEnabled = false
         
         phoneUserTextField.displayMode = .list
@@ -169,7 +169,7 @@ extension AuthViewController: UITextFieldDelegate, FPNTextFieldDelegate {
             
             viewModel.profileUser.phone = textField.getFormattedPhoneNumber(format: .International)!
         } else {
-            authButton.alpha = 0.5
+            authButton.alpha = 0.6
             authButton.isEnabled = false
         }
     }

@@ -6,17 +6,21 @@
 //
 
 import UIKit
+import Combine
 
 class BasketProductViewController: BaseViewController{
  
     // MARK: - ViewModel
-    var viewModel: BasketProductViewModel = .init()
+    var viewModel: BasketProductViewModel = .shared
+    
+    // MARK: - Combine variable
+    private var cancelable = Set<AnyCancellable>()
     
     // MARK: - UI
     var orderTableView: UITableView = {
         let tableView: UITableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.backgroundColor = .black
+        tableView.backgroundColor = .clear
         tableView.register(BasketProductTableViewCell.self, forCellReuseIdentifier: BasketProductTableViewCell.reuseID)
         
         return tableView
@@ -26,7 +30,7 @@ class BasketProductViewController: BaseViewController{
         let label: UILabel = UILabel()
         label.text = "ИТОГО :"
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.textColor = .white
+        label.textColor = .black
         label.textAlignment = .center
         label.backgroundColor = .clear
         label.font = .mobileH2
@@ -37,7 +41,7 @@ class BasketProductViewController: BaseViewController{
     var totalPriceLabel: UILabel = {
         let label: UILabel = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.textColor = .white
+        label.textColor = .black
         label.textAlignment = .center
         label.backgroundColor = .clear
         label.font = .mobileH2
@@ -84,6 +88,7 @@ class BasketProductViewController: BaseViewController{
         super.viewDidLoad()
         setConstraint()
         setupOrderTableView()
+        bind()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -95,6 +100,13 @@ class BasketProductViewController: BaseViewController{
 
 // MARK: - Private func
 private extension BasketProductViewController {
+    
+    func bind() {
+        viewModel.$orders.sink { [weak self] _ in
+            guard let self else { return }
+            self.orderTableView.reloadData()
+        }.store(in: &cancelable)
+    }
     
     func setupOrderTableView() {
         orderTableView.dataSource = self
@@ -134,12 +146,14 @@ private extension BasketProductViewController {
 // MARK: - UITableViewDelegate
 extension BasketProductViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
+        return viewModel.orders.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: BasketProductTableViewCell.reuseID, for: indexPath) as? BasketProductTableViewCell
-        
+        cell?.productTitle.text = viewModel.orders[indexPath.row].product.title
+        cell?.productPrice.text = "\(viewModel.orders[indexPath.row].cost) р."
+        cell?.productQuantity.text = "\(viewModel.orders[indexPath.row].count) шт."
         return cell ?? UITableViewCell()
     }
     

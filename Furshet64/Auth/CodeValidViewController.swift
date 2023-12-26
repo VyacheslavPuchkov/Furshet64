@@ -27,7 +27,7 @@ class CodeValidViewController: BaseViewController {
         textField.backgroundColor = .clear
         textField.layer.borderWidth = 2
         textField.layer.borderColor = UIColor.white.cgColor
-        textField.textColor = .white
+        textField.textColor = .black
         textField.keyboardType = .numberPad
         textField.textAlignment = .center
         textField.font = .bodyLarge2
@@ -43,7 +43,7 @@ class CodeValidViewController: BaseViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.layer.masksToBounds = true
         button.setTitle("Проверить код", for: .normal)
-        button.backgroundColor = .white.withAlphaComponent(0.8)
+        button.backgroundColor = .black.withAlphaComponent(0.8)
         button.titleLabel?.font = .bodyLarge2
         button.setTitleColor(.black, for: .normal)
         button.widthAnchor.constraint(equalToConstant: 350).isActive = true
@@ -51,7 +51,7 @@ class CodeValidViewController: BaseViewController {
         button.layer.cornerRadius = 6
         button.alpha = 0.5
         button.isEnabled = false
-        button.addTarget(self, action: #selector(actionButton), for: .touchUpInside)
+        button.addTarget(self, action: #selector(viewModel.showCodeValid), for: .touchUpInside)
         
         return button
     }()
@@ -62,14 +62,10 @@ class CodeValidViewController: BaseViewController {
         print(viewModel.verificCode)
         setConstraint()
         setupTextView()
-        codeTextField.delegate = self
         bind()
     }
     
     // MARK: - Func
-    @objc func actionButton() {
-        viewModel.showCodeValid()
-    }
     
     @objc func textFieldAction(sender: UITextView) {
         switch sender {
@@ -85,6 +81,7 @@ class CodeValidViewController: BaseViewController {
 private extension CodeValidViewController {
    
     func setupTextView() {
+        codeTextField.delegate = self
         textField.delegate = self
         textField.addTarget(self, action: #selector(textFieldAction), for: .editingChanged)
     }

@@ -12,6 +12,9 @@ class MenyProductCollectionViewCell: UICollectionViewCell {
     
     static let reuseID = "MenuProductCell"
     
+    var tapPublisher = PassthroughSubject<Void, Never>()
+    @Published var count: Int = 1
+    
     var imageProduct: UIImageView = {
         let image: UIImageView = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
@@ -26,6 +29,7 @@ class MenyProductCollectionViewCell: UICollectionViewCell {
         let label: UILabel = UILabel()
         label.backgroundColor = .clear
         label.textColor = .white
+        label.font = .systemFont(ofSize: 25)
         label.textAlignment = .center
         
         return label
@@ -36,6 +40,7 @@ class MenyProductCollectionViewCell: UICollectionViewCell {
         label.backgroundColor = .clear
         label.textAlignment = .center
         label.textColor = .white
+        label.font = .systemFont(ofSize: 20)
         label.numberOfLines = 5
         
         return label
@@ -47,30 +52,30 @@ class MenyProductCollectionViewCell: UICollectionViewCell {
         label.textColor = .white
         label.textAlignment = .center
         label.text = "1"
-    
+        label.font = .systemFont(ofSize: 25)
+        
         return label
     }()
     
     lazy var addStepper: UIStepper = {
         let stepper: UIStepper = UIStepper()
-        stepper.backgroundColor = .white
         stepper.translatesAutoresizingMaskIntoConstraints = false
         stepper.addTarget(self, action: #selector(actionStepper), for: .valueChanged)
+        stepper.backgroundColor = .white
         stepper.value = 1
         return stepper
     }()
     
-    var addButton: UIButton = {
+    lazy var addButton: UIButton = {
         let button: UIButton = UIButton()
         button.layer.masksToBounds = true
         button.setTitle("В корзину", for: .normal)
-        button.backgroundColor = .white.withAlphaComponent(0.8)
-        //button.titleLabel?.font = .bodyLarge2
+        button.backgroundColor = .black.withAlphaComponent(0.8)
         button.setTitleColor(.white, for: .normal)
         button.widthAnchor.constraint(equalToConstant: 150).isActive = true
         button.heightAnchor.constraint(equalToConstant: 30).isActive = true
         button.layer.cornerRadius = 6
-        
+        button.addTarget(self, action: #selector(actionButton), for: .touchUpInside)
         return button
     }()
     
@@ -83,7 +88,7 @@ class MenyProductCollectionViewCell: UICollectionViewCell {
         super.prepareForReuse()
         
         imageProduct.image = UIImage()
-        countLabel.text = "1"
+        count = 1
         addStepper.value = 1
     }
     
@@ -117,7 +122,12 @@ class MenyProductCollectionViewCell: UICollectionViewCell {
     }
     
     @objc func actionStepper(_ target: UIStepper) {
-        countLabel.text = "\(Int(target.value))"
+        count = Int(target.value)
+        countLabel.text = "\(count)"
+    }
+    
+    @objc func actionButton() {
+        tapPublisher.send(())
     }
     
     required init?(coder: NSCoder) {

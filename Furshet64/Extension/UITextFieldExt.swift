@@ -14,11 +14,11 @@ extension UITextField {
         translatesAutoresizingMaskIntoConstraints = false
         layer.masksToBounds = true
         placeholder = placeholderTextOne
-        attributedPlaceholder = NSAttributedString(string: "\(placeholderTextOne)", attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
+        attributedPlaceholder = NSAttributedString(string: "\(placeholderTextOne)", attributes: [NSAttributedString.Key.foregroundColor: UIColor.black])
         backgroundColor = .clear
         layer.borderWidth = 2
-        layer.borderColor = UIColor.white.cgColor
-        textColor = .white
+        layer.borderColor = UIColor.black.cgColor
+        textColor = .black
         isEnabled = false
         textAlignment = .left
         leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: self.frame.height))
@@ -34,11 +34,11 @@ extension UITextField {
         translatesAutoresizingMaskIntoConstraints = false
         layer.masksToBounds = true
         placeholder = placeholderText
-        attributedPlaceholder = NSAttributedString(string: "\(placeholderText)", attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
+        attributedPlaceholder = NSAttributedString(string: "\(placeholderText)", attributes: [NSAttributedString.Key.foregroundColor: UIColor.black])
         backgroundColor = .clear
         layer.borderWidth = 2
-        layer.borderColor = UIColor.white.cgColor
-        textColor = .white
+        layer.borderColor = UIColor.black.cgColor
+        textColor = .black
         textAlignment = .left
         leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: self.frame.height))
         self.leftViewMode = .always
@@ -53,11 +53,11 @@ extension UITextField {
         translatesAutoresizingMaskIntoConstraints = false
         layer.masksToBounds = true
         placeholder = placeholderTextSecure
-        attributedPlaceholder = NSAttributedString(string: "\(placeholderTextSecure)", attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
+        attributedPlaceholder = NSAttributedString(string: "\(placeholderTextSecure)", attributes: [NSAttributedString.Key.foregroundColor: UIColor.black])
         backgroundColor = .clear
         layer.borderWidth = 2
-        layer.borderColor = UIColor.white.cgColor
-        textColor = .white
+        layer.borderColor = UIColor.black.cgColor
+        textColor = .black
         textAlignment = .left
         leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: self.frame.height))
         self.leftViewMode = .always
@@ -71,7 +71,7 @@ extension UITextField {
     private func setPasswordToggleImage(_ button: UIButton) {
         if(isSecureTextEntry){
             button.setImage(UIImage(systemName: "eye"), for: .normal)
-            button.tintColor = .white
+            button.tintColor = .black
         }else{
             button.setImage(UIImage(systemName: "eye.slash"), for: .normal)
             

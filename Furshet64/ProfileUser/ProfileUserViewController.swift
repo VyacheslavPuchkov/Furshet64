@@ -34,13 +34,13 @@ class ProfileUserViewController: BaseViewController, ObservableObject {
     
     var phoneUserTextField: FPNTextField = {
         let textField: FPNTextField = FPNTextField()
-        textField.attributedPlaceholder = NSAttributedString(string: "Ваш номер", attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
+        textField.attributedPlaceholder = NSAttributedString(string: "  Ваш номер", attributes: [NSAttributedString.Key.foregroundColor: UIColor.black])
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.layer.masksToBounds = true
         textField.backgroundColor = .clear
         textField.layer.borderWidth = 2
-        textField.layer.borderColor = UIColor.white.cgColor
-        textField.textColor = .white
+        textField.layer.borderColor = UIColor.black.cgColor
+        textField.textColor = .black
         textField.heightAnchor.constraint(equalToConstant: 50).isActive = true
         textField.widthAnchor.constraint(equalToConstant: 350).isActive = true
         textField.layer.cornerRadius = 10
@@ -52,9 +52,9 @@ class ProfileUserViewController: BaseViewController, ObservableObject {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.layer.masksToBounds = true
         button.setTitle("Изменить", for: .normal)
-        button.backgroundColor = .white.withAlphaComponent(0.8)
+        button.backgroundColor = .black.withAlphaComponent(0.8)
         button.titleLabel?.font = .bodyLarge2
-        button.setTitleColor(.black, for: .normal)
+        button.setTitleColor(.white, for: .normal)
         button.widthAnchor.constraint(equalToConstant: 350).isActive = true
         button.heightAnchor.constraint(equalToConstant: 50).isActive = true
         button.layer.cornerRadius = 6
@@ -68,9 +68,9 @@ class ProfileUserViewController: BaseViewController, ObservableObject {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.layer.masksToBounds = true
         button.setTitle("Выйти", for: .normal)
-        button.backgroundColor = .white.withAlphaComponent(0.8)
+        button.backgroundColor = .black.withAlphaComponent(0.8)
         button.titleLabel?.font = .bodyLarge2
-        button.setTitleColor(.black, for: .normal)
+        button.setTitleColor(.white, for: .normal)
         button.widthAnchor.constraint(equalToConstant: 350).isActive = true
         button.heightAnchor.constraint(equalToConstant: 50).isActive = true
         button.layer.cornerRadius = 6

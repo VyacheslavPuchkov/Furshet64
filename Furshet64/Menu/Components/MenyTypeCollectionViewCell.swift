@@ -14,7 +14,7 @@ class MenyTypeCollectionViewCell: UICollectionViewCell {
     var titleMenyTypeLabel: UILabel = {
         let label: UILabel = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.textColor = .white
+        label.textColor = .black
         label.textAlignment = .center
         label.numberOfLines = 3
         return label
