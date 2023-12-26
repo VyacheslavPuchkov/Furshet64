@@ -8,7 +8,6 @@
 import Foundation
 import Combine
 
-
 class HomePageViewModel: NSObject {
     
     // MARK: - Combine

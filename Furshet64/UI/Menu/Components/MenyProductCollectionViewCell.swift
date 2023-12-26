@@ -89,6 +89,7 @@ class MenyProductCollectionViewCell: UICollectionViewCell {
         
         imageProduct.image = UIImage()
         count = 1
+        countLabel.text = "1"
         addStepper.value = 1
     }
     

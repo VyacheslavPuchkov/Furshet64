@@ -11,7 +11,7 @@ import Combine
 class BasketProductViewController: BaseViewController{
  
     // MARK: - ViewModel
-    var viewModel: BasketProductViewModel = .shared
+    var viewModel: BasketProductManager = .shared
     
     // MARK: - Combine variable
     private var cancelable = Set<AnyCancellable>()
@@ -158,4 +158,3 @@ extension BasketProductViewController: UITableViewDataSource, UITableViewDelegat
     }
     
 }
-

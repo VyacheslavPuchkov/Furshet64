@@ -37,6 +37,7 @@ class HomePageViewController: BaseViewController {
         super.viewDidLoad()
         view.backgroundColor = .blue
         setConstraint()
+        setupFurshetInfoCollectionView()
         print(Auth.auth().currentUser?.uid ?? "no user")
     }
         
@@ -73,6 +74,7 @@ private extension HomePageViewController {
 extension HomePageViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        print (viewModel.dataSourse.value.count)
         return viewModel.dataSourse.value.count
     }
     

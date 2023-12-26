@@ -147,10 +147,10 @@ extension MenuTypeViewController: UICollectionViewDelegate, UICollectionViewData
             cell?.tapPublisher.sink(receiveValue: { [weak self, weak cell] _ in
                 guard let self else { return }
                 let order: OrderModel = .init(id: UUID().uuidString, product: item, count: cell?.count ?? .zero)
-                cell?.priceLabel.text = "\(item.price)  р."
                 self.viewModel.addOrder(order)
             }).store(in: &cancelable)
             cell?.setFoto(title: item.imageUrl)
+            cell?.priceLabel.text = "\(item.price) р."
             cell?.titleLabel.text = item.title
             cell?.layer.cornerRadius = 8
             cell?.layer.borderWidth = 2

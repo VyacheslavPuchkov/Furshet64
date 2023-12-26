@@ -13,7 +13,7 @@ import FirebaseStorage
 class MenuTypeViewModel: NSObject  {
     
     //MARK: - Variable
-    var products: [Product] = .init()
+    var products: [Product] = []
     var count = 1
     
     // MARK: - Combine
@@ -52,7 +52,7 @@ class MenuTypeViewModel: NSObject  {
     }
     
     func addOrder(_ order: OrderModel) {
-        BasketProductViewModel.shared.addOrder(order)
+        BasketProductManager.shared.addOrder(order)
         }
     
 }
