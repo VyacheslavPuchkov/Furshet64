@@ -18,6 +18,7 @@ enum RFontStyle: String, CaseIterable {
     case defaultLargeTitleBold
     case bodyLarge
     case bodyLarge2
+    case bodyLarge3
     case labelText
     case bodySmallCaption
     case mobileH2
@@ -49,6 +50,8 @@ extension UIFont {
             return .buttonLarge
         case .bodyLarge2:
             return .bodyLarge2
+        case .bodyLarge3:
+            return .bodyLarge3
         case .defaultLargeTitleBold:
             return .defaultLargeTitleBold
         case .bodyLarge:
@@ -78,6 +81,7 @@ extension UIFont {
     static let bodyMedium = UIFont(name: SfProTextRegular, size: 15)!
     static let bodyLarge = UIFont(name: SfProTextRegular, size: 17)!
     static let bodyLarge2 = UIFont(name: SfProTextRegular, size: 22)!
+    static let bodyLarge3 = UIFont(name: SfProTextRegular, size: 20)!
     static let buttonLarge = UIFont(name: SfProTextSemibold, size: 17)!
     static let buttonSmall = UIFont(name: SfProTextSemibold, size: 11)!
     static let defaultLargeTitleBold = UIFont(name: SfProTextSemibold, size: 34)!

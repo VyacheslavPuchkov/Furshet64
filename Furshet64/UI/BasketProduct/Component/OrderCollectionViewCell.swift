@@ -1,22 +1,22 @@
 //
-//  MenyProductCollectionViewCell.swift
+//  OrderCollectionViewCell.swift
 //  Furshet64
 //
-//  Created by Вячеслав Пучков on 05.11.2023.
+//  Created by Вячеслав Пучков on 29.12.2023.
 //
 
 import UIKit
 import Combine
 
-class MenyProductCollectionViewCell: UICollectionViewCell {
+class OrderCollectionViewCell: UICollectionViewCell {
     
-    static let reuseID = "MenuProductCell"
+    static let reuseID = "OrderProductCell"
     
-    var cancelable = Set<AnyCancellable>()
-    
-    var tapPublisher = PassthroughSubject<(Product?, Int), Never>()
-    var product: Product?
-    @Published var count: Int = 1
+//    var cancelable = Set<AnyCancellable>()
+//
+//    var tapPublisher = PassthroughSubject<(Product?, Int), Never>()
+//    var product: Product?
+//    @Published var count: Int = 1
     
     var imageProduct: UIImageView = {
         let image: UIImageView = UIImageView()
@@ -54,7 +54,6 @@ class MenyProductCollectionViewCell: UICollectionViewCell {
         label.backgroundColor = .clear
         label.textColor = .black
         label.textAlignment = .center
-        label.text = "1"
         label.font = .systemFont(ofSize: 25)
         
         return label
@@ -62,39 +61,20 @@ class MenyProductCollectionViewCell: UICollectionViewCell {
     
     lazy var addStepper: UIStepper = {
         let stepper: UIStepper = UIStepper()
-        stepper.translatesAutoresizingMaskIntoConstraints = false
         stepper.addTarget(self, action: #selector(actionStepper), for: .valueChanged)
         stepper.backgroundColor = .gray
         stepper.layer.cornerRadius = 6
         stepper.value = 1
         return stepper
     }()
-    
-    lazy var addButton: UIButton = {
-        let button: UIButton = UIButton()
-        button.layer.masksToBounds = true
-        button.setTitle("В корзину", for: .normal)
-        button.backgroundColor = .black.withAlphaComponent(0.8)
-        button.setTitleColor(.white, for: .normal)
-        button.widthAnchor.constraint(equalToConstant: 150).isActive = true
-        button.heightAnchor.constraint(equalToConstant: 30).isActive = true
-        button.layer.cornerRadius = 6
-        button.addTarget(self, action: #selector(actionButton), for: .touchUpInside)
-        return button
-    }()
-    
+        
     override init(frame: CGRect) {
         super.init(frame: frame)
         setConstaints()
     }
     
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        
-        imageProduct.image = UIImage()
-        count = 1
-        countLabel.text = "1"
-        addStepper.value = 1
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     func setFoto(title: String) {
@@ -111,32 +91,29 @@ class MenyProductCollectionViewCell: UICollectionViewCell {
         NSLayoutConstraint.activate([
             imageProduct.topAnchor.constraint(equalTo: contentView.topAnchor),
             imageProduct.leftAnchor.constraint(equalTo: contentView.leftAnchor),
-            imageProduct.rightAnchor.constraint(equalTo: contentView.rightAnchor),
-            imageProduct.bottomAnchor.constraint(equalTo: contentView.topAnchor, constant: 150)
+            imageProduct.rightAnchor.constraint(equalTo: contentView.leftAnchor, constant: 160),
+            imageProduct.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
         ])
-        let stack = UIStackView(views: [countLabel, addStepper], axis: .horizontal, spacing: 20)
-        let finalStack = UIStackView(views: [titleLabel, stack, priceLabel, addButton], axis: .vertical, spacing: 1)
+        let stack = UIStackView(views: [countLabel, addStepper], axis: .horizontal, spacing: 10)
+        let finalStack = UIStackView(views: [titleLabel, stack , priceLabel], axis: .vertical, spacing: 1)
         contentView.addSubview(finalStack)
         finalStack.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            finalStack.topAnchor.constraint(equalTo: imageProduct.bottomAnchor, constant: 5),
-            finalStack.leftAnchor.constraint(equalTo: contentView.leftAnchor),
+            finalStack.topAnchor.constraint(equalTo: contentView.topAnchor),
+            finalStack.leftAnchor.constraint(equalTo: imageProduct.rightAnchor, constant: 10),
             finalStack.rightAnchor.constraint(equalTo: contentView.rightAnchor),
-            finalStack.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10)
+            finalStack.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
         ])
     }
     
     @objc func actionStepper(_ target: UIStepper) {
-        count = Int(target.value)
-        countLabel.text = "\(count)"
+        countLabel.text = "\(Int(target.value)) шт."
     }
-    
-    @objc func actionButton() {
-        tapPublisher.send((product, count))
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
+//
+//    @objc func actionButton() {
+//        tapPublisher.send((product, count))
+//    }
+//
+
 }
+

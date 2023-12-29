@@ -144,18 +144,19 @@ extension MenuTypeViewController: UICollectionViewDelegate, UICollectionViewData
         } else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MenyProductCollectionViewCell.reuseID, for: indexPath) as? MenyProductCollectionViewCell
             let item = viewModel.dataSourseProduct.value[indexPath.row]
-            cell?.tapPublisher.sink(receiveValue: { [weak self, weak cell] _ in
-                guard self != nil else { return }
-                let order: OrderModel = .init(id: UUID().uuidString, product: item, count: cell?.count ?? .zero)
-                BasketProductManager.shared.addOrder(order)
-            }).store(in: &cancelable)
+            cell?.product = item
+            cell?.cancelable.removeAll()
+            cell?.tapPublisher.sink(receiveValue: {product, count in
+                guard let product else { return }
+                BasketProductManager.shared.addPosition(.init(id: UUID().uuidString, product: product, count: count))
+            }).store(in: &cell!.cancelable)
             cell?.setFoto(title: item.imageUrl)
             cell?.priceLabel.text = "\(item.price) р."
             cell?.titleLabel.text = item.title
             cell?.layer.cornerRadius = 8
             cell?.layer.borderWidth = 2
             cell?.layer.borderColor = UIColor.white.cgColor
-            cell?.backgroundColor = .black.withAlphaComponent(0.3)
+            cell?.backgroundColor = .white.withAlphaComponent(0.5)
             return cell ?? UICollectionViewCell()
         }
         

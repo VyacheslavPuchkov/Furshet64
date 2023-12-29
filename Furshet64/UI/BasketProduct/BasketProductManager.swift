@@ -14,21 +14,34 @@ class BasketProductManager: NSObject {
     static let shared = BasketProductManager()
     
     // MARK: - Variable
-    @Published var orders: [OrderModel] = []
+    @Published var order: [Position] = []
+    @Published var cost: Int = .zero
     
-    var cost: Int {
-        var sum = 0
-        
-        for order in orders {
-            sum += order.cost
-        }
-        return sum
-        
+    // MARK: - Combine
+    private var cancelable = Set<AnyCancellable>()
+    
+    // MARK: - Init
+    override init() {
+        super.init()
+        bind()
     }
     
     // MARK: - Func
-    func addOrder(_ order: OrderModel) {
-        self.orders.append(order)
+    func bind() {
+        $order.sink { [weak self] order in
+            guard let self else { return }
+            var sum = 0
+            for position in order {
+                sum += position.cost
+            }
+            self.cost = sum
+        }.store(in: &cancelable)
+    }
+    
+    func addPosition(_ position: Position) {
+//        var currentPosition = position
+//        currentPosition.count = count
+        self.order.append(position)
     }
     
 }

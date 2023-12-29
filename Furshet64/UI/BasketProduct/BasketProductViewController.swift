@@ -10,20 +10,26 @@ import Combine
 
 class BasketProductViewController: BaseViewController{
  
-    // MARK: - ViewModel
-    var viewModel: BasketProductManager = .shared
+    // MARK: - Manager
+    var basketManager: BasketProductManager = .shared
     
     // MARK: - Combine variable
     private var cancelable = Set<AnyCancellable>()
     
     // MARK: - UI
-    var orderTableView: UITableView = {
-        let tableView: UITableView = UITableView()
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.backgroundColor = .clear
-        tableView.register(BasketProductTableViewCell.self, forCellReuseIdentifier: BasketProductTableViewCell.reuseID)
+    let collectViewOrder: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .vertical
+        layout.itemSize = CGSize(width: 350, height: 150)
+        layout.sectionInset = .init(top: .zero, left: 16, bottom: .zero, right: 16)
+        layout.minimumLineSpacing = 10
+        layout.minimumInteritemSpacing = 10
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.backgroundColor = .clear
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.register(OrderCollectionViewCell.self, forCellWithReuseIdentifier: OrderCollectionViewCell.reuseID)
+        return collectionView
         
-        return tableView
     }()
     
     var totalLabel: UILabel = {
@@ -87,13 +93,13 @@ class BasketProductViewController: BaseViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         setConstraint()
-        setupOrderTableView()
-        bind()
+        setupOrderCollectView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        totalPriceLabel.text = "\(viewModel.cost) р."
+        collectViewOrder.reloadData()
+        bind()
     }
     
 }
@@ -102,15 +108,21 @@ class BasketProductViewController: BaseViewController{
 private extension BasketProductViewController {
     
     func bind() {
-        viewModel.$orders.sink { [weak self] _ in
+        
+        basketManager.$cost.sink { [weak self] cost in
             guard let self else { return }
-            self.orderTableView.reloadData()
+            self.totalPriceLabel.text = "\(self.basketManager.cost) р."
+        }.store(in: &cancelable)
+        
+        basketManager.$order.sink { [weak self] _ in
+            guard let self else { return }
+            self.collectViewOrder.reloadData()
         }.store(in: &cancelable)
     }
     
-    func setupOrderTableView() {
-        orderTableView.dataSource = self
-        orderTableView.delegate = self
+    func setupOrderCollectView() {
+        collectViewOrder.dataSource = self
+        collectViewOrder.delegate = self
     }
     
     // MARK: - Constrains
@@ -132,30 +144,38 @@ private extension BasketProductViewController {
             totalPriceLabel.bottomAnchor.constraint(equalTo: stack.bottomAnchor, constant: -50),
             totalPriceLabel.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -16)
         ])
-        view.addSubview(orderTableView)
+        view.addSubview(collectViewOrder)
         NSLayoutConstraint.activate([
-            orderTableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 150),
-            orderTableView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 16),
-            orderTableView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -16),
-            orderTableView.bottomAnchor.constraint(equalTo: totalLabel.topAnchor, constant: -16)
+            collectViewOrder.topAnchor.constraint(equalTo: view.topAnchor, constant: 200),
+            collectViewOrder.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 16),
+            collectViewOrder.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -16),
+            collectViewOrder.bottomAnchor.constraint(equalTo: totalLabel.topAnchor, constant: -16)
         ])
     }
     
 }
 
-// MARK: - UITableViewDelegate
-extension BasketProductViewController: UITableViewDataSource, UITableViewDelegate {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.orders.count
+// MARK: - UICollectionViewDelegate
+
+extension BasketProductViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return basketManager.order.count
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: BasketProductTableViewCell.reuseID, for: indexPath) as? BasketProductTableViewCell
-        cell?.productTitle.text = viewModel.orders[indexPath.row].product.title
-        cell?.productPrice.text = "\(viewModel.orders[indexPath.row].cost) р."
-        cell?.productQuantity.text = "\(viewModel.orders[indexPath.row].count) шт"
-        cell?.backgroundColor = .clear
-        return cell ?? UITableViewCell()
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: OrderCollectionViewCell.reuseID, for: indexPath) as? OrderCollectionViewCell
+        let position = basketManager.order[indexPath.row]
+        cell?.setFoto(title: position.product.imageUrl)
+        cell?.titleLabel.text = position.product.title
+        cell?.countLabel.text = "\(position.count) шт."
+        cell?.priceLabel.text = "\(position.cost) р."
+        cell?.backgroundColor = .white.withAlphaComponent(0.5)
+        cell?.layer.cornerRadius = 8
+        cell?.layer.borderWidth = 2
+        cell?.layer.borderColor = UIColor.white.cgColor
+        return cell ?? UICollectionViewCell()
     }
+    
     
 }
+

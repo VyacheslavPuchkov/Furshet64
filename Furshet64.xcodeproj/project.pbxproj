@@ -46,6 +46,8 @@
 		CA12F7B62B0D17E300394CF5 /* HomePageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA12F7B52B0D17E300394CF5 /* HomePageViewModel.swift */; };
 		CA12F7B82B0D199D00394CF5 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA12F7B72B0D199D00394CF5 /* BaseViewController.swift */; };
 		CA12F7BB2B0D1D2B00394CF5 /* FurshetInfoViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA12F7BA2B0D1D2B00394CF5 /* FurshetInfoViewCell.swift */; };
+		CA23F7042B3F3815004AAA42 /* PositionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA23F7032B3F3815004AAA42 /* PositionModel.swift */; };
+		CA23F7062B3F4FB9004AAA42 /* OrderCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA23F7052B3F4FB9004AAA42 /* OrderCollectionViewCell.swift */; };
 		CA4E8C8C2AE9810D00CE8D16 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = CA4E8C8B2AE9810D00CE8D16 /* FirebaseAuth */; };
 		CA4E8C8E2AE9810D00CE8D16 /* FirebaseAuthCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = CA4E8C8D2AE9810D00CE8D16 /* FirebaseAuthCombine-Community */; };
 		CA4E8C902AE9810D00CE8D16 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = CA4E8C8F2AE9810D00CE8D16 /* FirebaseDatabase */; };
@@ -65,7 +67,6 @@
 		CA6B20C22B3AE74200D09572 /* OrderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA6B20C12B3AE74200D09572 /* OrderModel.swift */; };
 		CA6B20C42B3AE79700D09572 /* BasketProductManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA6B20C32B3AE79700D09572 /* BasketProductManager.swift */; };
 		CA6B20C62B3AE7C300D09572 /* BasketProductViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA6B20C52B3AE7C300D09572 /* BasketProductViewController.swift */; };
-		CA6B20C82B3AF15E00D09572 /* BasketProductTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA6B20C72B3AF15E00D09572 /* BasketProductTableViewCell.swift */; };
 		CA6B20CC2B3AF2F600D09572 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CA6B20CB2B3AF2F600D09572 /* GoogleService-Info.plist */; };
 		CA6DF6E72AEA9F8800AC6F22 /* ProfileUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA6DF6E62AEA9F8800AC6F22 /* ProfileUserViewController.swift */; };
 		CA6DF6E92AEAAE6600AC6F22 /* RegistrationUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA6DF6E82AEAAE6500AC6F22 /* RegistrationUserViewController.swift */; };
@@ -133,6 +134,8 @@
 		CA12F7B52B0D17E300394CF5 /* HomePageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageViewModel.swift; sourceTree = "<group>"; };
 		CA12F7B72B0D199D00394CF5 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		CA12F7BA2B0D1D2B00394CF5 /* FurshetInfoViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FurshetInfoViewCell.swift; sourceTree = "<group>"; };
+		CA23F7032B3F3815004AAA42 /* PositionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PositionModel.swift; sourceTree = "<group>"; };
+		CA23F7052B3F4FB9004AAA42 /* OrderCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderCollectionViewCell.swift; sourceTree = "<group>"; };
 		CA4E8C9A2AE98F0500CE8D16 /* ProfileUserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileUserModel.swift; sourceTree = "<group>"; };
 		CA4E8C9C2AE99B7A00CE8D16 /* FurshetInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FurshetInfoModel.swift; sourceTree = "<group>"; };
 		CA5491812AF7E222000737B4 /* MenyProductCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenyProductCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -145,7 +148,6 @@
 		CA6B20C12B3AE74200D09572 /* OrderModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderModel.swift; sourceTree = "<group>"; };
 		CA6B20C32B3AE79700D09572 /* BasketProductManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasketProductManager.swift; sourceTree = "<group>"; };
 		CA6B20C52B3AE7C300D09572 /* BasketProductViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasketProductViewController.swift; sourceTree = "<group>"; };
-		CA6B20C72B3AF15E00D09572 /* BasketProductTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasketProductTableViewCell.swift; sourceTree = "<group>"; };
 		CA6B20CB2B3AF2F600D09572 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../Downloads/Furshet64-main-3/Furshet64/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		CA6DF6E62AEA9F8800AC6F22 /* ProfileUserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileUserViewController.swift; sourceTree = "<group>"; };
 		CA6DF6E82AEAAE6500AC6F22 /* RegistrationUserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationUserViewController.swift; sourceTree = "<group>"; };
@@ -351,6 +353,7 @@
 			isa = PBXGroup;
 			children = (
 				CA6B20C12B3AE74200D09572 /* OrderModel.swift */,
+				CA23F7032B3F3815004AAA42 /* PositionModel.swift */,
 				CA6B20C32B3AE79700D09572 /* BasketProductManager.swift */,
 				CA6B20C52B3AE7C300D09572 /* BasketProductViewController.swift */,
 				CA6B20BB2B3AE3A600D09572 /* Component */,
@@ -361,7 +364,7 @@
 		CA6B20BB2B3AE3A600D09572 /* Component */ = {
 			isa = PBXGroup;
 			children = (
-				CA6B20C72B3AF15E00D09572 /* BasketProductTableViewCell.swift */,
+				CA23F7052B3F4FB9004AAA42 /* OrderCollectionViewCell.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -625,8 +628,8 @@
 				CA4E8C9B2AE98F0500CE8D16 /* ProfileUserModel.swift in Sources */,
 				CA81CA682AE54E9E00F4B4D9 /* ExtensionViewController.swift in Sources */,
 				CAF7328E2B11EAD600820E0D /* AuthViewModel.swift in Sources */,
-				CA6B20C82B3AF15E00D09572 /* BasketProductTableViewCell.swift in Sources */,
 				CA110FEC2AE5000700BD4C7C /* RFontStyle.swift in Sources */,
+				CA23F7042B3F3815004AAA42 /* PositionModel.swift in Sources */,
 				CA6B20C42B3AE79700D09572 /* BasketProductManager.swift in Sources */,
 				CA86CFCA2AFD06AB00149053 /* RegistrationModel.swift in Sources */,
 				CAA5AE8B2AE06E8C00823018 /* StackExt.swift in Sources */,
@@ -635,6 +638,7 @@
 				CA9DCEBD2B03572B00A2253C /* EntranceViewModel.swift in Sources */,
 				CA6B20C62B3AE7C300D09572 /* BasketProductViewController.swift in Sources */,
 				CA655EDE2B1F5C32000FBD2C /* MenuTypeModel.swift in Sources */,
+				CA23F7062B3F4FB9004AAA42 /* OrderCollectionViewCell.swift in Sources */,
 				CA12F7B82B0D199D00394CF5 /* BaseViewController.swift in Sources */,
 				CA86CFC72AFCE6B400149053 /* RegistrationViewModel.swift in Sources */,
 				CA6DF6E92AEAAE6600AC6F22 /* RegistrationUserViewController.swift in Sources */,
