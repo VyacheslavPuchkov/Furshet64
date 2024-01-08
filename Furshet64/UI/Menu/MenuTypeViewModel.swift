@@ -27,7 +27,11 @@ class MenuTypeViewModel: NSObject  {
             guard let self else { return }
             switch result {
             case .success(let type):
-                self.dataSourseTypeProduct.send(type)
+                var filters = type
+                if filters.count > .zero {
+                    filters[.zero].selected = true
+                }
+                self.dataSourseTypeProduct.send(filters)
             case .failure(let error):
                 print(error.localizedDescription)
             }

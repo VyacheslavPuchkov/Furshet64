@@ -67,7 +67,7 @@ class BasketProductViewController: BaseViewController{
         button.widthAnchor.constraint(equalToConstant: 200).isActive = true
         button.heightAnchor.constraint(equalToConstant: 40).isActive = true
         button.layer.cornerRadius = 6
-        //button.addTarget(self, action: #selector(actionButton), for: .touchUpInside)
+        button.addTarget(self, action: #selector(setOrder), for: .touchUpInside)
         
         return button
     }()
@@ -84,7 +84,7 @@ class BasketProductViewController: BaseViewController{
         button.widthAnchor.constraint(equalToConstant: 150).isActive = true
         button.heightAnchor.constraint(equalToConstant: 40).isActive = true
         button.layer.cornerRadius = 5
-        //button.addTarget(self, action: #selector(actionButton), for: .touchUpInside)
+        button.addTarget(self, action: #selector(removeOrder), for: .touchUpInside)
         
         return button
     }()
@@ -94,18 +94,53 @@ class BasketProductViewController: BaseViewController{
         super.viewDidLoad()
         setConstraint()
         setupOrderCollectView()
+        bindAlert()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
+        self.basketManager.displayView()
         collectViewOrder.reloadData()
         bind()
+    }
+    
+    @objc func removeOrder() {
+        basketManager.removeOrder()
+        totalPriceLabel.text = "0 р."
+    }
+    
+    @objc func setOrder() {
+        basketManager.addOrder()
+        basketManager.alertSucceessTriggerTwo.sink { alert in
+            let action = UIAlertAction(title: "ОК", style: .default) { _ in
+                self.navigationController?.tabBarController?.selectedIndex = 0
+            }
+            alert.view.tintColor = .black
+            alert.addAction(action)
+            self.present(alert, animated: true)
+        }.store(in: &cancelable)
     }
     
 }
 
 // MARK: - Private func
 private extension BasketProductViewController {
+    
+    func bindAlert() {
+        basketManager.alertSucceessTrigger.sink { alert in
+            let oKaction = UIAlertAction(title: "Авторизиваться", style: .default) { _ in
+                let vc = AuthViewController()
+                self.navigationController?.pushViewController(vc, animated: true)
+            }
+            let noAction = UIAlertAction(title: "Без изменений", style: .default) { _ in
+                self.navigationController?.tabBarController?.selectedIndex = 0
+            }
+            alert.view.tintColor = .black
+            alert.addAction(oKaction)
+            alert.addAction(noAction)
+            self.present(alert, animated: true)
+        }.store(in: &cancelable)
+    }
     
     func bind() {
         
@@ -114,7 +149,7 @@ private extension BasketProductViewController {
             self.totalPriceLabel.text = "\(self.basketManager.cost) р."
         }.store(in: &cancelable)
         
-        basketManager.$order.sink { [weak self] _ in
+        basketManager.$positions.sink { [weak self] _ in
             guard let self else { return }
             self.collectViewOrder.reloadData()
         }.store(in: &cancelable)
@@ -159,16 +194,17 @@ private extension BasketProductViewController {
 
 extension BasketProductViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return basketManager.order.count
+        return basketManager.positions.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: OrderCollectionViewCell.reuseID, for: indexPath) as? OrderCollectionViewCell
-        let position = basketManager.order[indexPath.row]
-        cell?.setFoto(title: position.product.imageUrl)
+        let position = basketManager.positions[indexPath.row]
+        //cell?.setFoto(title: position.product.id + ".jpg") Получение картинки из базы данных
         cell?.titleLabel.text = position.product.title
         cell?.countLabel.text = "\(position.count) шт."
         cell?.priceLabel.text = "\(position.cost) р."
+        cell?.imageProduct.image = UIImage(named: "productFoto")
         cell?.backgroundColor = .white.withAlphaComponent(0.5)
         cell?.layer.cornerRadius = 8
         cell?.layer.borderWidth = 2

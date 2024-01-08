@@ -48,6 +48,7 @@
 		CA12F7BB2B0D1D2B00394CF5 /* FurshetInfoViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA12F7BA2B0D1D2B00394CF5 /* FurshetInfoViewCell.swift */; };
 		CA23F7042B3F3815004AAA42 /* PositionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA23F7032B3F3815004AAA42 /* PositionModel.swift */; };
 		CA23F7062B3F4FB9004AAA42 /* OrderCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA23F7052B3F4FB9004AAA42 /* OrderCollectionViewCell.swift */; };
+		CA34EFFE2B4C3CBF0050E9F6 /* StringExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA34EFFD2B4C3CBF0050E9F6 /* StringExt.swift */; };
 		CA4E8C8C2AE9810D00CE8D16 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = CA4E8C8B2AE9810D00CE8D16 /* FirebaseAuth */; };
 		CA4E8C8E2AE9810D00CE8D16 /* FirebaseAuthCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = CA4E8C8D2AE9810D00CE8D16 /* FirebaseAuthCombine-Community */; };
 		CA4E8C902AE9810D00CE8D16 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = CA4E8C8F2AE9810D00CE8D16 /* FirebaseDatabase */; };
@@ -57,6 +58,9 @@
 		CA4E8C982AE9810D00CE8D16 /* FirebaseStorageCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = CA4E8C972AE9810D00CE8D16 /* FirebaseStorageCombine-Community */; };
 		CA4E8C9B2AE98F0500CE8D16 /* ProfileUserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA4E8C9A2AE98F0500CE8D16 /* ProfileUserModel.swift */; };
 		CA4E8C9D2AE99B7A00CE8D16 /* FurshetInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA4E8C9C2AE99B7A00CE8D16 /* FurshetInfoModel.swift */; };
+		CA50356B2B41A3CB00571266 /* HistoryOrdersViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA50356A2B41A3CB00571266 /* HistoryOrdersViewModel.swift */; };
+		CA50356D2B41A41500571266 /* HistoryOrdersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA50356C2B41A41500571266 /* HistoryOrdersViewController.swift */; };
+		CA5035702B41A65D00571266 /* HistoryOrdersTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA50356F2B41A65D00571266 /* HistoryOrdersTableViewCell.swift */; };
 		CA5491822AF7E222000737B4 /* MenyProductCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA5491812AF7E222000737B4 /* MenyProductCollectionViewCell.swift */; };
 		CA5491852AF8125F000737B4 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA5491842AF8125F000737B4 /* AuthService.swift */; };
 		CA5491872AF81BC8000737B4 /* DatabaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA5491862AF81BC8000737B4 /* DatabaseService.swift */; };
@@ -136,8 +140,12 @@
 		CA12F7BA2B0D1D2B00394CF5 /* FurshetInfoViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FurshetInfoViewCell.swift; sourceTree = "<group>"; };
 		CA23F7032B3F3815004AAA42 /* PositionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PositionModel.swift; sourceTree = "<group>"; };
 		CA23F7052B3F4FB9004AAA42 /* OrderCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderCollectionViewCell.swift; sourceTree = "<group>"; };
+		CA34EFFD2B4C3CBF0050E9F6 /* StringExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExt.swift; sourceTree = "<group>"; };
 		CA4E8C9A2AE98F0500CE8D16 /* ProfileUserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileUserModel.swift; sourceTree = "<group>"; };
 		CA4E8C9C2AE99B7A00CE8D16 /* FurshetInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FurshetInfoModel.swift; sourceTree = "<group>"; };
+		CA50356A2B41A3CB00571266 /* HistoryOrdersViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryOrdersViewModel.swift; sourceTree = "<group>"; };
+		CA50356C2B41A41500571266 /* HistoryOrdersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryOrdersViewController.swift; sourceTree = "<group>"; };
+		CA50356F2B41A65D00571266 /* HistoryOrdersTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryOrdersTableViewCell.swift; sourceTree = "<group>"; };
 		CA5491812AF7E222000737B4 /* MenyProductCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenyProductCollectionViewCell.swift; sourceTree = "<group>"; };
 		CA5491842AF8125F000737B4 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		CA5491862AF81BC8000737B4 /* DatabaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseService.swift; sourceTree = "<group>"; };
@@ -261,6 +269,25 @@
 			path = Components;
 			sourceTree = "<group>";
 		};
+		CA5035692B41A37800571266 /* HistoryOrders */ = {
+			isa = PBXGroup;
+			children = (
+				CA6B20C12B3AE74200D09572 /* OrderModel.swift */,
+				CA50356A2B41A3CB00571266 /* HistoryOrdersViewModel.swift */,
+				CA50356C2B41A41500571266 /* HistoryOrdersViewController.swift */,
+				CA50356E2B41A5FD00571266 /* Components */,
+			);
+			path = HistoryOrders;
+			sourceTree = "<group>";
+		};
+		CA50356E2B41A5FD00571266 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				CA50356F2B41A65D00571266 /* HistoryOrdersTableViewCell.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
 		CA5491832AF81229000737B4 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
@@ -276,13 +303,14 @@
 			children = (
 				CAB255862AE053D1002EA4DB /* MainTableBaRController.swift */,
 				CA12F7B72B0D199D00394CF5 /* BaseViewController.swift */,
+				CAF7328C2B11EA0000820E0D /* Auth */,
 				CA6881BA2B03B3CE005EB250 /* ProfileUser */,
 				CA6881B92B03B346005EB250 /* Home */,
 				CA6881BB2B03B451005EB250 /* Registration */,
 				CA6881BE2B03B4CE005EB250 /* Entrance */,
 				CA6881BF2B03B514005EB250 /* Menu */,
+				CA5035692B41A37800571266 /* HistoryOrders */,
 				CA6B20B82B3AE3A600D09572 /* BasketProduct */,
-				CAF7328C2B11EA0000820E0D /* Auth */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -312,8 +340,8 @@
 			isa = PBXGroup;
 			children = (
 				CA86CFC92AFD06AB00149053 /* RegistrationModel.swift */,
-				CA6DF6E82AEAAE6500AC6F22 /* RegistrationUserViewController.swift */,
 				CA86CFC62AFCE6B400149053 /* RegistrationViewModel.swift */,
+				CA6DF6E82AEAAE6500AC6F22 /* RegistrationUserViewController.swift */,
 			);
 			path = Registration;
 			sourceTree = "<group>";
@@ -352,7 +380,6 @@
 		CA6B20B82B3AE3A600D09572 /* BasketProduct */ = {
 			isa = PBXGroup;
 			children = (
-				CA6B20C12B3AE74200D09572 /* OrderModel.swift */,
 				CA23F7032B3F3815004AAA42 /* PositionModel.swift */,
 				CA6B20C32B3AE79700D09572 /* BasketProductManager.swift */,
 				CA6B20C52B3AE7C300D09572 /* BasketProductViewController.swift */,
@@ -400,6 +427,7 @@
 			children = (
 				CAA5AE8A2AE06E8C00823018 /* StackExt.swift */,
 				CA9146742AEAD356008429F6 /* UITextFieldExt.swift */,
+				CA34EFFD2B4C3CBF0050E9F6 /* StringExt.swift */,
 				CA81CA662AE54E6E00F4B4D9 /* ViewController */,
 				CA11102B2AE5083900BD4C7C /* RColor */,
 				CA110FE42AE4FFD500BD4C7C /* Fonts */,
@@ -626,6 +654,7 @@
 				CA9DCEBF2B0358EF00A2253C /* EntranceModel.swift in Sources */,
 				CA655EE02B1F8B59000FBD2C /* StorageService.swift in Sources */,
 				CA4E8C9B2AE98F0500CE8D16 /* ProfileUserModel.swift in Sources */,
+				CA5035702B41A65D00571266 /* HistoryOrdersTableViewCell.swift in Sources */,
 				CA81CA682AE54E9E00F4B4D9 /* ExtensionViewController.swift in Sources */,
 				CAF7328E2B11EAD600820E0D /* AuthViewModel.swift in Sources */,
 				CA110FEC2AE5000700BD4C7C /* RFontStyle.swift in Sources */,
@@ -644,13 +673,16 @@
 				CA6DF6E92AEAAE6600AC6F22 /* RegistrationUserViewController.swift in Sources */,
 				CA5491822AF7E222000737B4 /* MenyProductCollectionViewCell.swift in Sources */,
 				CA598CD22B0FAD430024B9CE /* AuthViewController.swift in Sources */,
+				CA50356B2B41A3CB00571266 /* HistoryOrdersViewModel.swift in Sources */,
 				CA6DF6E72AEA9F8800AC6F22 /* ProfileUserViewController.swift in Sources */,
 				CA12F7BB2B0D1D2B00394CF5 /* FurshetInfoViewCell.swift in Sources */,
 				CA4E8C9D2AE99B7A00CE8D16 /* FurshetInfoModel.swift in Sources */,
 				CA6B20C22B3AE74200D09572 /* OrderModel.swift in Sources */,
 				CA9146752AEAD356008429F6 /* UITextFieldExt.swift in Sources */,
 				CAB255872AE053D1002EA4DB /* MainTableBaRController.swift in Sources */,
+				CA34EFFE2B4C3CBF0050E9F6 /* StringExt.swift in Sources */,
 				CA906EA62AE6F0D000B1BB52 /* MenyTypeCollectionViewCell.swift in Sources */,
+				CA50356D2B41A41500571266 /* HistoryOrdersViewController.swift in Sources */,
 				CA5491852AF8125F000737B4 /* AuthService.swift in Sources */,
 				CA5491872AF81BC8000737B4 /* DatabaseService.swift in Sources */,
 				CAB255832AE053D1002EA4DB /* AppDelegate.swift in Sources */,

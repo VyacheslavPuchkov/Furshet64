@@ -48,11 +48,9 @@ class ProfileUserViewModel: NSObject {
     
     func displayView() {
         if Auth.auth().currentUser?.uid != nil {
-            print("yes")
             getProfile()
         } else {
-            self.alertSucceessTrigger.send(UIAlertController(title: "Для просмотра своего профиля необходимо зарегистрироваться", message: "Зарагистрируйтесь пожалуйста", preferredStyle: .alert))
-            print("no")
+            self.alertSucceessTrigger.send(UIAlertController(title: "Внимание", message: "Для просмотра своего профиля необходимо авторизоваться", preferredStyle: .alert))
         }
     }
     

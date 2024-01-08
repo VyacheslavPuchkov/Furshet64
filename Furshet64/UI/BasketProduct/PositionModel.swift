@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import FirebaseFirestore
 
 struct Position: Identifiable {
     
@@ -23,8 +24,29 @@ struct Position: Identifiable {
         repres["title"] = product.title
         repres["price"] = product.price
         repres["count"] = count
-        repres["cost"] = self.cost
+        repres["cost"] = cost
         return repres
+    }
+    
+    init(id: String, product: Product, count: Int) {
+        self.id = id
+        self.product = product
+        self.count = count
+    }
+    
+    init?(doc: QueryDocumentSnapshot) {
+        let data = doc.data()
+        
+        guard let id = data["id"] as? String else { return nil }
+        guard let title = data["title"] as? String else { return nil }
+        guard let price = data["price"] as? Int else { return nil }
+        guard let count = data["count"] as? Int else { return nil }
+        
+        let product: Product = .init(id: "", title: title, price: price, typeProduct: "")
+        
+        self.id = id
+        self.product = product
+        self.count = count
     }
     
 }

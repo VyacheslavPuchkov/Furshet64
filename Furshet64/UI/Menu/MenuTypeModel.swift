@@ -12,6 +12,7 @@ struct MenuTypeProduct: Identifiable {
     
     var id: String
     var title: String
+    var selected: Bool = false
     
     var representation: [String: Any] {
         var repres = [String: Any]()

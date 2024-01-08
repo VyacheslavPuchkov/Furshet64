@@ -17,7 +17,7 @@ class StorageService {
     var productRef: StorageReference { storage.child("imageProduct") }
     
     func dowloadPicture(picName: String, ref: StorageReference, completion: @escaping([UIImage]) -> ()) {
-        var image: UIImage = UIImage(named: "image")!
+        var image: UIImage = UIImage(named: "productFoto")!
         var images: [UIImage] = []
         let fileRef = ref.child(picName)
         fileRef.getData(maxSize: 5 * 1024 * 1024) { data, error in

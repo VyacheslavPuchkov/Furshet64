@@ -27,7 +27,7 @@ class CodeValidViewModel: NSObject {
     }
 
     // MARK: - Func
-   @objc func showCodeValid() {
+   func showCodeValid() {
         AuthService.shared.signUpPhone(verificationID: verificId, verificationCode: verificCode) { [weak self] result in
             guard let self else { return }
             switch result {
@@ -42,7 +42,7 @@ class CodeValidViewModel: NSObject {
     }
 
     // MARK: - Private func
-    private func setProfile() {
+    func setProfile() {
         DatabaseService.shared.setProfile(user: profileUser) { [weak self] result in
             guard self != nil else { return }
             switch result {

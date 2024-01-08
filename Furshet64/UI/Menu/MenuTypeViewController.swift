@@ -20,7 +20,6 @@ class MenuTypeViewController: BaseViewController {
     let collectViewTypeProduct : UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
-        layout.itemSize = CGSize(width: 160, height: 50)
         layout.sectionInset = .init(top: .zero, left: 16, bottom: .zero, right: 16)
         layout.minimumLineSpacing = 5
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
@@ -34,7 +33,6 @@ class MenuTypeViewController: BaseViewController {
     let collectViewProduct: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
-        layout.itemSize = CGSize(width: 170, height: 330)
         layout.sectionInset = .init(top: .zero, left: 16, bottom: .zero, right: 16)
         layout.minimumLineSpacing = 10
         layout.minimumInteritemSpacing = 10
@@ -54,10 +52,6 @@ class MenuTypeViewController: BaseViewController {
         combineFunc()
         setupCollectionTypeProduct()
         setupCollectionProduct()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
     }
     
 }
@@ -93,7 +87,7 @@ private extension MenuTypeViewController {
             collectViewTypeProduct.topAnchor.constraint(equalTo: typeOrganization.bottomAnchor,constant: 25),
             collectViewTypeProduct.leftAnchor.constraint(equalTo: view.leftAnchor),
             collectViewTypeProduct.rightAnchor.constraint(equalTo: view.rightAnchor),
-            collectViewTypeProduct.bottomAnchor.constraint(equalTo: typeOrganization.bottomAnchor, constant: 80)
+            collectViewTypeProduct.bottomAnchor.constraint(equalTo: typeOrganization.bottomAnchor, constant: 100)
         ])
         view.addSubview(collectViewProduct)
         NSLayoutConstraint.activate([
@@ -137,6 +131,7 @@ extension MenuTypeViewController: UICollectionViewDelegate, UICollectionViewData
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MenyTypeCollectionViewCell.reuseID, for: indexPath) as? MenyTypeCollectionViewCell
             let item = viewModel.dataSourseTypeProduct.value[indexPath.row]
             cell?.titleMenyTypeLabel.text = item.title
+            cell?.contentView.backgroundColor = item.selected ? .white : .clear
             cell?.layer.cornerRadius = 5
             cell?.layer.borderWidth = 2
             cell?.layer.borderColor = UIColor.black.cgColor
@@ -150,7 +145,8 @@ extension MenuTypeViewController: UICollectionViewDelegate, UICollectionViewData
                 guard let product else { return }
                 BasketProductManager.shared.addPosition(.init(id: UUID().uuidString, product: product, count: count))
             }).store(in: &cell!.cancelable)
-            cell?.setFoto(title: item.imageUrl)
+            //cell?.setFoto(title: item.id + ".jpg") Получение картинки из базы данных
+            cell?.imageProduct.image = UIImage(named: "productFoto")
             cell?.priceLabel.text = "\(item.price) р."
             cell?.titleLabel.text = item.title
             cell?.layer.cornerRadius = 8
@@ -162,9 +158,28 @@ extension MenuTypeViewController: UICollectionViewDelegate, UICollectionViewData
         
     }
     
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        if collectionView == collectViewTypeProduct {
+            let item = viewModel.dataSourseTypeProduct.value[indexPath.row].title
+            let width = item.widthOfString(uisingFont: UIFont.systemFont(ofSize: 15))
+            return CGSize(width: width + 40, height: 60)
+        } else {
+            return CGSize(width: 170, height: 330)
+        }
+    }
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == collectViewTypeProduct {
             let selectedTypeProduct = viewModel.dataSourseTypeProduct.value[indexPath.row].title
+            var filters = viewModel.dataSourseTypeProduct.value
+            filters.indices.forEach { index in
+                if index == indexPath.row {
+                    filters[index].selected = true
+                } else {
+                    filters[index].selected = false
+                }
+            }
+            viewModel.dataSourseTypeProduct.send(filters)
             viewModel.getProduct(productType: selectedTypeProduct)
         }
     }

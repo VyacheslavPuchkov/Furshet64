@@ -16,6 +16,7 @@ class MenyTypeCollectionViewCell: UICollectionViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .black
         label.textAlignment = .center
+        label.font = .bodyLarge2
         label.numberOfLines = 3
         return label
         

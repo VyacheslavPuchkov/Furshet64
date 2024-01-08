@@ -45,13 +45,13 @@ class CodeValidViewController: BaseViewController {
         button.setTitle("Проверить код", for: .normal)
         button.backgroundColor = .black.withAlphaComponent(0.8)
         button.titleLabel?.font = .bodyLarge2
-        button.setTitleColor(.black, for: .normal)
+        button.setTitleColor(.white, for: .normal)
         button.widthAnchor.constraint(equalToConstant: 350).isActive = true
         button.heightAnchor.constraint(equalToConstant: 50).isActive = true
         button.layer.cornerRadius = 6
         button.alpha = 0.5
         button.isEnabled = false
-        button.addTarget(self, action: #selector(viewModel.showCodeValid), for: .touchUpInside)
+        button.addTarget(self, action: #selector(showCodeValid), for: .touchUpInside)
         
         return button
     }()
@@ -73,6 +73,10 @@ class CodeValidViewController: BaseViewController {
             viewModel.verificCode = sender.text ?? ""
         default: break
         }
+    }
+    
+    @objc func showCodeValid() {
+        viewModel.showCodeValid()
     }
     
 }
@@ -99,16 +103,24 @@ private extension CodeValidViewController {
     
     // MARK: - Combine
     func bind() {
-        viewModel.alertSucceessTrigger.sink(receiveValue: { alert in
+        viewModel.alertSucceessTrigger.sink { alert in
             let action = UIAlertAction(title: "К профилю", style: .default) { _ in
+                self.navigationController?.popViewController(animated: true)
                 self.navigationController?.tabBarController?.selectedIndex = 2
             }
+            let actionTwo = UIAlertAction(title: "В корзину", style: .default) { _ in
+                self.navigationController?.popViewController(animated: true)
+                self.navigationController?.tabBarController?.selectedIndex = 3
+            }
+            alert.view.tintColor = .black
             alert.addAction(action)
+            alert.addAction(actionTwo)
             self.present(alert, animated: true)
-         }).store(in: &cancelable)
+         }.store(in: &cancelable)
     }
     
 }
+
 
 // MARK: - UITextFieldDelegate
 extension CodeValidViewController: UITextFieldDelegate {

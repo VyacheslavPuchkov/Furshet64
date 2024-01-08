@@ -16,7 +16,7 @@ class OrderCollectionViewCell: UICollectionViewCell {
 //
 //    var tapPublisher = PassthroughSubject<(Product?, Int), Never>()
 //    var product: Product?
-//    @Published var count: Int = 1
+    //@Published var count: Int = 1
     
     var imageProduct: UIImageView = {
         let image: UIImageView = UIImageView()
@@ -61,10 +61,14 @@ class OrderCollectionViewCell: UICollectionViewCell {
     
     lazy var addStepper: UIStepper = {
         let stepper: UIStepper = UIStepper()
-        stepper.addTarget(self, action: #selector(actionStepper), for: .valueChanged)
-        stepper.backgroundColor = .gray
+        stepper.layer.masksToBounds = true
+        stepper.backgroundColor = .clear
         stepper.layer.cornerRadius = 6
         stepper.value = 1
+        stepper.layer.cornerRadius = 3
+        stepper.layer.borderWidth = 2
+        stepper.layer.borderColor = UIColor.black.cgColor
+        stepper.addTarget(self, action: #selector(actionStepper), for: .valueChanged)
         return stepper
     }()
         

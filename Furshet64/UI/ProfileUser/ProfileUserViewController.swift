@@ -35,7 +35,6 @@ class ProfileUserViewController: BaseViewController, ObservableObject {
     var phoneUserTextField: FPNTextField = {
         let textField: FPNTextField = FPNTextField()
         textField.attributedPlaceholder = NSAttributedString(string: "  Ваш номер", attributes: [NSAttributedString.Key.foregroundColor: UIColor.black])
-        textField.translatesAutoresizingMaskIntoConstraints = false
         textField.layer.masksToBounds = true
         textField.backgroundColor = .clear
         textField.layer.borderWidth = 2
@@ -49,7 +48,6 @@ class ProfileUserViewController: BaseViewController, ObservableObject {
     
     lazy var saveButton: UIButton = {
         let button: UIButton = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
         button.layer.masksToBounds = true
         button.setTitle("Изменить", for: .normal)
         button.backgroundColor = .black.withAlphaComponent(0.8)
@@ -59,6 +57,21 @@ class ProfileUserViewController: BaseViewController, ObservableObject {
         button.heightAnchor.constraint(equalToConstant: 50).isActive = true
         button.layer.cornerRadius = 6
         button.addTarget(self, action: #selector(saveActionButton), for: .touchUpInside)
+        
+        return button
+    }()
+    
+    lazy var historyOrdersButton: UIButton = {
+        let button: UIButton = UIButton()
+        button.layer.masksToBounds = true
+        button.setTitle("История заказов", for: .normal)
+        button.backgroundColor = .black.withAlphaComponent(0.5)
+        button.titleLabel?.font = .bodyLarge2
+        button.setTitleColor(.white, for: .normal)
+        button.widthAnchor.constraint(equalToConstant: 350).isActive = true
+        button.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        button.layer.cornerRadius = 6
+        button.addTarget(self, action: #selector(historyOrdersAction), for: .touchUpInside)
         
         return button
     }()
@@ -103,7 +116,7 @@ class ProfileUserViewController: BaseViewController, ObservableObject {
         self.navigationController?.tabBarController?.selectedIndex = 0
     }
     
-    @objc func saveActionButton(){
+    @objc func saveActionButton() {
         if signUp == false {
             nameUserTextField.isEnabled = false
             phoneUserTextField.isEnabled = false
@@ -116,6 +129,11 @@ class ProfileUserViewController: BaseViewController, ObservableObject {
             phoneUserTextField.isEnabled = true
             signUp = false
         }
+    }
+    
+    @objc func historyOrdersAction() {
+        let vc = HistoryOrdersViewController()
+        navigationController?.pushViewController(vc, animated: true)
     }
     
 }
@@ -139,7 +157,7 @@ private extension ProfileUserViewController {
     
     // MARK: - Contraints
     func setConstraint() {
-        let stack = UIStackView(views: [nameUserTextField, phoneUserTextField, saveButton], axis: .vertical, spacing: 5)
+        let stack = UIStackView(views: [nameUserTextField, phoneUserTextField, saveButton, historyOrdersButton], axis: .vertical, spacing: 5)
         stack.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(stack)
         NSLayoutConstraint.activate([
@@ -163,6 +181,7 @@ private extension ProfileUserViewController {
             let noAction = UIAlertAction(title: "Без изменений", style: .default) { _ in
                 self.navigationController?.tabBarController?.selectedIndex = 0
             }
+            alert.view.tintColor = .black
             alert.addAction(oKaction)
             alert.addAction(noAction)
             self.present(alert, animated: true)

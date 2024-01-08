@@ -62,11 +62,14 @@ class MenyProductCollectionViewCell: UICollectionViewCell {
     
     lazy var addStepper: UIStepper = {
         let stepper: UIStepper = UIStepper()
-        stepper.translatesAutoresizingMaskIntoConstraints = false
-        stepper.addTarget(self, action: #selector(actionStepper), for: .valueChanged)
-        stepper.backgroundColor = .gray
+        stepper.layer.masksToBounds = true
+        stepper.backgroundColor = .clear
         stepper.layer.cornerRadius = 6
         stepper.value = 1
+        stepper.layer.cornerRadius = 3
+        stepper.layer.borderWidth = 2
+        stepper.layer.borderColor = UIColor.black.cgColor
+        stepper.addTarget(self, action: #selector(actionStepper), for: .valueChanged)
         return stepper
     }()
     
@@ -78,7 +81,7 @@ class MenyProductCollectionViewCell: UICollectionViewCell {
         button.setTitleColor(.white, for: .normal)
         button.widthAnchor.constraint(equalToConstant: 150).isActive = true
         button.heightAnchor.constraint(equalToConstant: 30).isActive = true
-        button.layer.cornerRadius = 6
+        button.layer.cornerRadius = 4
         button.addTarget(self, action: #selector(actionButton), for: .touchUpInside)
         return button
     }()
