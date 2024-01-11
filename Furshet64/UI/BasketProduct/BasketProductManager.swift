@@ -20,8 +20,7 @@ class BasketProductManager: NSObject {
     
     // MARK: - Combine
     private var cancelable = Set<AnyCancellable>()
-    var alertSucceessTrigger = PassthroughSubject<UIAlertController, Never>()
-    var alertSucceessTriggerTwo = PassthroughSubject<UIAlertController, Never>()
+    var succeessTrigger = PassthroughSubject<Void, Never>()
     
     // MARK: - Init
     override init() {
@@ -42,8 +41,7 @@ class BasketProductManager: NSObject {
     }
     
     func displayView() {
-        guard Auth.auth().currentUser?.uid != nil else { return self.alertSucceessTrigger.send(UIAlertController(title: "Внимание", message: "Для заказа необходимо авторизоваться", preferredStyle: .alert))
-            }
+        guard Auth.auth().currentUser?.uid != nil else { return self.succeessTrigger.send() }
     }
     
     func addPosition(_ position: Position) {
@@ -52,11 +50,11 @@ class BasketProductManager: NSObject {
     
     func addOrder() {
         let order = OrderModel(id: UUID().uuidString, positions: positions, userID: Auth.auth().currentUser!.uid, date: Date(), cost: cost)
-        DatabaseService.shared.setOrder(order: order) { result in
+        DatabaseService.shared.setOrder(order: order) { [weak self] result in
+            guard let self else { return }
             switch result {
-            case .success(let order):
-                print(order.cost)
-                self.alertSucceessTriggerTwo.send(UIAlertController(title: "Спасибо за заказ", message: "В ближайшее время с вами свяжется оператор", preferredStyle: .alert))
+            case .success( _):
+                self.succeessTrigger.send()
             case .failure(let error):
                 print(error.localizedDescription)
             }

@@ -27,6 +27,14 @@ class MenyTypeCollectionViewCell: UICollectionViewCell {
         setConstaints()
     }
     
+    func configureCell(with menuType: MenuTypeProduct) {
+        titleMenyTypeLabel.text = menuType.title
+        contentView.backgroundColor = menuType.selected ? .black.withAlphaComponent(0.1) : .clear
+        layer.cornerRadius = 5
+        layer.borderWidth = 2
+        layer.borderColor = UIColor.black.cgColor
+    }
+    
     private func setConstaints() {
         contentView.addSubview(titleMenyTypeLabel)
         NSLayoutConstraint.activate([

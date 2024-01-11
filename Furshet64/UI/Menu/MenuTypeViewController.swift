@@ -129,35 +129,26 @@ extension MenuTypeViewController: UICollectionViewDelegate, UICollectionViewData
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if collectionView == collectViewTypeProduct {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MenyTypeCollectionViewCell.reuseID, for: indexPath) as? MenyTypeCollectionViewCell
-            let item = viewModel.dataSourseTypeProduct.value[indexPath.row]
-            cell?.titleMenyTypeLabel.text = item.title
-            cell?.contentView.backgroundColor = item.selected ? .white : .clear
-            cell?.layer.cornerRadius = 5
-            cell?.layer.borderWidth = 2
-            cell?.layer.borderColor = UIColor.black.cgColor
+            let menuType = viewModel.dataSourseTypeProduct.value[indexPath.row]
+            cell?.configureCell(with: menuType)
             return cell ?? UICollectionViewCell()
         } else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MenyProductCollectionViewCell.reuseID, for: indexPath) as? MenyProductCollectionViewCell
-            let item = viewModel.dataSourseProduct.value[indexPath.row]
-            cell?.product = item
-            cell?.cancelable.removeAll()
+            let product = viewModel.dataSourseProduct.value[indexPath.row]
+            cell?.configureCell(with: product)
             cell?.tapPublisher.sink(receiveValue: {product, count in
                 guard let product else { return }
                 BasketProductManager.shared.addPosition(.init(id: UUID().uuidString, product: product, count: count))
             }).store(in: &cell!.cancelable)
-            //cell?.setFoto(title: item.id + ".jpg") Получение картинки из базы данных
-            cell?.imageProduct.image = UIImage(named: "productFoto")
-            cell?.priceLabel.text = "\(item.price) р."
-            cell?.titleLabel.text = item.title
-            cell?.layer.cornerRadius = 8
-            cell?.layer.borderWidth = 2
-            cell?.layer.borderColor = UIColor.white.cgColor
-            cell?.backgroundColor = .white.withAlphaComponent(0.5)
+            cell?.alertSucceessTrigger.sink(receiveValue: { [weak self ] product in
+                guard let self, let product else { return }
+                self.alertChange(titleAlert: product.title, messageAlert: "Вес: \(product.weight) \n Состав/описание товара: \(product.compound)", completion: nil)
+            }).store(in: &cancelable)
             return cell ?? UICollectionViewCell()
         }
         
     }
-    
+   
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if collectionView == collectViewTypeProduct {
             let item = viewModel.dataSourseTypeProduct.value[indexPath.row].title

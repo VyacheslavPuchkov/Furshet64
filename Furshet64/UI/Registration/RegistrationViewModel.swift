@@ -15,7 +15,7 @@ class RegistrationViewModel: NSObject {
     var userRegistration: RegistrationModel = .init(password: "", passwordTwo: "", email: "")
     var userProfile: ProfileUser = .init(id: UUID().uuidString, name: "", phone: "")
     // MARK: - Combine
-    var alertSucceessTrigger = PassthroughSubject<UIAlertController, Never>()
+    var succeessTrigger = PassthroughSubject<Void, Never>()
     
     // MARK: - Init
     override init() {
@@ -28,7 +28,7 @@ class RegistrationViewModel: NSObject {
             guard let self, self.userRegistration.password == self.userRegistration.passwordTwo else { return }
             switch result {
             case .success(_):
-                self.alertSucceessTrigger.send(UIAlertController(title: "Спасибо за регистрацию", message: "Заполните пожалуйста ваш профиль", preferredStyle: .alert))
+                self.succeessTrigger.send()
             case .failure(let error):
                 print(error.localizedDescription)
             }

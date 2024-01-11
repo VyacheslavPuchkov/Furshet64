@@ -14,6 +14,7 @@ class MenyProductCollectionViewCell: UICollectionViewCell {
     
     var cancelable = Set<AnyCancellable>()
     
+    var alertSucceessTrigger = PassthroughSubject<Product?, Never>()
     var tapPublisher = PassthroughSubject<(Product?, Int), Never>()
     var product: Product?
     @Published var count: Int = 1
@@ -86,6 +87,16 @@ class MenyProductCollectionViewCell: UICollectionViewCell {
         return button
     }()
     
+    lazy var questionButton: UIButton = {
+        let button: UIButton = UIButton()
+        button.setImage(UIImage(systemName: "questionmark.app"), for: .normal)
+        button.tintColor = .black
+        button.widthAnchor.constraint(equalToConstant: 30).isActive = true
+        button.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        button.addTarget(self, action: #selector(actionQuestionButton), for: .touchUpInside)
+        return button
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setConstaints()
@@ -98,6 +109,19 @@ class MenyProductCollectionViewCell: UICollectionViewCell {
         count = 1
         countLabel.text = "1"
         addStepper.value = 1
+    }
+    
+    func configureCell(with product: Product) {
+        self.product = product
+        cancelable.removeAll()
+        //setFoto(title: item.id + ".jpg") Получение картинки из базы данных
+        imageProduct.image = UIImage(named: "productFoto")
+        priceLabel.text = "\(product.price) р."
+        titleLabel.text = product.title
+        layer.cornerRadius = 8
+        layer.borderWidth = 2
+        layer.borderColor = UIColor.white.cgColor
+        backgroundColor = .white.withAlphaComponent(0.5)
     }
     
     func setFoto(title: String) {
@@ -118,7 +142,8 @@ class MenyProductCollectionViewCell: UICollectionViewCell {
             imageProduct.bottomAnchor.constraint(equalTo: contentView.topAnchor, constant: 150)
         ])
         let stack = UIStackView(views: [countLabel, addStepper], axis: .horizontal, spacing: 20)
-        let finalStack = UIStackView(views: [titleLabel, stack, priceLabel, addButton], axis: .vertical, spacing: 1)
+        let stackTwo = UIStackView(views: [questionButton, priceLabel], axis: .horizontal, spacing: 20)
+        let finalStack = UIStackView(views: [titleLabel, stack, stackTwo, addButton], axis: .vertical, spacing: 1)
         contentView.addSubview(finalStack)
         finalStack.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -136,6 +161,10 @@ class MenyProductCollectionViewCell: UICollectionViewCell {
     
     @objc func actionButton() {
         tapPublisher.send((product, count))
+    }
+    
+    @objc func actionQuestionButton() {
+        alertSucceessTrigger.send(product)
     }
     
     required init?(coder: NSCoder) {

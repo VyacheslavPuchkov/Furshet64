@@ -11,7 +11,10 @@ import Combine
 class EntranceUserViewController: BaseViewController {
     
     // MARK: - ViewModel
-    var viewModel: EntranceViewModel?
+    var viewModel: EntranceViewModel = .init()
+    
+    // MARK: - Combine
+    private var cancelable = Set<AnyCancellable>()
     
     // MARK: - Private variable
     private var arrayTF: Array<UITextField> {
@@ -88,11 +91,12 @@ class EntranceUserViewController: BaseViewController {
         super.viewDidLoad()
         setConstraint()
         setupTextField()
+        bind()
     }
     
     // MARK: - Func
     @objc func actionButton() {
-        viewModel?.signIn()
+        viewModel.signIn()
     }
     
     @objc func registrationActionButton() {
@@ -108,9 +112,9 @@ class EntranceUserViewController: BaseViewController {
     @objc func textFieldAction(sender: UITextField) {
         switch sender {
         case mailUserTextField:
-            viewModel?.userEntrance.email = sender.text ?? ""
+            viewModel.userEntrance.email = sender.text ?? ""
         case passwordUserTextField:
-            viewModel?.userEntrance.password = sender.text ?? ""
+            viewModel.userEntrance.password = sender.text ?? ""
         default: break
         }
     }
@@ -139,6 +143,21 @@ private extension EntranceUserViewController {
             stackFinal.centerYAnchor.constraint(equalTo:view.centerYAnchor)
         ])
     }
+    
+    // MARK: - Combine
+    func bind() {
+        viewModel.succeessTrigger.sink { [weak self] () in
+            guard let self else { return }
+            self.alertChange(titleAlertTwo: "Спасибо за регистрацию", messageAlert:  nil) { _ in
+                self.navigationController?.popViewController(animated: true)
+                self.navigationController?.tabBarController?.selectedIndex = 2
+            } comletionNo: { _ in
+                self.navigationController?.popViewController(animated: true)
+                self.navigationController?.tabBarController?.selectedIndex = 3
+            }
+        }.store(in: &cancelable)
+    }
+
     
 }
 

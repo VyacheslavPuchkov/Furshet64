@@ -74,20 +74,20 @@ extension HistoryOrdersViewController: UITableViewDataSource, UITableViewDelegat
     }
 
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        let item = viewModel.dataSourse.value[section]
+        let order = viewModel.dataSourse.value[section]
         let dataFormatter = DateFormatter()
         dataFormatter.dateFormat = "dd.MM.yy HH:mm"
-        let date = dataFormatter.string(from: item.date)
-        let sectionTitle = "Дата заказа:" + " " + date + "   " + "Сумма: \(item.cost)р."
+        let date = dataFormatter.string(from: order.date)
+        let sectionTitle = "Дата заказа:" + " " + date + "   " + "Сумма: \(order.cost)р."
         return sectionTitle
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "HistoryOrdersCell", for: indexPath) as? HistoryOrdersTableViewCell
-        let item = viewModel.dataSourse.value[indexPath.section]
-        cell?.titleLabel.text = item.posiotions[indexPath.row].product.title
-        cell?.countLabel.text = "\(item.posiotions[indexPath.row].count) шт."
-        cell?.priceLabel.text = "\(item.posiotions[indexPath.row].cost) р."
+        let order = viewModel.dataSourse.value[indexPath.section]
+        cell?.titleLabel.text = order.posiotions[indexPath.row].product.title
+        cell?.countLabel.text = "\(order.posiotions[indexPath.row].count) шт."
+        cell?.priceLabel.text = "\(order.posiotions[indexPath.row].cost) р."
         cell?.backgroundColor = .white.withAlphaComponent(0.3)
         return cell ?? UITableViewCell()
     }

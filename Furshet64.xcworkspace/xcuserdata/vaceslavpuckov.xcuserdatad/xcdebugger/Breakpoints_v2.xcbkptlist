@@ -808,7 +808,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "D7C98B91-3329-4B6B-A01D-95B80EEDC265"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Furshet64/UI/Auth/CodeValidViewModel.swift"
@@ -830,8 +830,8 @@
             filePath = "Furshet64/UI/Auth/CodeValidViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "36"
-            endingLineNumber = "36"
+            startingLineNumber = "37"
+            endingLineNumber = "37"
             landmarkName = "showCodeValid()"
             landmarkType = "7">
          </BreakpointContent>
@@ -840,7 +840,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "11E899FA-5FFE-400A-8526-99F42016208D"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Furshet64/UI/Auth/CodeValidViewModel.swift"
@@ -916,11 +916,26 @@
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "0A85CC87-218C-4BAD-9C23-46E6406B1C17 - a327366ca97137ce"
+                  uuid = "0A85CC87-218C-4BAD-9C23-46E6406B1C17 - b0e4af591194f482"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "Furshet64.DatabaseService.getOrdes(for: __C.FIRUser, completion: (Swift.Result&lt;Swift.Array&lt;Furshet64.OrderModel&gt;, Swift.Error&gt;) -&gt; ()) -&gt; ()"
+                  symbolName = "Furshet64.DatabaseService.getOrders(for: __C.FIRUser, completion: (Swift.Result&lt;Swift.Array&lt;Furshet64.OrderModel&gt;, Swift.Error&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "Furshet64"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/vaceslavpuckov/Desktop/Furshet64/Furshet64/Networking/DatabaseService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "124"
+                  endingLineNumber = "124"
+                  offsetFromSymbolStart = "402">
+               </Location>
+               <Location
+                  uuid = "0A85CC87-218C-4BAD-9C23-46E6406B1C17 - 6c9563f9b973c23c"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Optional&lt;__C.FIRQuerySnapshot&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in Furshet64.DatabaseService.getOrders(for: __C.FIRUser, completion: (Swift.Result&lt;Swift.Array&lt;Furshet64.OrderModel&gt;, Swift.Error&gt;) -&gt; ()) -&gt; ()"
                   moduleName = "Furshet64"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/vaceslavpuckov/Desktop/Furshet64/Furshet64/Networking/DatabaseService.swift"
@@ -928,21 +943,6 @@
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "125"
                   endingLineNumber = "125"
-                  offsetFromSymbolStart = "402">
-               </Location>
-               <Location
-                  uuid = "0A85CC87-218C-4BAD-9C23-46E6406B1C17 - 74ce95ed58345547"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Optional&lt;__C.FIRQuerySnapshot&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in Furshet64.DatabaseService.getOrdes(for: __C.FIRUser, completion: (Swift.Result&lt;Swift.Array&lt;Furshet64.OrderModel&gt;, Swift.Error&gt;) -&gt; ()) -&gt; ()"
-                  moduleName = "Furshet64"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/vaceslavpuckov/Desktop/Furshet64/Furshet64/Networking/DatabaseService.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "126"
-                  endingLineNumber = "126"
                   offsetFromSymbolStart = "271">
                </Location>
             </Locations>

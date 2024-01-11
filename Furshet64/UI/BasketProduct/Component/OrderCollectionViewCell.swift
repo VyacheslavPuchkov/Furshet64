@@ -90,6 +90,18 @@ class OrderCollectionViewCell: UICollectionViewCell {
         }
     }
     
+    func configureCell(with position: Position) {
+        //cell?.setFoto(title: position.product.id + ".jpg") Получение картинки из базы данных
+        titleLabel.text = position.product.title
+        countLabel.text = "\(position.count) шт."
+        priceLabel.text = "\(position.cost) р."
+        imageProduct.image = UIImage(named: "productFoto")
+        backgroundColor = .white.withAlphaComponent(0.5)
+        layer.cornerRadius = 8
+        layer.borderWidth = 2
+        layer.borderColor = UIColor.white.cgColor
+    }
+    
     private func setConstaints() {
         contentView.addSubview(imageProduct)
         NSLayoutConstraint.activate([

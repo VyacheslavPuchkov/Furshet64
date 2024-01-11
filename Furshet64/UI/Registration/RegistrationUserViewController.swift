@@ -114,13 +114,16 @@ private extension RegistrationUserViewController {
     
     // MARK: - Combine
     func bind() {
-        viewModel.alertSucceessTrigger.sink(receiveValue: { alert in
-            let action = UIAlertAction(title: "К профилю", style: .default) { _ in
+        viewModel.succeessTrigger.sink { [weak self] () in
+            guard let self else { return }
+            self.alertChange(titleAlertTwo: "Спасибо за регистрацию", messageAlert:  nil) { _ in
+                self.navigationController?.popViewController(animated: true)
                 self.navigationController?.tabBarController?.selectedIndex = 2
+            } comletionNo: { _ in
+                self.navigationController?.popViewController(animated: true)
+                self.navigationController?.tabBarController?.selectedIndex = 3
             }
-            alert.addAction(action)
-            self.present(alert, animated: true)
-         }).store(in: &cancelable)
+        }.store(in: &cancelable)
     }
     
     // MARK: - Constraints

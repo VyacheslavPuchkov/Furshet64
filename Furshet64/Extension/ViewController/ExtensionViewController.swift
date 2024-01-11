@@ -17,6 +17,7 @@ extension UIViewController {
         let noAction = UIAlertAction(title: "Без изменений", style: .default, handler: comletionNo)
         alert.addAction(okAction)
         alert.addAction(noAction)
+        alert.view.tintColor = .black
         self.present(alert, animated: true)
         return
     }
@@ -25,19 +26,21 @@ extension UIViewController {
         let alert = UIAlertController(title: titleAlert,
                                       message: messageAlert,
                                       preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "ОК", style: .default, handler: completion)
+        let okAction = UIAlertAction(title: "Спасибо", style: .default, handler: completion)
         alert.addAction(okAction)
+        alert.view.tintColor = .black
         self.present(alert, animated: true)
         return
     }
-    func alertChange(titleAlertTwo: String, messageAlert: String, completion: ((UIAlertAction) -> Void)?, comletionNo: ((UIAlertAction) -> Void)?) {
+    func alertChange(titleAlertTwo: String, messageAlert: String?, completion: ((UIAlertAction) -> Void)?, comletionNo: ((UIAlertAction) -> Void)?) {
         let alert = UIAlertController(title: titleAlertTwo,
                                       message: messageAlert,
                                       preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "Да", style: .default, handler: completion)
-        let noAction = UIAlertAction(title: "Нет", style: .default, handler: comletionNo)
+        let okAction = UIAlertAction(title: "К профилю", style: .default, handler: completion)
+        let noAction = UIAlertAction(title: "В корзину", style: .default, handler: comletionNo)
         alert.addAction(okAction)
         alert.addAction(noAction)
+        alert.view.tintColor = .black
         self.present(alert, animated: true)
         return
     }

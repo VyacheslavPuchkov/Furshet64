@@ -7,6 +7,7 @@
 
 import UIKit
 import Combine
+import MessageUI
 
 class BasketProductViewController: BaseViewController{
  
@@ -111,13 +112,11 @@ class BasketProductViewController: BaseViewController{
     
     @objc func setOrder() {
         basketManager.addOrder()
-        basketManager.alertSucceessTriggerTwo.sink { alert in
-            let action = UIAlertAction(title: "ОК", style: .default) { _ in
+        basketManager.succeessTrigger.sink { [weak self] () in
+            guard let self else { return }
+            self.alertChange(titleAlert: "Спасибо за заказ", messageAlert: "В ближайшее время с вами свяжется оператор") { _ in
                 self.navigationController?.tabBarController?.selectedIndex = 0
             }
-            alert.view.tintColor = .black
-            alert.addAction(action)
-            self.present(alert, animated: true)
         }.store(in: &cancelable)
     }
     
@@ -125,25 +124,20 @@ class BasketProductViewController: BaseViewController{
 
 // MARK: - Private func
 private extension BasketProductViewController {
-    
+
     func bindAlert() {
-        basketManager.alertSucceessTrigger.sink { alert in
-            let oKaction = UIAlertAction(title: "Авторизиваться", style: .default) { _ in
+        basketManager.succeessTrigger.sink { [weak self] () in
+            guard let self else { return }
+            self.alertChange(titleAlert: "Внимание", messageAlert: "Для заказа необходимо авторизоваться") { _ in
                 let vc = AuthViewController()
                 self.navigationController?.pushViewController(vc, animated: true)
-            }
-            let noAction = UIAlertAction(title: "Без изменений", style: .default) { _ in
+            } comletionNo: { _ in
                 self.navigationController?.tabBarController?.selectedIndex = 0
             }
-            alert.view.tintColor = .black
-            alert.addAction(oKaction)
-            alert.addAction(noAction)
-            self.present(alert, animated: true)
         }.store(in: &cancelable)
     }
     
     func bind() {
-        
         basketManager.$cost.sink { [weak self] cost in
             guard let self else { return }
             self.totalPriceLabel.text = "\(self.basketManager.cost) р."
@@ -200,18 +194,27 @@ extension BasketProductViewController: UICollectionViewDelegate, UICollectionVie
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: OrderCollectionViewCell.reuseID, for: indexPath) as? OrderCollectionViewCell
         let position = basketManager.positions[indexPath.row]
-        //cell?.setFoto(title: position.product.id + ".jpg") Получение картинки из базы данных
-        cell?.titleLabel.text = position.product.title
-        cell?.countLabel.text = "\(position.count) шт."
-        cell?.priceLabel.text = "\(position.cost) р."
-        cell?.imageProduct.image = UIImage(named: "productFoto")
-        cell?.backgroundColor = .white.withAlphaComponent(0.5)
-        cell?.layer.cornerRadius = 8
-        cell?.layer.borderWidth = 2
-        cell?.layer.borderColor = UIColor.white.cgColor
+        cell?.configureCell(with: position)
         return cell ?? UICollectionViewCell()
     }
     
     
 }
 
+extension BasketProductViewController: MFMailComposeViewControllerDelegate {
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+            controller.dismiss(animated: true)
+        }
+    
+    // отправка заказа на email. Добавить в setOrder()
+    //            if MFMailComposeViewController.canSendMail() {
+    //                let mail = MFMailComposeViewController()
+    //                mail.mailComposeDelegate = self
+    //                mail.setToRecipients(["you@yoursite.com"])
+    //                mail.setSubject("Email Subject Here")
+    //                mail.setMessageBody("<p>You're so awesome!</p>", isHTML: true)
+    //                present(mail, animated: true)
+    //            } else {
+    //                print("Application is not able to send an email")
+    //            }
+}

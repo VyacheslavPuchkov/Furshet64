@@ -13,6 +13,9 @@ class EntranceViewModel: NSObject {
     // MARK: - Variable
     var userEntrance: EntranceModel = .init(password: "", email: "")
     
+    // MARK: - Combine
+    var succeessTrigger = PassthroughSubject<Void, Never>()
+    
     // MARK: - Init
     override init() {
         super.init()
@@ -21,10 +24,10 @@ class EntranceViewModel: NSObject {
     // MARK: - Func
     func signIn() {
         AuthService.shared.signInEmail(email: userEntrance.email, password: userEntrance.password) { [weak self] result in
-            guard self != nil else { return }
+            guard let self else { return }
             switch result {
             case .success(_):
-                break
+                self.succeessTrigger.send()
             case .failure(let error):
                 print(error.localizedDescription)
             }

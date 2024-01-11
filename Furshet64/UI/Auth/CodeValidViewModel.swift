@@ -17,7 +17,7 @@ class CodeValidViewModel: NSObject {
     var verificCode: String = ""
     var verificId: String
     // MARK: - Combine
-    var alertSucceessTrigger = PassthroughSubject<UIAlertController, Never>()
+    var succeessTrigger = PassthroughSubject<Void, Never>()
     
     // MARK: - Init
     init(verificId: String, phone: String) {
@@ -33,8 +33,8 @@ class CodeValidViewModel: NSObject {
             switch result {
             case .success(let user):
                 self.profileUser.id = user.uid
-                self.alertSucceessTrigger.send(UIAlertController(title: "Спасибо за регистрацию", message: "Заполните пожалуйста ваш профиль", preferredStyle: .alert))
                 self.setProfile()
+                self.succeessTrigger.send()
             case .failure(let error):
                 print(error.localizedDescription)
             }

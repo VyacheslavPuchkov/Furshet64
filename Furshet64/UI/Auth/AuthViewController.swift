@@ -22,17 +22,6 @@ class AuthViewController: BaseViewController {
     }
     
     // MARK: - UI
-//    var authorizationLabel: UILabel = {
-//        let label: UILabel = UILabel()
-//        label.translatesAutoresizingMaskIntoConstraints = false
-//        label.text = "Введите номер телефона"
-//        label.textAlignment = .center
-//        label.font = .defaultLargeTitleBold
-//        label.textColor = .black
-//        label.backgroundColor = .clear
-//        return label
-//    }()
-    
     var phoneUserTextField: FPNTextField = {
         let textField: FPNTextField = FPNTextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
