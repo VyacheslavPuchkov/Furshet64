@@ -35,7 +35,6 @@ class HomePageViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .blue
         setConstraint()
         setupFurshetInfoCollectionView()
         print(Auth.auth().currentUser?.uid ?? "no user")

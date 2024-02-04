@@ -60,12 +60,12 @@ class DatabaseService {
         }
     }
     
-    func getTypeProduct(completion: @escaping(Result<[MenuTypeProduct], Error>) -> ()){
+    func getTypeProduct(completion: @escaping(Result<[MenuType], Error>) -> ()){
         typeProductRef.getDocuments { docSnapshot, error in
             if let docSnapshot = docSnapshot {
-                var typeProducts = [MenuTypeProduct]()
+                var typeProducts = [MenuType]()
                 for doc in docSnapshot.documents {
-                    if let typeProduct = MenuTypeProduct(doc: doc) {
+                    if let typeProduct = MenuType(doc: doc) {
                         typeProducts.append(typeProduct)
                     }
                 }

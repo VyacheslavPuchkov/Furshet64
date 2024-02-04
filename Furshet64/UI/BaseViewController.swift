@@ -9,14 +9,14 @@ import UIKit
 
 class BaseViewController: UIViewController {
 
-    var bgImage: UIImageView = {
-        let image: UIImageView = UIImageView()
-        image.image = UIImage(named: "mainFotoThree")
-        image.contentMode = .scaleAspectFill
-        image.translatesAutoresizingMaskIntoConstraints = false
-        return image
-        
-    }()
+//    var bgImage: UIImageView = {
+//        let image: UIImageView = UIImageView()
+//        image.image = UIImage(named: "mainFotoThree")
+//        image.contentMode = .scaleAspectFill
+//        image.translatesAutoresizingMaskIntoConstraints = false
+//        return image
+//
+//    }()
     
     var nameOrganization: UILabel = {
         let label: UILabel = UILabel()
@@ -24,7 +24,7 @@ class BaseViewController: UIViewController {
         label.text = "Фуршет 64"
         label.textAlignment = .center
         label.font = .mobileH1
-        label.textColor = .black
+        label.textColor = .systemGreen
         label.backgroundColor = .clear
         
         return label
@@ -36,7 +36,7 @@ class BaseViewController: UIViewController {
         label.text = "КЕЙТЕРИНГОВАЯ КОМПАНИЯ В САРАТОВЕ"
         label.font = .mobileH6
         label.textAlignment = .center
-        label.textColor = .black
+        label.textColor = .systemGreen
         label.backgroundColor = .clear
         return label
     }()
@@ -44,16 +44,18 @@ class BaseViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setConstraints()
+        
     }
     
     func setConstraints() {
-        view.addSubview(bgImage)
-        NSLayoutConstraint.activate([
-            bgImage.topAnchor.constraint(equalTo: view.topAnchor),
-            bgImage.leftAnchor.constraint(equalTo: view.leftAnchor),
-            bgImage.rightAnchor.constraint(equalTo: view.rightAnchor),
-            bgImage.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-        ])
+//        view.addSubview(bgImage)
+//        NSLayoutConstraint.activate([
+//            bgImage.topAnchor.constraint(equalTo: view.topAnchor),
+//            bgImage.leftAnchor.constraint(equalTo: view.leftAnchor),
+//            bgImage.rightAnchor.constraint(equalTo: view.rightAnchor),
+//            bgImage.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+//        ])
+        view.backgroundColor = .white
         let stack = UIStackView(views: [nameOrganization, typeOrganization], axis: .vertical, spacing: 6)
         view.addSubview(stack)
         stack.translatesAutoresizingMaskIntoConstraints = false

@@ -7,6 +7,13 @@ target 'Furshet64' do
 
   # Pods for Furshet64
 
-    pod "FlagPhoneNumber"
+
+pod "FlagPhoneNumber"
+pod 'FirebaseAuth'
+pod 'FirebaseFirestore'
+pod 'FirebaseStorage'
+pod 'FirebaseDatabase'
+pod 'Firebase'
+
 
 end

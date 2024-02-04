@@ -2,20 +2,11 @@
 //  ProductModel.swift
 //  Furshet64
 //
-//  Created by Вячеслав Пучков on 22.10.2023.
+//  Created by Вячеслав Пучков on 17.01.2024.
 //
 
 import Foundation
 import FirebaseFirestore
-
-//enum TypeProduct: String {
-//   
-//    case all
-//    case snackWegetablesCheese
-//    case snackSeafood
-//    case snackMeat
-//    
-//}
 
 struct Product: Identifiable {
    
@@ -66,22 +57,3 @@ struct Product: Identifiable {
     }
     
 }
-
-//
-//extension Product {
-//
-//    var typeProductValue: TypeProduct {
-//        get {
-//            if typeProduct == "Холодные закуски из сыра и овощей" {
-//                return .snackWegetablesCheese
-//            } else if typeProduct == "Холодные закуски из морепродуктов" {
-//                return .snackSeafood
-//            } else if typeProduct == "Канапе, брускеты, закуски мясные" {
-//                return .snackMeat
-//            } else {
-//                return .all
-//            }
-//        }
-//    }
-    
-//}

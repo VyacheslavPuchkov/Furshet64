@@ -18,12 +18,12 @@ class MainTableBaRController: UITabBarController {
         super.viewDidLoad()
         
         homePageController = HomePageViewController()
-        menuController = MenuTypeViewController()
+        menuController = MenuViewController()
         profileUserController = ProfileUserViewController()
         basketProduct = BasketProductViewController()
         
-        tabBar.tintColor = .black
-        tabBar.barTintColor = .black
+        tabBar.tintColor = .systemGreen
+        tabBar.barTintColor = .white
         tabBar.unselectedItemTintColor = .gray
         
         viewControllers = [
@@ -40,7 +40,7 @@ class MainTableBaRController: UITabBarController {
         let navVC = UINavigationController(rootViewController: root)
         navVC.tabBarItem.title = title
         navVC.tabBarItem.image = image
-        navVC.navigationBar.tintColor = .black
+        navVC.navigationBar.tintColor = .systemGreen
         return navVC
     }
     

@@ -26,8 +26,8 @@ class CodeValidViewController: BaseViewController {
         textField.layer.masksToBounds = true
         textField.backgroundColor = .clear
         textField.layer.borderWidth = 2
-        textField.layer.borderColor = UIColor.white.cgColor
-        textField.textColor = .black
+        textField.layer.borderColor = UIColor.systemGreen.cgColor
+        textField.textColor = .systemGreen
         textField.keyboardType = .numberPad
         textField.textAlignment = .center
         textField.font = .bodyLarge2
@@ -43,7 +43,7 @@ class CodeValidViewController: BaseViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.layer.masksToBounds = true
         button.setTitle("Проверить код", for: .normal)
-        button.backgroundColor = .black.withAlphaComponent(0.8)
+        button.backgroundColor = .systemGreen.withAlphaComponent(0.8)
         button.titleLabel?.font = .bodyLarge2
         button.setTitleColor(.white, for: .normal)
         button.widthAnchor.constraint(equalToConstant: 350).isActive = true

@@ -29,7 +29,7 @@ class AuthViewController: BaseViewController {
         textField.attributedPlaceholder = NSAttributedString(string: "  Ваш номер", attributes: [NSAttributedString.Key.foregroundColor: UIColor.black])
         textField.backgroundColor = .clear
         textField.layer.borderWidth = 2
-        textField.layer.borderColor = UIColor.black.cgColor
+        textField.layer.borderColor = UIColor.systemGreen.cgColor
         textField.heightAnchor.constraint(equalToConstant: 50).isActive = true
         textField.widthAnchor.constraint(equalToConstant: 350).isActive = true
         textField.layer.cornerRadius = 10
@@ -41,7 +41,7 @@ class AuthViewController: BaseViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.layer.masksToBounds = true
         button.setTitle("Получить код", for: .normal)
-        button.backgroundColor = .black
+        button.backgroundColor = .systemGreen
         button.titleLabel?.font = .bodyLarge2
         button.setTitleColor(.white, for: .normal)
         button.widthAnchor.constraint(equalToConstant: 350).isActive = true
@@ -57,7 +57,7 @@ class AuthViewController: BaseViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.layer.masksToBounds = true
         button.setTitle("Авторизоваться с помощью e-mail", for: .normal)
-        button.backgroundColor = .black.withAlphaComponent(0.8)
+        button.backgroundColor = .systemGreen.withAlphaComponent(0.8)
         button.titleLabel?.font = .bodyLarge
         button.setTitleColor(.white, for: .normal)
         button.widthAnchor.constraint(equalToConstant: 350).isActive = true
