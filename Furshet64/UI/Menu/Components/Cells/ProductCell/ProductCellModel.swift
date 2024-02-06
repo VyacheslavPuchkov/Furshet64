@@ -15,14 +15,18 @@ class ProductCellModel: FCellViewModel {
     var price: Int
     var id: String
     var count: Int
+    var typeProduct: String
+    var weight: String
     
-    init(image: UIImage?, name: String, compound: String, price: Int, id: String, count: Int) {
+    init(image: UIImage?, name: String, compound: String, price: Int, id: String, count: Int, typeProduct: String, weight: String) {
         self.image = image
         self.name = name
         self.compound = compound
         self.price = price
         self.id = id
         self.count = count
+        self.typeProduct = typeProduct
+        self.weight = weight
         super.init(cellIdentifier: "ProductCell")
     }
 

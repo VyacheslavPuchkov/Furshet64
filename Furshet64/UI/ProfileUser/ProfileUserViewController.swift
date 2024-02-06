@@ -12,6 +12,14 @@ import FirebaseAuth
 
 class ProfileUserViewController: BaseViewController, ObservableObject {
     
+    // MARK: - Constants
+    enum Constants {
+        static let size = CGSize(width: 350, height: 50)
+        enum ExitButton {
+            static let insets = UIEdgeInsets(top: .zero, left: .zero, bottom: -100, right: .zero)
+        }
+    }
+    
     // MARK: - ViewModel
     var viewModel: ProfileUserViewModel = .init()
     // MARK: - Private variable
@@ -34,14 +42,14 @@ class ProfileUserViewController: BaseViewController, ObservableObject {
     
     var phoneUserTextField: FPNTextField = {
         let textField: FPNTextField = FPNTextField()
-        textField.attributedPlaceholder = NSAttributedString(string: "  Ваш номер", attributes: [NSAttributedString.Key.foregroundColor: UIColor.black])
+        textField.attributedPlaceholder = NSAttributedString(string: "  Ваш номер", attributes: [NSAttributedString.Key.foregroundColor: UIColor.statusGreen])
         textField.layer.masksToBounds = true
         textField.backgroundColor = .clear
         textField.layer.borderWidth = 2
-        textField.layer.borderColor = UIColor.black.cgColor
-        textField.textColor = .black
-        textField.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        textField.widthAnchor.constraint(equalToConstant: 350).isActive = true
+        textField.layer.borderColor = UIColor.systemGreen.cgColor
+        textField.textColor = .systemGreen
+        textField.heightAnchor.constraint(equalToConstant: Constants.size.height).isActive = true
+        textField.widthAnchor.constraint(equalToConstant: Constants.size.width).isActive = true
         textField.layer.cornerRadius = 10
         return textField
     }()
@@ -50,11 +58,11 @@ class ProfileUserViewController: BaseViewController, ObservableObject {
         let button: UIButton = UIButton()
         button.layer.masksToBounds = true
         button.setTitle("Изменить", for: .normal)
-        button.backgroundColor = .black.withAlphaComponent(0.8)
+        button.backgroundColor = .systemGreen.withAlphaComponent(0.8)
         button.titleLabel?.font = .bodyLarge2
         button.setTitleColor(.white, for: .normal)
-        button.widthAnchor.constraint(equalToConstant: 350).isActive = true
-        button.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        button.widthAnchor.constraint(equalToConstant: Constants.size.width).isActive = true
+        button.heightAnchor.constraint(equalToConstant: Constants.size.height).isActive = true
         button.layer.cornerRadius = 6
         button.addTarget(self, action: #selector(saveActionButton), for: .touchUpInside)
         
@@ -65,11 +73,11 @@ class ProfileUserViewController: BaseViewController, ObservableObject {
         let button: UIButton = UIButton()
         button.layer.masksToBounds = true
         button.setTitle("История заказов", for: .normal)
-        button.backgroundColor = .black.withAlphaComponent(0.5)
+        button.backgroundColor = .systemGreen.withAlphaComponent(0.5)
         button.titleLabel?.font = .bodyLarge2
         button.setTitleColor(.white, for: .normal)
-        button.widthAnchor.constraint(equalToConstant: 350).isActive = true
-        button.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        button.widthAnchor.constraint(equalToConstant: Constants.size.width).isActive = true
+        button.heightAnchor.constraint(equalToConstant: Constants.size.height).isActive = true
         button.layer.cornerRadius = 6
         button.addTarget(self, action: #selector(historyOrdersAction), for: .touchUpInside)
         
@@ -81,11 +89,11 @@ class ProfileUserViewController: BaseViewController, ObservableObject {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.layer.masksToBounds = true
         button.setTitle("Выйти", for: .normal)
-        button.backgroundColor = .black.withAlphaComponent(0.8)
+        button.backgroundColor = .systemGreen.withAlphaComponent(0.8)
         button.titleLabel?.font = .bodyLarge2
         button.setTitleColor(.white, for: .normal)
-        button.widthAnchor.constraint(equalToConstant: 350).isActive = true
-        button.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        button.widthAnchor.constraint(equalToConstant: Constants.size.width).isActive = true
+        button.heightAnchor.constraint(equalToConstant: Constants.size.height).isActive = true
         button.layer.cornerRadius = 6
         button.addTarget(self, action: #selector(exitActionButton), for: .touchUpInside)
         
@@ -95,7 +103,7 @@ class ProfileUserViewController: BaseViewController, ObservableObject {
     // MARK: - Life Cycle View Controller
     override func viewDidLoad() {
         super.viewDidLoad()
-        setConstraint()
+        configure()
         myProfile()
         setupConfig()
         bind()
@@ -156,7 +164,8 @@ private extension ProfileUserViewController {
     }
     
     // MARK: - Contraints
-    func setConstraint() {
+    func configure() {
+        let insets = Constants.ExitButton.insets
         let stack = UIStackView(views: [nameUserTextField, phoneUserTextField, saveButton, historyOrdersButton], axis: .vertical, spacing: 5)
         stack.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(stack)
@@ -166,7 +175,7 @@ private extension ProfileUserViewController {
         ])
         view.addSubview(exitButton)
         NSLayoutConstraint.activate([
-            exitButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -100),
+            exitButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: insets.bottom),
             exitButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
     }

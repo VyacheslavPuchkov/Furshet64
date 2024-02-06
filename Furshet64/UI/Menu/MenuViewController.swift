@@ -128,7 +128,6 @@ extension MenuViewController: UITableViewDelegate, UITableViewDataSource {
 
 // MARK - FiltersViewAction
 extension MenuViewController: MenuTypeViewAction {
-    
     func didTap(id: String) {
         viewModel.dataSourseTypeProduct.value.indices.forEach({ index in
             if viewModel.dataSourseTypeProduct.value[index].title == id {
@@ -140,3 +139,4 @@ extension MenuViewController: MenuTypeViewAction {
         viewModel.getProduct(productType: id)
     }
 }
+    

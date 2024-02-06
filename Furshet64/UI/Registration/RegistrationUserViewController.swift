@@ -10,6 +10,11 @@ import Combine
 
 class RegistrationUserViewController: BaseViewController {
     
+    // MARK: - Constants
+    enum Constants {
+        static let size = CGSize(width: 350, height: 50)
+    }
+    
     // MARK: - ViewModel
     var viewModel: RegistrationViewModel = .init()
     // MARK: - Combine
@@ -43,8 +48,8 @@ class RegistrationUserViewController: BaseViewController {
         button.backgroundColor = .black.withAlphaComponent(0.8)
         button.titleLabel?.font = .bodyLarge2
         button.setTitleColor(.white, for: .normal)
-        button.widthAnchor.constraint(equalToConstant: 350).isActive = true
-        button.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        button.widthAnchor.constraint(equalToConstant: Constants.size.width).isActive = true
+        button.heightAnchor.constraint(equalToConstant: Constants.size.height).isActive = true
         button.layer.cornerRadius = 6
         button.addTarget(self, action: #selector(actionButton), for: .touchUpInside)
         
@@ -59,8 +64,8 @@ class RegistrationUserViewController: BaseViewController {
         button.backgroundColor = .clear
         button.titleLabel?.font = .bodyLarge2
         button.setTitleColor(.black, for: .normal)
-        button.widthAnchor.constraint(equalToConstant: 350).isActive = true
-        button.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        button.widthAnchor.constraint(equalToConstant: Constants.size.width).isActive = true
+        button.heightAnchor.constraint(equalToConstant: Constants.size.height).isActive = true
         button.layer.cornerRadius = 6
         button.layer.borderWidth = 2
         button.layer.borderColor = UIColor.black.cgColor
@@ -72,7 +77,7 @@ class RegistrationUserViewController: BaseViewController {
     // MARK: - Life Cycle View Controller
     override func viewDidLoad() {
         super.viewDidLoad()
-        setConstraint()
+        configure()
         setupTextField()
         bind()
     }
@@ -127,7 +132,7 @@ private extension RegistrationUserViewController {
     }
     
     // MARK: - Constraints
-    func setConstraint() {
+    func configure() {
         let stack = UIStackView(views: [mailUserTextField, passwordUserTextField, passwordTwoUserTextField], axis: .vertical, spacing: 10)
         let stackButton = UIStackView(views: [registrationButton, entranceButton], axis: .vertical, spacing: 10)
         let stackFinal = UIStackView(views: [registrationLabel, stack, stackButton], axis: .vertical, spacing: 30)

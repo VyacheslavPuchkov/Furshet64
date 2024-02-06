@@ -9,7 +9,29 @@ import UIKit
 import Combine
 import MessageUI
 
-class BasketProductViewController: BaseViewController{
+class BasketProductViewController: BaseViewController {
+    
+    // MARK: - Constants
+    enum Constants {
+        enum OrderButton {
+            static let size = CGSize(width: 200, height: 40)
+        }
+        enum CancelButton {
+            static let size = CGSize(width: 150, height: 40)
+        }
+        enum StackButton {
+            static let insets = UIEdgeInsets(top: .zero, left: .zero, bottom: -100, right: .zero)
+        }
+        enum TotalLabel {
+            static let insets = UIEdgeInsets(top: .zero, left: 16, bottom: -50, right: .zero)
+        }
+        enum TotalPriceLabel {
+            static let insets = UIEdgeInsets(top: .zero, left: .zero, bottom: -50, right: -16)
+        }
+        enum TableView {
+            static let insets = UIEdgeInsets(top: 200, left: 16, bottom: -16, right: 16)
+        }
+    }
  
     // MARK: - Manager
     var basketManager: BasketProductManager = .shared
@@ -18,19 +40,11 @@ class BasketProductViewController: BaseViewController{
     private var cancelable = Set<AnyCancellable>()
     
     // MARK: - UI
-    let collectViewOrder: UICollectionView = {
-        let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .vertical
-        layout.itemSize = CGSize(width: 350, height: 150)
-        layout.sectionInset = .init(top: .zero, left: 16, bottom: .zero, right: 16)
-        layout.minimumLineSpacing = 10
-        layout.minimumInteritemSpacing = 10
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.backgroundColor = .clear
-        collectionView.translatesAutoresizingMaskIntoConstraints = false
-        collectionView.register(OrderCollectionViewCell.self, forCellWithReuseIdentifier: OrderCollectionViewCell.reuseID)
-        return collectionView
-        
+    private let tableView: UITableView = {
+        let tableView = UITableView()
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.backgroundColor = .white
+        return tableView
     }()
     
     var totalLabel: UILabel = {
@@ -58,6 +72,7 @@ class BasketProductViewController: BaseViewController{
     
     lazy var orderButton: UIButton = {
         let button: UIButton = UIButton()
+        let size = Constants.OrderButton.size
         button.translatesAutoresizingMaskIntoConstraints = false
         button.layer.masksToBounds = true
         button.setTitle("Заказать", for: .normal)
@@ -65,8 +80,8 @@ class BasketProductViewController: BaseViewController{
         button.titleLabel?.font = .bodyLarge2
         button.backgroundColor = .systemGreen
         button.setTitleColor(.white, for: .normal)
-        button.widthAnchor.constraint(equalToConstant: 200).isActive = true
-        button.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        button.widthAnchor.constraint(equalToConstant: size.width).isActive = true
+        button.heightAnchor.constraint(equalToConstant: size.height).isActive = true
         button.layer.cornerRadius = 6
         button.addTarget(self, action: #selector(setOrder), for: .touchUpInside)
         
@@ -75,6 +90,7 @@ class BasketProductViewController: BaseViewController{
     
     lazy var cancelButton: UIButton = {
         let button: UIButton = UIButton()
+        let size = Constants.CancelButton.size
         button.translatesAutoresizingMaskIntoConstraints = false
         button.layer.masksToBounds = true
         button.setTitle("Отменить", for: .normal)
@@ -82,8 +98,8 @@ class BasketProductViewController: BaseViewController{
         button.titleLabel?.font = .bodyLarge2
         button.backgroundColor = .systemRed
         button.setTitleColor(.white, for: .normal)
-        button.widthAnchor.constraint(equalToConstant: 150).isActive = true
-        button.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        button.widthAnchor.constraint(equalToConstant: size.width).isActive = true
+        button.heightAnchor.constraint(equalToConstant: size.height).isActive = true
         button.layer.cornerRadius = 5
         button.addTarget(self, action: #selector(removeOrder), for: .touchUpInside)
         
@@ -93,20 +109,22 @@ class BasketProductViewController: BaseViewController{
     // MARK: - Life Cycle View Controller
     override func viewDidLoad() {
         super.viewDidLoad()
-        setConstraint()
-        setupOrderCollectView()
+        configure()
+        setupTabletView()
         bindAlert()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         self.basketManager.displayView()
-        collectViewOrder.reloadData()
+        tableView.reloadData()
         bind()
     }
     
     @objc func removeOrder() {
-        basketManager.removeOrder()
+        basketManager.cellModels.removeAll()
+        basketManager.positions.removeAll()
+        tableView.reloadData()
         totalPriceLabel.text = "0 р."
     }
     
@@ -145,60 +163,64 @@ private extension BasketProductViewController {
         
         basketManager.$positions.sink { [weak self] _ in
             guard let self else { return }
-            self.collectViewOrder.reloadData()
+            self.tableView.reloadData()
         }.store(in: &cancelable)
     }
     
-    func setupOrderCollectView() {
-        collectViewOrder.dataSource = self
-        collectViewOrder.delegate = self
+    func setupTabletView() {
+        tableView.dataSource = self
+        tableView.delegate = self
+        tableView.register(OrderTableCell.self, forCellReuseIdentifier: "OrderTableCell")
     }
     
-    // MARK: - Constrains
-    func setConstraint() {
+    // MARK: - Configure
+    func configure() {
+        let insetsStack = Constants.StackButton.insets
+        let insetsTotalLabel = Constants.TotalLabel.insets
+        let insetsTotalPriceLabel = Constants.TotalPriceLabel.insets
+        let insetsTableView = Constants.TableView.insets
         let stack = UIStackView(views: [cancelButton, orderButton], axis: .horizontal, spacing: 15)
         view.addSubview(stack)
         stack.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             stack.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            stack.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -100)
+            stack.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: insetsStack.bottom)
         ])
         view.addSubview(totalLabel)
         NSLayoutConstraint.activate([
-            totalLabel.bottomAnchor.constraint(equalTo: stack.bottomAnchor, constant: -50),
-            totalLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 16)
+            totalLabel.bottomAnchor.constraint(equalTo: stack.bottomAnchor, constant: insetsTotalLabel.bottom),
+            totalLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: insetsTotalLabel.left)
         ])
         view.addSubview(totalPriceLabel)
         NSLayoutConstraint.activate([
-            totalPriceLabel.bottomAnchor.constraint(equalTo: stack.bottomAnchor, constant: -50),
-            totalPriceLabel.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -16)
+            totalPriceLabel.bottomAnchor.constraint(equalTo: stack.bottomAnchor, constant: insetsTotalPriceLabel.bottom),
+            totalPriceLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: insetsTotalPriceLabel.right)
         ])
-        view.addSubview(collectViewOrder)
+        view.addSubview(tableView)
         NSLayoutConstraint.activate([
-            collectViewOrder.topAnchor.constraint(equalTo: view.topAnchor, constant: 200),
-            collectViewOrder.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 16),
-            collectViewOrder.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -16),
-            collectViewOrder.bottomAnchor.constraint(equalTo: totalLabel.topAnchor, constant: -16)
+            tableView.topAnchor.constraint(equalTo: view.topAnchor, constant: insetsTableView.top),
+            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: insetsTableView.left),
+            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: insetsTableView.right),
+            tableView.bottomAnchor.constraint(equalTo: totalLabel.topAnchor, constant: insetsTableView.bottom)
         ])
     }
     
 }
 
-// MARK: - UICollectionViewDelegate
+// MARK: - UITableViewDelegate
 
-extension BasketProductViewController: UICollectionViewDelegate, UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return basketManager.positions.count
+extension BasketProductViewController: UITableViewDataSource, UITableViewDelegate {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return basketManager.cellModels.count
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: OrderCollectionViewCell.reuseID, for: indexPath) as? OrderCollectionViewCell
-        let position = basketManager.positions[indexPath.row]
-        cell?.configureCell(with: position)
-        return cell ?? UICollectionViewCell()
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cellModel = basketManager.cellModels[indexPath.item]
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellModel.cellIdentifier, for: indexPath)
+        guard let baseCell = cell as? FTableViewCell else { return cell }
+        cellModel.fillableCell = baseCell
+        return baseCell
     }
-    
-    
 }
 
 extension BasketProductViewController: MFMailComposeViewControllerDelegate {

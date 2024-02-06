@@ -7,7 +7,6 @@
 //
 import Foundation
 import FirebaseFirestore
-
 import Combine
 import UIKit
 
@@ -15,6 +14,7 @@ class MenuViewModel: NSObject {
     
     // MARK: - Combine
     var dataSourseTypeProduct = CurrentValueSubject<[MenuType], Never>([])
+    var dataSourseProduct = CurrentValueSubject<[Product], Never>([])
     
     // MARK - Model
     @Published var cellModels: [FCellViewModel] = []
@@ -57,12 +57,14 @@ class MenuViewModel: NSObject {
         }
     }
     
+    
+    
     // MARK: - Private func
     private func makeViewModels(for products: [Product]) {
         cellModels = []
         products.forEach { cellModels.append(
-            ProductCellModel(image: UIImage(named: ""), name: $0.title, compound: $0.compound, price: $0.price, id: $0.id, count: 1))
+            ProductCellModel(image: UIImage(named: ""), name: $0.title, compound: $0.compound, price: $0.price, id: $0.id, count: 1, typeProduct: $0.typeProduct, weight: $0.weight))
         }
     }
-    
+        
 }

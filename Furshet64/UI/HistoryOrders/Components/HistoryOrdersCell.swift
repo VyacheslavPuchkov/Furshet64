@@ -1,10 +1,11 @@
 //
-//  HistoryOrdesTableViewCell.swift
+//  HistoryOrdersCell.swift
 //  Furshet64
 //
-//  Created by Вячеслав Пучков on 31.12.2023.
+//  Created by Вячеслав Пучков on 06.02.2024.
 //
 
+import Foundation
 import UIKit
 
 class HistoryOrdersTableViewCell: UITableViewCell {

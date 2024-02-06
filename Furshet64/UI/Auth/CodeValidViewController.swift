@@ -10,6 +10,11 @@ import Combine
 
 class CodeValidViewController: BaseViewController {
     
+    // MARK: - Constants
+    enum Constants {
+        static let size = CGSize(width: 350, height: 50)
+    }
+    
     // MARK: - ViewModel
     var viewModel: CodeValidViewModel = .init(verificId: "", phone: "")
     // MARK: - Combine
@@ -31,8 +36,8 @@ class CodeValidViewController: BaseViewController {
         textField.keyboardType = .numberPad
         textField.textAlignment = .center
         textField.font = .bodyLarge2
-        textField.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        textField.widthAnchor.constraint(equalToConstant: 350).isActive = true
+        textField.heightAnchor.constraint(equalToConstant: Constants.size.height).isActive = true
+        textField.widthAnchor.constraint(equalToConstant: Constants.size.width).isActive = true
         textField.layer.cornerRadius = 10
         
         return textField
@@ -46,8 +51,8 @@ class CodeValidViewController: BaseViewController {
         button.backgroundColor = .systemGreen.withAlphaComponent(0.8)
         button.titleLabel?.font = .bodyLarge2
         button.setTitleColor(.white, for: .normal)
-        button.widthAnchor.constraint(equalToConstant: 350).isActive = true
-        button.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        button.widthAnchor.constraint(equalToConstant: Constants.size.width).isActive = true
+        button.heightAnchor.constraint(equalToConstant: Constants.size.height).isActive = true
         button.layer.cornerRadius = 6
         button.alpha = 0.5
         button.isEnabled = false
@@ -60,7 +65,7 @@ class CodeValidViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         print(viewModel.verificCode)
-        setConstraint()
+        configure()
         setupTextView()
         bind()
     }
@@ -91,7 +96,7 @@ private extension CodeValidViewController {
     }
     
     // MARK: - Constraints
-    func setConstraint() {
+    func configure() {
         let stack = UIStackView(views: [codeTextField, sendButton], axis: .vertical, spacing: 35)
         view.addSubview(stack)
         stack.translatesAutoresizingMaskIntoConstraints = false

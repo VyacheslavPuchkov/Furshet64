@@ -1,15 +1,14 @@
 //
-//  ProductCell.swift
+//  OrderColletionViewCell.swift
 //  Furshet64
 //
-//  Created by Вячеслав Пучков on 17.01.2024.
+//  Created by Вячеслав Пучков on 05.02.2024.
 //
 
 import Foundation
 import UIKit
-import Combine
 
-class ProductCell: FTableViewCell {
+class OrderTableCell: FTableViewCell {
     
     // MARK: - Constants
     enum Constants {
@@ -23,7 +22,7 @@ class ProductCell: FTableViewCell {
         enum DescriptionLabel {
             static let insets = UIEdgeInsets(top: .zero, left: .zero, bottom: .zero, right: .zero)
         }
-        enum AddProductView {
+        enum PriceProduct {
             static let insets = UIEdgeInsets(top: 16, left: .zero, bottom: -16, right: -16)
         }
         enum CountProductView {
@@ -32,18 +31,14 @@ class ProductCell: FTableViewCell {
     }
     
     // MARK: - View
-    let addProductView = AddProductView()
     let countProductView = CountProductView()
     
     // MARK: - ViewModel
-    var currentViewModel: ProductCellModel? {
-        viewModel as? ProductCellModel
+    var currentViewModel: OrderTableCellModel? {
+        viewModel as? OrderTableCellModel
     }
     
-    var tapPublisher = PassthroughSubject<(Product?, Int), Never>()
-    
-    var product: Product?
-    @Published var count: Int = 1
+    @Published var count: Int = .zero
     
     // MARK: - UI
     let productImageView: UIImageView = {
@@ -68,6 +63,14 @@ class ProductCell: FTableViewCell {
         return label
     }()
     
+    let priceProduct: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textColor = .systemGreen
+        label.font = .systemFont(ofSize: 20, weight: .regular)
+        return label
+    }()
+    
 
     // MARK: - Init
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -84,7 +87,7 @@ class ProductCell: FTableViewCell {
         configureImageView()
         configureNameLabel()
         configureDescriptionLabel()
-        configureAddProductView()
+        configurePriceProduct()
         configureCountProductView()
     }
     
@@ -100,6 +103,7 @@ class ProductCell: FTableViewCell {
             productImageView.bottomAnchor.constraint(lessThanOrEqualTo: contentView.bottomAnchor, constant: insets.bottom)
         ])
     }
+    
     
     private func configureNameLabel() {
         let insets = Constants.NameLabel.insets
@@ -121,13 +125,13 @@ class ProductCell: FTableViewCell {
         ])
     }
     
-    private func configureAddProductView() {
-        let insets = Constants.AddProductView.insets
-        contentView.addSubview(addProductView)
+    private func configurePriceProduct() {
+        let insets = Constants.PriceProduct.insets
+        contentView.addSubview(priceProduct)
         NSLayoutConstraint.activate([
-            addProductView.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: insets.top),
-            addProductView.trailingAnchor.constraint(equalTo: descriptionLabel.trailingAnchor),
-            addProductView.bottomAnchor.constraint(lessThanOrEqualTo: contentView.bottomAnchor, constant: insets.bottom)
+            priceProduct.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: insets.top),
+            priceProduct.trailingAnchor.constraint(equalTo: descriptionLabel.trailingAnchor),
+            priceProduct.bottomAnchor.constraint(lessThanOrEqualTo: contentView.bottomAnchor, constant: insets.bottom)
         ])
     }
     
@@ -136,7 +140,7 @@ class ProductCell: FTableViewCell {
         contentView.addSubview(countProductView)
         NSLayoutConstraint.activate([
             countProductView.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: insets.top),
-            countProductView.trailingAnchor.constraint(equalTo: addProductView.leadingAnchor, constant: insets.right),
+            countProductView.trailingAnchor.constraint(equalTo: priceProduct.leadingAnchor, constant: insets.right),
             countProductView.bottomAnchor.constraint(lessThanOrEqualTo: contentView.bottomAnchor, constant: insets.bottom)
         ])
     }
@@ -155,12 +159,12 @@ class ProductCell: FTableViewCell {
     override func fill(viewModel: FCellViewModel) {
         super.fill(viewModel: viewModel)
         guard let currentViewModel else { return }
-        nameLabel.text = currentViewModel.name
-        descriptionLabel.text = currentViewModel.compound
-        addProductView.label.text = "\(currentViewModel.price) р."
-        addProductView.button.addTarget(self, action: #selector(actionButton), for: .touchUpInside)
+        nameLabel.text = currentViewModel.product.title
+        descriptionLabel.text = currentViewModel.product.compound
+        priceProduct.text = "\(currentViewModel.cost) р."
         //setFoto(title: currentViewModel.id + ".jpg")  На сервере нет фото
         productImageView.image = UIImage(named: "productFoto")
+        countProductView.label.text = "\(currentViewModel.count)"
         countProductView.buttonPlus.addTarget(self, action: #selector(addProduct), for: .touchUpInside)
         countProductView.buttonMinus.addTarget(self, action: #selector(deleteProduct), for: .touchUpInside)
     }
@@ -171,30 +175,23 @@ class ProductCell: FTableViewCell {
     }
     
     @objc func addProduct() {
+        guard let currentViewModel else { return }
+        count = currentViewModel.count
         count += 1
         countProductView.label.text = "\(count)"
-        guard let price = currentViewModel?.price else { return }
-        addProductView.label.text = "\(price * count) р."
+        let price = currentViewModel.product.price
+        priceProduct.text = "\(price * count) р."
     }
     
     @objc func deleteProduct() {
+        guard let currentViewModel else { return }
+        count = currentViewModel.count
         if count > 1 {
             count -= 1
         }
         countProductView.label.text = "\(count)"
-        guard let price = currentViewModel?.price else { return }
-        addProductView.label.text = "\(price * count) р."
-    }
-    
-    @objc func actionButton() {
-        guard let currentViewModel else { return }
-        let id = currentViewModel.id
-        let title = currentViewModel.name
-        let price = currentViewModel.price
-        let typeProduct = currentViewModel.typeProduct
-        let weight = currentViewModel.weight
-        let compound = currentViewModel.compound
-        BasketProductManager.shared.addPosition(.init(id: UUID().uuidString, product: .init(id: id, title: title, price: price, typeProduct: typeProduct, weight: weight, compound: compound), count: count))
+        let price = currentViewModel.product.price
+        priceProduct.text = "\(price * count) р."
     }
     
 }

@@ -10,6 +10,12 @@ import Combine
 
 class HistoryOrdersViewController: BaseViewController {
     
+    enum Constant {
+        enum TableView {
+            static let insets = UIEdgeInsets(top: 200, left: 16, bottom: -16, right: -90)
+        }
+    }
+    
     // MARK: - ViewModel
     var viewModel: HistoryOrdersViewModel = .init()
     // MARK: - Combine
@@ -42,11 +48,12 @@ class HistoryOrdersViewController: BaseViewController {
 private extension HistoryOrdersViewController {
     func setConstraint() {
         view.addSubview(historyOrdersTableView)
+        let insets = Constant.TableView.insets
         NSLayoutConstraint.activate([
-            historyOrdersTableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 200),
-            historyOrdersTableView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 16),
-            historyOrdersTableView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -16),
-            historyOrdersTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -90)
+            historyOrdersTableView.topAnchor.constraint(equalTo: view.topAnchor, constant: insets.top),
+            historyOrdersTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: insets.left),
+            historyOrdersTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: insets.right),
+            historyOrdersTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: insets.bottom)
         ])
     }
     
@@ -92,5 +99,3 @@ extension HistoryOrdersViewController: UITableViewDataSource, UITableViewDelegat
         return cell ?? UITableViewCell()
     }
 }
-
-

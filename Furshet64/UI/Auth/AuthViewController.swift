@@ -12,6 +12,11 @@ import FirebaseAuth
 
 class AuthViewController: BaseViewController {
     
+    // MARK: - Constants
+    enum Constants {
+        static let size = CGSize(width: 350, height: 50)
+    }
+    
     // MARK: - ViewModel
     var viewModel: AuthViewModel = .init()
     // MARK: - Private variable
@@ -30,8 +35,9 @@ class AuthViewController: BaseViewController {
         textField.backgroundColor = .clear
         textField.layer.borderWidth = 2
         textField.layer.borderColor = UIColor.systemGreen.cgColor
-        textField.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        textField.widthAnchor.constraint(equalToConstant: 350).isActive = true
+        textField.heightAnchor.constraint(equalToConstant: Constants.size.height).isActive = true
+        textField.widthAnchor.constraint(equalToConstant: Constants.size.width
+        ).isActive = true
         textField.layer.cornerRadius = 10
         return textField
     }()
@@ -44,8 +50,8 @@ class AuthViewController: BaseViewController {
         button.backgroundColor = .systemGreen
         button.titleLabel?.font = .bodyLarge2
         button.setTitleColor(.white, for: .normal)
-        button.widthAnchor.constraint(equalToConstant: 350).isActive = true
-        button.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        button.widthAnchor.constraint(equalToConstant: Constants.size.width).isActive = true
+        button.heightAnchor.constraint(equalToConstant: Constants.size.height).isActive = true
         button.layer.cornerRadius = 6
         button.addTarget(self, action: #selector(actionButton), for: .touchUpInside)
         
@@ -60,8 +66,8 @@ class AuthViewController: BaseViewController {
         button.backgroundColor = .systemGreen.withAlphaComponent(0.8)
         button.titleLabel?.font = .bodyLarge
         button.setTitleColor(.white, for: .normal)
-        button.widthAnchor.constraint(equalToConstant: 350).isActive = true
-        button.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        button.widthAnchor.constraint(equalToConstant: Constants.size.width).isActive = true
+        button.heightAnchor.constraint(equalToConstant: Constants.size.height).isActive = true
         button.layer.cornerRadius = 6
         button.addTarget(self, action: #selector(actionButtonTwo), for: .touchUpInside)
         
@@ -115,7 +121,9 @@ private extension AuthViewController {
         
         listController = FPNCountryListViewController(style: .grouped)
         listController.setup(repository: phoneUserTextField.countryRepository)
-        listController?.didSelect = { country in
+        
+        listController?.didSelect = { [weak self] country in
+            guard let self else { return }
             self.phoneUserTextField.setFlag(countryCode: country.code)
         }
     }

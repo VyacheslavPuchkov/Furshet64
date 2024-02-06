@@ -10,6 +10,13 @@ import Combine
 import FirebaseAuth
 
 class HomePageViewController: BaseViewController {
+    
+    // MARK: - Constants
+    enum Constants {
+        enum CollectionView {
+            static let insets = UIEdgeInsets(top: 150, left: 16, bottom: 230, right: -16)
+        }
+    }
    
     // MARK: - ViewModel
     var viewModel: HomePageViewModel = .init()
@@ -17,7 +24,7 @@ class HomePageViewController: BaseViewController {
     private var cancelable = Set<AnyCancellable>()
     
     // MARK: - UI
-    let furshetInfoCollectView: UICollectionView = {
+    let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
@@ -46,25 +53,26 @@ class HomePageViewController: BaseViewController {
 private extension HomePageViewController {
     
     func setupFurshetInfoCollectionView() {
-        furshetInfoCollectView.delegate = self
-        furshetInfoCollectView.dataSource = self
+        collectionView.delegate = self
+        collectionView.dataSource = self
     }
     
     // MARK: - Combine
     func bind () {
         viewModel.dataSourse.sink { [weak self] _ in
-            self?.furshetInfoCollectView.reloadData()
+            self?.collectionView.reloadData()
         }.store(in: &cancelable)
     }
     
     // MARK: - Constraints
     func setConstraint() {
-        view.addSubview(furshetInfoCollectView)
+        view.addSubview(collectionView)
+        let insets = Constants.CollectionView.insets
         NSLayoutConstraint.activate([
-            furshetInfoCollectView.topAnchor.constraint(equalTo: view.topAnchor,constant: 150),
-            furshetInfoCollectView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 16),
-            furshetInfoCollectView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: 16),
-            furshetInfoCollectView.bottomAnchor.constraint(equalTo: view.topAnchor, constant: 230)
+            collectionView.topAnchor.constraint(equalTo: view.topAnchor,constant: insets.top),
+            collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: insets.left),
+            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: insets.right),
+            collectionView.bottomAnchor.constraint(equalTo: view.topAnchor, constant: insets.bottom)
         ])
     }
     

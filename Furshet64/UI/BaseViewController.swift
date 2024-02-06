@@ -9,15 +9,6 @@ import UIKit
 
 class BaseViewController: UIViewController {
 
-//    var bgImage: UIImageView = {
-//        let image: UIImageView = UIImageView()
-//        image.image = UIImage(named: "mainFotoThree")
-//        image.contentMode = .scaleAspectFill
-//        image.translatesAutoresizingMaskIntoConstraints = false
-//        return image
-//
-//    }()
-    
     var nameOrganization: UILabel = {
         let label: UILabel = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -48,13 +39,6 @@ class BaseViewController: UIViewController {
     }
     
     func setConstraints() {
-//        view.addSubview(bgImage)
-//        NSLayoutConstraint.activate([
-//            bgImage.topAnchor.constraint(equalTo: view.topAnchor),
-//            bgImage.leftAnchor.constraint(equalTo: view.leftAnchor),
-//            bgImage.rightAnchor.constraint(equalTo: view.rightAnchor),
-//            bgImage.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-//        ])
         view.backgroundColor = .white
         let stack = UIStackView(views: [nameOrganization, typeOrganization], axis: .vertical, spacing: 6)
         view.addSubview(stack)
