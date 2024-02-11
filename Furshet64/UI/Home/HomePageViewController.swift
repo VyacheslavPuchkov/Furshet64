@@ -44,7 +44,7 @@ class HomePageViewController: BaseViewController {
         super.viewDidLoad()
         setConstraint()
         setupFurshetInfoCollectionView()
-        print(Auth.auth().currentUser?.uid ?? "no user")
+        print(Auth.auth().currentUser?.phoneNumber ?? "no user")
     }
         
 }

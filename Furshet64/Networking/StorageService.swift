@@ -15,6 +15,7 @@ class StorageService {
     
     var typeProductRef: StorageReference { storage.child("imageTypeProduct") }
     var productRef: StorageReference { storage.child("imageProduct") }
+    var bannerRef: StorageReference { storage.child("imageBanner") }
     
     func dowloadPicture(picName: String, ref: StorageReference, completion: @escaping([UIImage]) -> ()) {
         var image: UIImage = UIImage(named: "productFoto")!
@@ -31,4 +32,19 @@ class StorageService {
         }
     }
     
+    func dowloadPictureBanner(completion: @escaping ([UIImage]) -> ()) {
+        var image: UIImage = UIImage(named: "productFoto")!
+        var images: [UIImage] = []
+        bannerRef.getData(maxSize: 5 * 2048 * 2048) { data, error in
+            guard error == nil else {
+                completion(images)
+                return
+            }
+            image = UIImage(data: data!)!
+            images.append(image)
+            completion(images)
+        }
+    }
+    
 }
+

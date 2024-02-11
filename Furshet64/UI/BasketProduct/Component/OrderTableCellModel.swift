@@ -12,14 +12,13 @@ class OrderTableCellModel: FCellViewModel {
     var id: String
     var product: Product
     var count: Int
-    var cost: Int {
-        return product.price * self.count
-    }
+    var cost: Int
     
-    init(id: String, product: Product, count: Int) {
+        init(id: String, product: Product, count: Int, cost: Int) {
         self.id = id
         self.product = product
         self.count = count
+        self.cost = cost
         super.init(cellIdentifier: "OrderTableCell")
     }
     

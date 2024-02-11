@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   uuid = "9A3FD582-7B89-42DE-A769-8CC5C1A6359B"
+   type = "0"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "E43B1C1A-7D45-4858-A48B-E9A77931CF6F"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Furshet64/UI/BasketProduct/BasketProductManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "68"
+            endingLineNumber = "68"
+            landmarkName = "makeViewModels(for:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "E43B1C1A-7D45-4858-A48B-E9A77931CF6F - 223610e65ee471c7"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Furshet64.BasketProductManager.makeViewModels(for: Swift.Array&lt;Furshet64.Position&gt;) -&gt; ()"
+                  moduleName = "Furshet64"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/vaceslavpuckov/Desktop/Furshet64/Furshet64/UI/BasketProduct/BasketProductManager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "68"
+                  endingLineNumber = "68"
+                  offsetFromSymbolStart = "105">
+               </Location>
+               <Location
+                  uuid = "E43B1C1A-7D45-4858-A48B-E9A77931CF6F - 7bb3c1e3dc5ffe17"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Furshet64.Position) -&gt; () in Furshet64.BasketProductManager.makeViewModels(for: Swift.Array&lt;Furshet64.Position&gt;) -&gt; ()"
+                  moduleName = "Furshet64"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/vaceslavpuckov/Desktop/Furshet64/Furshet64/UI/BasketProduct/BasketProductManager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "69"
+                  endingLineNumber = "69"
+                  offsetFromSymbolStart = "315">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>

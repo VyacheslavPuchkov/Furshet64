@@ -8,10 +8,15 @@
 import UIKit
 
 class PromoBanerCollectionCellModel: FCellViewModel {
+    
     var image: UIImage
-    init(image: UIImage) {
+    var imageName: String
+    
+    init(image: UIImage, imageName: String) {
         self.image = image
+        self.imageName = imageName
         super.init(cellIdentifier: "PromoBanerCollectionCell")
     }
+    
 }
 

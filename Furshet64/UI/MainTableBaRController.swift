@@ -27,8 +27,8 @@ class MainTableBaRController: UITabBarController {
         tabBar.unselectedItemTintColor = .gray
         
         viewControllers = [
-        createNavVC(root: homePageController!, title: "Главная", image: UIImage(systemName: "house")!),
         createNavVC(root: menuController!, title: "Меню", image: UIImage(systemName: "menubar.rectangle")!),
+        createNavVC(root: homePageController!, title: "Контакты", image: UIImage(systemName: "house")!),
         createNavVC(root: profileUserController!, title: "Мой профиль", image: UIImage(systemName: "person.text.rectangle")!),
         createNavVC(root: basketProduct!, title: "Корзина", image: UIImage(systemName: "basket")!)
         ]

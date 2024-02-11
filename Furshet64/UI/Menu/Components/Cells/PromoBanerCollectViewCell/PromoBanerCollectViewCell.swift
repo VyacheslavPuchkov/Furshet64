@@ -57,10 +57,21 @@ class PromoBanerCollectionCell: FCollectionViewCell {
         backgroundColor = .clear
     }
     
+    // MARK - Func network request
+    func setFoto(title: String) {
+        StorageService.shared.dowloadPicture(picName: title, ref: StorageService.shared.bannerRef) { [weak self] pic in
+            guard let self else { return }
+            DispatchQueue.main.async {
+                self.imageView.image = pic.first
+            }
+        }
+    }
+    
     // MARK: - Override
     override func fill(viewModel: FCellViewModel) {
         super.fill(viewModel: viewModel)
-        imageView.image = currentViewModel?.image
+        guard let currentViewModel else { return }
+        setFoto(title: currentViewModel.imageName)
     }
     
 }

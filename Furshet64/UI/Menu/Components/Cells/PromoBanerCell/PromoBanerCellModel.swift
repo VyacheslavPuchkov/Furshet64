@@ -13,9 +13,9 @@ class PromoBanerCellModel: FCellViewModel {
     
     init() {
         super.init(cellIdentifier: "PromoBanerCell")
-        
-//        let images: [UIImage?] = [UIImage(named: "banner"), UIImage(named: "banner"), UIImage(named: "banner")]
-//        images.forEach { cellModels.append(PromoBanerCollectionCellModel(image: $0 ?? UIImage())) }
-        
+        let imageName: [String] = ["banner1.jpg","banner2.jpg","banner3.jpg"]
+        imageName.forEach { cellModels.append(PromoBanerCollectionCellModel(image: UIImage(named: "") ?? UIImage(), imageName: $0))}
     }
+
+    
 }

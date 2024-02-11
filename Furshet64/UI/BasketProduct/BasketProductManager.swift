@@ -66,7 +66,7 @@ class BasketProductManager: NSObject {
     private func makeViewModels(for order: [Position]) {
         cellModels = []
         order.forEach { cellModels.append(
-            OrderTableCellModel(id: UUID().uuidString, product: .init(id: UUID().uuidString, title: $0.product.title, price: $0.product.price, typeProduct: $0.product.typeProduct, weight: $0.product.weight, compound: $0.product.compound), count: $0.count))
+            OrderTableCellModel(id: UUID().uuidString, product: .init(id: UUID().uuidString, title: $0.product.title, price: $0.product.price, typeProduct: $0.product.typeProduct, weight: $0.product.weight, compound: $0.product.compound), count: $0.count, cost: $0.cost))
         }
     }
     

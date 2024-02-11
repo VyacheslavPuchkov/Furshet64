@@ -38,8 +38,6 @@ class OrderTableCell: FTableViewCell {
         viewModel as? OrderTableCellModel
     }
     
-    @Published var count: Int = .zero
-    
     // MARK: - UI
     let productImageView: UIImageView = {
         let imageView = UIImageView()
@@ -176,22 +174,19 @@ class OrderTableCell: FTableViewCell {
     
     @objc func addProduct() {
         guard let currentViewModel else { return }
-        count = currentViewModel.count
-        count += 1
-        countProductView.label.text = "\(count)"
-        let price = currentViewModel.product.price
-        priceProduct.text = "\(price * count) р."
+        currentViewModel.count += 1
+        countProductView.label.text = "\(currentViewModel.count)"
+        currentViewModel.cost = currentViewModel.count * currentViewModel.product.price
+        priceProduct.text = "\(currentViewModel.cost) р."
     }
     
     @objc func deleteProduct() {
         guard let currentViewModel else { return }
-        count = currentViewModel.count
-        if count > 1 {
-            count -= 1
-        }
-        countProductView.label.text = "\(count)"
-        let price = currentViewModel.product.price
-        priceProduct.text = "\(price * count) р."
+        guard currentViewModel.count > 1 else { return }
+        currentViewModel.count -= 1
+        countProductView.label.text = "\(currentViewModel.count)"
+        currentViewModel.cost = currentViewModel.count * currentViewModel.product.price
+        priceProduct.text = "\(currentViewModel.cost) р."
     }
     
 }

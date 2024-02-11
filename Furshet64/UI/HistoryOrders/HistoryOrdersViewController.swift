@@ -12,7 +12,7 @@ class HistoryOrdersViewController: BaseViewController {
     
     enum Constant {
         enum TableView {
-            static let insets = UIEdgeInsets(top: 200, left: 16, bottom: -16, right: -90)
+            static let insets = UIEdgeInsets(top: 16, left: 16, bottom: -90, right: -16)
         }
     }
     
@@ -50,7 +50,7 @@ private extension HistoryOrdersViewController {
         view.addSubview(historyOrdersTableView)
         let insets = Constant.TableView.insets
         NSLayoutConstraint.activate([
-            historyOrdersTableView.topAnchor.constraint(equalTo: view.topAnchor, constant: insets.top),
+            historyOrdersTableView.topAnchor.constraint(equalTo: typeOrganization.bottomAnchor, constant: insets.top),
             historyOrdersTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: insets.left),
             historyOrdersTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: insets.right),
             historyOrdersTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: insets.bottom)

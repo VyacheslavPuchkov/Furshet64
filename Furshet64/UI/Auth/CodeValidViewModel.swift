@@ -33,7 +33,6 @@ class CodeValidViewModel: NSObject {
             switch result {
             case .success(let user):
                 self.profileUser.id = user.uid
-                self.setProfile()
                 self.succeessTrigger.send()
             case .failure(let error):
                 print(error.localizedDescription)

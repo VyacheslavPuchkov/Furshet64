@@ -9,6 +9,11 @@ import Foundation
 import UIKit
 
 class HistoryOrdersTableViewCell: UITableViewCell {
+    
+    // MARK: - Constants
+    enum Constants {
+        static let size = CGSize(width: 220, height: .zero)
+    }
 
     //MARK: - Static constants
     static let reuseID = "HistoryOrdersCell"
@@ -18,7 +23,7 @@ class HistoryOrdersTableViewCell: UITableViewCell {
         let label: UILabel = UILabel()
         label.backgroundColor = .clear
         label.textColor = .black
-        label.font = .systemFont(ofSize: 20)
+        label.font = .systemFont(ofSize: 15)
         label.textAlignment = .center
         
         return label
@@ -29,8 +34,8 @@ class HistoryOrdersTableViewCell: UITableViewCell {
         label.backgroundColor = .clear
         label.textAlignment = .center
         label.textColor = .black
-        label.font = .systemFont(ofSize: 20)
-        label.widthAnchor.constraint(equalToConstant: 220).isActive = true
+        label.font = .systemFont(ofSize: 15)
+        label.widthAnchor.constraint(equalToConstant: Constants.size.width).isActive = true
         label.numberOfLines = 5
         
         return label
@@ -41,7 +46,7 @@ class HistoryOrdersTableViewCell: UITableViewCell {
         label.backgroundColor = .clear
         label.textColor = .black
         label.textAlignment = .center
-        label.font = .systemFont(ofSize: 20)
+        label.font = .systemFont(ofSize: 15)
         
         return label
     }()

@@ -7,7 +7,6 @@
 
 import UIKit
 import Combine
-import FlagPhoneNumber
 import FirebaseAuth
 
 class ProfileUserViewController: BaseViewController, ObservableObject {
@@ -23,7 +22,6 @@ class ProfileUserViewController: BaseViewController, ObservableObject {
     // MARK: - ViewModel
     var viewModel: ProfileUserViewModel = .init()
     // MARK: - Private variable
-    private var listController: FPNCountryListViewController!
     private var profileUser: ProfileUser = .init(id: "", name: "", phone: "")
     private var signUp: Bool = true {
         willSet {
@@ -39,20 +37,7 @@ class ProfileUserViewController: BaseViewController, ObservableObject {
     
     // MARK: - UI
     let nameUserTextField = UITextField(placeholderText: "Как вас зовут? Желательно с фамилией")
-    
-    var phoneUserTextField: FPNTextField = {
-        let textField: FPNTextField = FPNTextField()
-        textField.attributedPlaceholder = NSAttributedString(string: "  Ваш номер", attributes: [NSAttributedString.Key.foregroundColor: UIColor.statusGreen])
-        textField.layer.masksToBounds = true
-        textField.backgroundColor = .clear
-        textField.layer.borderWidth = 2
-        textField.layer.borderColor = UIColor.systemGreen.cgColor
-        textField.textColor = .systemGreen
-        textField.heightAnchor.constraint(equalToConstant: Constants.size.height).isActive = true
-        textField.widthAnchor.constraint(equalToConstant: Constants.size.width).isActive = true
-        textField.layer.cornerRadius = 10
-        return textField
-    }()
+    let phoneUserTextField = UITextField(placeholderText: "Ваш номер")
     
     lazy var saveButton: UIButton = {
         let button: UIButton = UIButton()
@@ -151,16 +136,9 @@ private extension ProfileUserViewController {
     
     func setupConfig() {
         nameUserTextField.isEnabled = false
+        nameUserTextField.delegate = self
         phoneUserTextField.isEnabled = false
-        
-        phoneUserTextField.displayMode = .list
         phoneUserTextField.delegate = self
-        
-        listController = FPNCountryListViewController(style: .grouped)
-        listController.setup(repository: phoneUserTextField.countryRepository)
-        listController?.didSelect = { country in
-            self.phoneUserTextField.setFlag(countryCode: country.code)
-        }
     }
     
     // MARK: - Contraints
@@ -202,27 +180,17 @@ private extension ProfileUserViewController {
             guard let self else { return }
             self.profileUser = user
             self.nameUserTextField.text = user.name
-            self.phoneUserTextField.text = user.phone
+            self.phoneUserTextField.text = Auth.auth().currentUser?.phoneNumber
         }.store(in: &cancelable)
     }
     
 }
 
-extension ProfileUserViewController: UITextFieldDelegate, FPNTextFieldDelegate {
+extension ProfileUserViewController: UITextFieldDelegate {
     func fpnDidSelectCountry(name: String, dialCode: String, code: String) {
         ///
     }
-    
-    func fpnDidValidatePhoneNumber(textField: FlagPhoneNumber.FPNTextField, isValid: Bool) {
-        ///
-    }
-    
-    func fpnDisplayCountryList() {
-        let navVC  = UINavigationController(rootViewController: listController)
-        listController.title = "Страны"
-        self.present(navVC, animated: true)
-    }
-    
+
 }
 
     

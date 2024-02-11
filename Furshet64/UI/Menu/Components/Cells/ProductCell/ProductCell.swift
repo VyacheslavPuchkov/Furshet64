@@ -159,7 +159,7 @@ class ProductCell: FTableViewCell {
         descriptionLabel.text = currentViewModel.compound
         addProductView.label.text = "\(currentViewModel.price) р."
         addProductView.button.addTarget(self, action: #selector(actionButton), for: .touchUpInside)
-        //setFoto(title: currentViewModel.id + ".jpg")  На сервере нет фото
+        //setFoto(title: currentViewModel.id + ".jpg")  //На сервере нет фото
         productImageView.image = UIImage(named: "productFoto")
         countProductView.buttonPlus.addTarget(self, action: #selector(addProduct), for: .touchUpInside)
         countProductView.buttonMinus.addTarget(self, action: #selector(deleteProduct), for: .touchUpInside)
@@ -168,6 +168,8 @@ class ProductCell: FTableViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         productImageView.image = UIImage()
+        countProductView.label.text = "1"
+        count = 1
     }
     
     @objc func addProduct() {

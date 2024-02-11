@@ -21,7 +21,7 @@ class PromoBanerCell: FTableViewCell {
         layout.scrollDirection = .horizontal
         layout.minimumLineSpacing = 16
         layout.minimumInteritemSpacing = .zero
-        layout.sectionInset = .init(top: .zero, left: 16, bottom: .zero, right: .zero)
+        layout.sectionInset = .init(top: .zero, left: 8, bottom: .zero, right: 8)
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         return collectionView
@@ -51,7 +51,7 @@ class PromoBanerCell: FTableViewCell {
             collectionView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             collectionView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-            collectionView.heightAnchor.constraint(equalToConstant: 112)
+            collectionView.heightAnchor.constraint(equalToConstant: 150)
         ])
     }
     
@@ -65,11 +65,11 @@ class PromoBanerCell: FTableViewCell {
         collectionView.dataSource = self
         collectionView.register(PromoBanerCollectionCell.self, forCellWithReuseIdentifier: "PromoBanerCollectionCell")
         collectionView.backgroundColor = .clear
+        collectionView.showsHorizontalScrollIndicator = false
     }
     
     override func fill(viewModel: FCellViewModel) {
         super.fill(viewModel: viewModel)
-        collectionView.reloadData()
     }
     
 }
@@ -91,7 +91,6 @@ extension PromoBanerCell: UICollectionViewDelegate, UICollectionViewDataSource, 
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        CGSize(width: 300, height: 112)
+        CGSize(width: 310, height: 150)
     }
 }
-
