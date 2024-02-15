@@ -79,7 +79,7 @@ class RegistrationUserViewController: BaseViewController {
         super.viewDidLoad()
         configure()
         setupTextField()
-        bind()
+        receivingAlert()
     }
     
     // MARK: - Func
@@ -118,8 +118,8 @@ private extension RegistrationUserViewController {
     }
     
     // MARK: - Combine
-    func bind() {
-        viewModel.succeessTrigger.sink { [weak self] () in
+    func receivingAlert() {
+        viewModel.alertSucceessTrigger.sink { [weak self] () in
             guard let self else { return }
             self.alertChange(titleAlertTwo: "Спасибо за регистрацию", messageAlert:  nil) { _ in
                 self.navigationController?.popViewController(animated: true)
@@ -149,7 +149,6 @@ private extension RegistrationUserViewController {
 extension RegistrationUserViewController: UITextFieldDelegate {
 
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-
         return true
     }
     

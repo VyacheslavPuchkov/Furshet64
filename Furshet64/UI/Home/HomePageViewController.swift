@@ -37,7 +37,7 @@ class HomePageViewController: BaseViewController {
     // MARK: - Life Cycle View Controller
     override func loadView() {
         super.loadView()
-        bind()
+        receivingInfo()
     }
 
     override func viewDidLoad() {
@@ -58,8 +58,8 @@ private extension HomePageViewController {
     }
     
     // MARK: - Combine
-    func bind () {
-        viewModel.dataSourse.sink { [weak self] _ in
+    func receivingInfo () {
+        viewModel.infoDataSourse.sink { [weak self] _ in
             self?.collectionView.reloadData()
         }.store(in: &cancelable)
     }
@@ -81,18 +81,18 @@ private extension HomePageViewController {
 extension HomePageViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return viewModel.dataSourse.value.count
+        return viewModel.infoDataSourse.value.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FurshetInfoViewCell.reuseID, for: indexPath) as? FurshetInfoViewCell
-        let titleFoto = viewModel.dataSourse.value[indexPath.row].imageName
+        let titleFoto = viewModel.infoDataSourse.value[indexPath.row].imageName
         cell?.imageInfo.image = UIImage(named: titleFoto)
         return cell ?? UICollectionViewCell()
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let url = URL(string: viewModel.dataSourse.value[indexPath.row].url) else { return }
+        guard let url = URL(string: viewModel.infoDataSourse.value[indexPath.row].url) else { return }
         UIApplication.shared.open(url)
     }
     

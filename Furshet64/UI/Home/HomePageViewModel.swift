@@ -11,7 +11,7 @@ import Combine
 class HomePageViewModel: NSObject {
     
     // MARK: - Combine
-    var dataSourse = CurrentValueSubject<[FurshetInfo], Never>([])
+    var infoDataSourse = CurrentValueSubject<[FurshetInfo], Never>([])
     
     // MARK: - Init
     override init() {
@@ -25,7 +25,7 @@ class HomePageViewModel: NSObject {
             guard let self = self else { return }
             switch result {
             case .success(let info):
-                self.dataSourse.send(info)
+                self.infoDataSourse.send(info)
             case .failure(let error):
                 print(error.localizedDescription)
             }

@@ -39,8 +39,8 @@ class MenuViewController: UIViewController {
         super.viewDidLoad()
         configure()
         setupTableView()
-        bindProduct()
-        bindTypeProduct()
+        receivingProduct()
+        receivingTypeProduct()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -68,14 +68,14 @@ class MenuViewController: UIViewController {
     }
     
         // MARK: - Combine
-        func bindTypeProduct() {
+        func receivingTypeProduct() {
             viewModel.dataSourseTypeProduct.sink { [weak self] _ in
                 guard let self else { return }
                 self.tableView.reloadData()
             }.store(in: &cancelable)
         }
     
-        func bindProduct() {
+        func receivingProduct() {
             viewModel.$cellModels.sink { [weak self] _ in
                 guard let self else { return }
                 self.tableView.reloadData()

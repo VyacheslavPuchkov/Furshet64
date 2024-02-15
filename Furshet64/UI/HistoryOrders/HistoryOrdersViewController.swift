@@ -38,7 +38,7 @@ class HistoryOrdersViewController: BaseViewController {
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        bindOrders()
+        receivingOrders()
         viewModel.getHistoryOrdes()
     }
 
@@ -62,8 +62,8 @@ private extension HistoryOrdersViewController {
         historyOrdersTableView.delegate = self
     }
     
-    func bindOrders() {
-        viewModel.dataSourse.sink { [weak self] orders in
+    func receivingOrders() {
+        viewModel.ordersDataSourse.sink { [weak self] orders in
             guard let self else { return }
             self.historyOrdersTableView.reloadData()
         }.store(in: &cancelable)
@@ -73,15 +73,15 @@ private extension HistoryOrdersViewController {
 //MARK: - UITableViewDataSource, UITableViewDelegate
 extension HistoryOrdersViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.dataSourse.value[section].posiotions.count
+        return viewModel.ordersDataSourse.value[section].posiotions.count
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return viewModel.dataSourse.value.count
+        return viewModel.ordersDataSourse.value.count
     }
 
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        let order = viewModel.dataSourse.value[section]
+        let order = viewModel.ordersDataSourse.value[section]
         let dataFormatter = DateFormatter()
         dataFormatter.dateFormat = "dd.MM.yy HH:mm"
         let date = dataFormatter.string(from: order.date)
@@ -91,7 +91,7 @@ extension HistoryOrdersViewController: UITableViewDataSource, UITableViewDelegat
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "HistoryOrdersCell", for: indexPath) as? HistoryOrdersTableViewCell
-        let order = viewModel.dataSourse.value[indexPath.section]
+        let order = viewModel.ordersDataSourse.value[indexPath.section]
         cell?.titleLabel.text = order.posiotions[indexPath.row].product.title
         cell?.countLabel.text = "\(order.posiotions[indexPath.row].count) шт."
         cell?.priceLabel.text = "\(order.posiotions[indexPath.row].cost) р."

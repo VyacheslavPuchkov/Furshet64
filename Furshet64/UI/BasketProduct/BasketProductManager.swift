@@ -21,7 +21,8 @@ class BasketProductManager: NSObject {
     
     // MARK: - Combine
     private var cancelable = Set<AnyCancellable>()
-    var succeessTrigger = PassthroughSubject<Void, Never>()
+    var alertSucceessTrigger = PassthroughSubject<Void, Never>()
+    var alertTwoSucceessTrigger = PassthroughSubject<Void, Never>()
     
     // MARK: - Init
     override init() {
@@ -42,7 +43,7 @@ class BasketProductManager: NSObject {
     }
     
     func displayView() {
-        guard Auth.auth().currentUser?.uid != nil else { return self.succeessTrigger.send() }
+        guard Auth.auth().currentUser?.uid != nil else { return self.alertSucceessTrigger.send() }
     }
     
     func addPosition(_ position: Position) {
@@ -56,7 +57,7 @@ class BasketProductManager: NSObject {
             guard let self else { return }
             switch result {
             case .success( _):
-                self.succeessTrigger.send()
+                self.alertTwoSucceessTrigger.send()
             case .failure(let error):
                 print(error.localizedDescription)
             }

@@ -91,7 +91,7 @@ class ProfileUserViewController: BaseViewController, ObservableObject {
         configure()
         myProfile()
         setupConfig()
-        bind()
+        receivingAlert()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -159,7 +159,7 @@ private extension ProfileUserViewController {
     }
     
     // MARK: - Combine
-    func bind() {
+    func receivingAlert() {
         viewModel.alertSucceessTrigger.sink { alert in
             let oKaction = UIAlertAction(title: "Авторизиваться", style: .default) { _ in
                 let vc = AuthViewController()

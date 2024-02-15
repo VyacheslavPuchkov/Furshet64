@@ -96,7 +96,7 @@ class EntranceUserViewController: BaseViewController {
         super.viewDidLoad()
         configure()
         setupTextField()
-        bind()
+        receivingAlert()
     }
     
     // MARK: - Func
@@ -150,8 +150,8 @@ private extension EntranceUserViewController {
     }
     
     // MARK: - Combine
-    func bind() {
-        viewModel.succeessTrigger.sink { [weak self] () in
+    func receivingAlert() {
+        viewModel.alertSucceessTrigger.sink { [weak self] () in
             guard let self else { return }
             self.alertChange(titleAlertTwo: "Спасибо за регистрацию", messageAlert:  nil) { _ in
                 self.navigationController?.popViewController(animated: true)

@@ -14,7 +14,7 @@ class EntranceViewModel: NSObject {
     var userEntrance: EntranceModel = .init(password: "", email: "")
     
     // MARK: - Combine
-    var succeessTrigger = PassthroughSubject<Void, Never>()
+    var alertSucceessTrigger = PassthroughSubject<Void, Never>()
     
     // MARK: - Init
     override init() {
@@ -27,7 +27,7 @@ class EntranceViewModel: NSObject {
             guard let self else { return }
             switch result {
             case .success(_):
-                self.succeessTrigger.send()
+                self.alertSucceessTrigger.send()
             case .failure(let error):
                 print(error.localizedDescription)
             }

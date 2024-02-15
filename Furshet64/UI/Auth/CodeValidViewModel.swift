@@ -17,7 +17,7 @@ class CodeValidViewModel: NSObject {
     var verificCode: String = ""
     var verificId: String
     // MARK: - Combine
-    var succeessTrigger = PassthroughSubject<Void, Never>()
+    var alertSucceessTrigger = PassthroughSubject<Void, Never>()
     
     // MARK: - Init
     init(verificId: String, phone: String) {
@@ -33,7 +33,7 @@ class CodeValidViewModel: NSObject {
             switch result {
             case .success(let user):
                 self.profileUser.id = user.uid
-                self.succeessTrigger.send()
+                self.alertSucceessTrigger.send()
             case .failure(let error):
                 print(error.localizedDescription)
             }

@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import Combine
 
 class OrderTableCell: FTableViewCell {
     
@@ -29,6 +30,11 @@ class OrderTableCell: FTableViewCell {
             static let insets = UIEdgeInsets(top: 16, left: .zero, bottom: -16, right: -32)
         }
     }
+    // MARK: - Manager
+    var basketManager: BasketProductManager = .shared
+    
+    // MARK: - Combine variable
+    private var cancelable = Set<AnyCancellable>()
     
     // MARK: - View
     let countProductView = CountProductView()
@@ -188,5 +194,5 @@ class OrderTableCell: FTableViewCell {
         currentViewModel.cost = currentViewModel.count * currentViewModel.product.price
         priceProduct.text = "\(currentViewModel.cost) р."
     }
-    
+ 
 }

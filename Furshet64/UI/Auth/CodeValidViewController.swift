@@ -67,7 +67,7 @@ class CodeValidViewController: BaseViewController {
         print(viewModel.verificCode)
         configure()
         setupTextView()
-        bind()
+        receivingAlert()
     }
     
     // MARK: - Func
@@ -107,13 +107,15 @@ private extension CodeValidViewController {
     }
     
     // MARK: - Combine
-    func bind() {
-        viewModel.succeessTrigger.sink { [weak self] () in
+    func receivingAlert() {
+        viewModel.alertSucceessTrigger.sink { [weak self] () in
             guard let self else { return }
             self.alertChange(titleAlertTwo: "Спасибо за авторизацию", messageAlert:  nil) { _ in
                 self.navigationController?.popViewController(animated: true)
+                self.navigationController?.popViewController(animated: true)
                 self.navigationController?.tabBarController?.selectedIndex = 2
             } comletionNo: { _ in
+                self.navigationController?.popViewController(animated: true)
                 self.navigationController?.popViewController(animated: true)
                 self.navigationController?.tabBarController?.selectedIndex = 3
             }

@@ -13,7 +13,7 @@ class HistoryOrdersViewModel: NSObject {
     var orders: [OrderModel] = []
 
     //MARK: - Combine
-    var dataSourse = CurrentValueSubject<[OrderModel], Never>([])
+    var ordersDataSourse = CurrentValueSubject<[OrderModel], Never>([])
     
     //MARK: - Init
     override init() {
@@ -36,7 +36,7 @@ class HistoryOrdersViewModel: NSObject {
                         switch result {
                         case .success(let positions):
                             self.orders[index].posiotions = positions
-                            self.dataSourse.send(self.orders)
+                            self.ordersDataSourse.send(self.orders)
                         case .failure(let error):
                             print(error.localizedDescription)
                         }

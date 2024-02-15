@@ -15,7 +15,7 @@ class RegistrationViewModel: NSObject {
     var userRegistration: RegistrationModel = .init(password: "", passwordTwo: "", email: "")
     var userProfile: ProfileUser = .init(id: UUID().uuidString, name: "", phone: "")
     // MARK: - Combine
-    var succeessTrigger = PassthroughSubject<Void, Never>()
+    var alertSucceessTrigger = PassthroughSubject<Void, Never>()
     
     // MARK: - Init
     override init() {
@@ -28,7 +28,7 @@ class RegistrationViewModel: NSObject {
             guard let self, self.userRegistration.password == self.userRegistration.passwordTwo else { return }
             switch result {
             case .success(_):
-                self.succeessTrigger.send()
+                self.alertSucceessTrigger.send()
             case .failure(let error):
                 print(error.localizedDescription)
             }

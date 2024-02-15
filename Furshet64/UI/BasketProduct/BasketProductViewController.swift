@@ -111,14 +111,14 @@ class BasketProductViewController: BaseViewController {
         super.viewDidLoad()
         configure()
         setupTabletView()
-        bindAlert()
+        receivingAlert()
+        self.basketManager.displayView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        self.basketManager.displayView()
         tableView.reloadData()
-        bind()
+        receivingCost()
     }
     
     @objc func removeOrder() {
@@ -130,10 +130,11 @@ class BasketProductViewController: BaseViewController {
     
     @objc func setOrder() {
         basketManager.addOrder()
-        basketManager.succeessTrigger.sink { [weak self] () in
+        basketManager.alertTwoSucceessTrigger.sink { [weak self] () in
             guard let self else { return }
             self.alertChange(titleAlert: "Спасибо за заказ", messageAlert: "В ближайшее время с вами свяжется оператор") { _ in
                 self.navigationController?.tabBarController?.selectedIndex = 0
+                self.removeOrder()
             }
         }.store(in: &cancelable)
     }
@@ -143,8 +144,8 @@ class BasketProductViewController: BaseViewController {
 // MARK: - Private func
 private extension BasketProductViewController {
 
-    func bindAlert() {
-        basketManager.succeessTrigger.sink { [weak self] () in
+    func receivingAlert() {
+        basketManager.alertSucceessTrigger.sink { [weak self] () in
             guard let self else { return }
             self.alertChange(titleAlert: "Внимание", messageAlert: "Для заказа необходимо авторизоваться") { _ in
                 let vc = AuthViewController()
@@ -155,7 +156,7 @@ private extension BasketProductViewController {
         }.store(in: &cancelable)
     }
     
-    func bind() {
+    func receivingCost() {
         basketManager.$cost.sink { [weak self] cost in
             guard let self else { return }
             self.totalPriceLabel.text = "\(self.basketManager.cost) р."
