@@ -61,12 +61,12 @@ class MenuViewModel: NSObject {
     
     // MARK: - Private func
     private func makeViewModels(for products: [Product]) {
-        var testCellModels: [FCellViewModel] = []
+//        var testCellModels: [FCellViewModel] = []
         cellModels = []
-        products.forEach { testCellModels.append(
+        products.forEach { cellModels.append(
             ProductCellModel(image: UIImage(named: "productFoto"), name: $0.title, compound: $0.compound, price: $0.price, id: $0.id, count: 1, typeProduct: $0.typeProduct, weight: $0.weight))
         }
-        cellModels = testCellModels
+//        cellModels = testCellModels
     }
         
 }
