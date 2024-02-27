@@ -24,7 +24,7 @@ class MenuViewController: UIViewController {
         return tableView
     }()
     
- //   var header: MenuTypeView?
+    var header: MenuTypeView?
     
     // MARK: - Init
     init() {
