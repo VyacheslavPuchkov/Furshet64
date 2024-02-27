@@ -46,11 +46,11 @@ class MenuTypeView: UIView {
         self.delegate = delegate
         self.menuType = filters
         super.init(frame: .zero)
+        configure()
+        setupCollectionView()
         self.menuType.forEach {
             cellModels.append(MenuTypeCollectionCellModel(selected: $0.selected, id: $0.id, title: $0.title))
         }
-        configure()
-        setupCollectionView()
     }
     
     required init?(coder: NSCoder) {

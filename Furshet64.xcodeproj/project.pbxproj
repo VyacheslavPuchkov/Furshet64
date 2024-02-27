@@ -60,6 +60,7 @@
 		CA5491872AF81BC8000737B4 /* DatabaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA5491862AF81BC8000737B4 /* DatabaseService.swift */; };
 		CA598CD22B0FAD430024B9CE /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA598CD12B0FAD430024B9CE /* AuthViewController.swift */; };
 		CA5C13502B722134009F72D4 /* HistoryOrdersCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA5C134F2B722134009F72D4 /* HistoryOrdersCell.swift */; };
+		CA6442882B8BAC39008F4D11 /* BasketProductViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA6442872B8BAC39008F4D11 /* BasketProductViewModel.swift */; };
 		CA655EE02B1F8B59000FBD2C /* StorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA655EDF2B1F8B59000FBD2C /* StorageService.swift */; };
 		CA6881B82B03B2EB005EB250 /* ProfileUserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA6881B72B03B2EB005EB250 /* ProfileUserViewModel.swift */; };
 		CA6B20C22B3AE74200D09572 /* OrderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA6B20C12B3AE74200D09572 /* OrderModel.swift */; };
@@ -87,8 +88,8 @@
 		CA7E9DFE2B585DBA008EC221 /* ProductCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA7E9DFD2B585DBA008EC221 /* ProductCellModel.swift */; };
 		CA7E9E002B585DD1008EC221 /* PromoBanerCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA7E9DFF2B585DD1008EC221 /* PromoBanerCellModel.swift */; };
 		CA7E9E022B585DDE008EC221 /* PromoBanerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA7E9E012B585DDE008EC221 /* PromoBanerCell.swift */; };
-		CA7E9E042B585DF5008EC221 /* PromoBanerCollectVeiwCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA7E9E032B585DF5008EC221 /* PromoBanerCollectVeiwCellModel.swift */; };
-		CA7E9E062B585E11008EC221 /* PromoBanerCollectViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA7E9E052B585E11008EC221 /* PromoBanerCollectViewCell.swift */; };
+		CA7E9E042B585DF5008EC221 /* PromoBanerCollectionCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA7E9E032B585DF5008EC221 /* PromoBanerCollectionCellModel.swift */; };
+		CA7E9E062B585E11008EC221 /* PromoBanerCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA7E9E052B585E11008EC221 /* PromoBanerCollectionCell.swift */; };
 		CA81CA682AE54E9E00F4B4D9 /* ExtensionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA81CA672AE54E9E00F4B4D9 /* ExtensionViewController.swift */; };
 		CA86CFC72AFCE6B400149053 /* RegistrationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA86CFC62AFCE6B400149053 /* RegistrationViewModel.swift */; };
 		CA86CFCA2AFD06AB00149053 /* RegistrationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA86CFC92AFD06AB00149053 /* RegistrationModel.swift */; };
@@ -167,6 +168,7 @@
 		CA5491862AF81BC8000737B4 /* DatabaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseService.swift; sourceTree = "<group>"; };
 		CA598CD12B0FAD430024B9CE /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
 		CA5C134F2B722134009F72D4 /* HistoryOrdersCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryOrdersCell.swift; sourceTree = "<group>"; };
+		CA6442872B8BAC39008F4D11 /* BasketProductViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasketProductViewModel.swift; sourceTree = "<group>"; };
 		CA655EDF2B1F8B59000FBD2C /* StorageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageService.swift; sourceTree = "<group>"; };
 		CA6881B72B03B2EB005EB250 /* ProfileUserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileUserViewModel.swift; sourceTree = "<group>"; };
 		CA6B20C12B3AE74200D09572 /* OrderModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderModel.swift; sourceTree = "<group>"; };
@@ -194,8 +196,8 @@
 		CA7E9DFD2B585DBA008EC221 /* ProductCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCellModel.swift; sourceTree = "<group>"; };
 		CA7E9DFF2B585DD1008EC221 /* PromoBanerCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromoBanerCellModel.swift; sourceTree = "<group>"; };
 		CA7E9E012B585DDE008EC221 /* PromoBanerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromoBanerCell.swift; sourceTree = "<group>"; };
-		CA7E9E032B585DF5008EC221 /* PromoBanerCollectVeiwCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromoBanerCollectVeiwCellModel.swift; sourceTree = "<group>"; };
-		CA7E9E052B585E11008EC221 /* PromoBanerCollectViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromoBanerCollectViewCell.swift; sourceTree = "<group>"; };
+		CA7E9E032B585DF5008EC221 /* PromoBanerCollectionCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromoBanerCollectionCellModel.swift; sourceTree = "<group>"; };
+		CA7E9E052B585E11008EC221 /* PromoBanerCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromoBanerCollectionCell.swift; sourceTree = "<group>"; };
 		CA81CA672AE54E9E00F4B4D9 /* ExtensionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionViewController.swift; sourceTree = "<group>"; };
 		CA86CFC62AFCE6B400149053 /* RegistrationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewModel.swift; sourceTree = "<group>"; };
 		CA86CFC92AFD06AB00149053 /* RegistrationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationModel.swift; sourceTree = "<group>"; };
@@ -394,6 +396,7 @@
 				CA23F7032B3F3815004AAA42 /* PositionModel.swift */,
 				CA6B20C32B3AE79700D09572 /* BasketProductManager.swift */,
 				CA6B20C52B3AE7C300D09572 /* BasketProductViewController.swift */,
+				CA6442872B8BAC39008F4D11 /* BasketProductViewModel.swift */,
 				CA6B20BB2B3AE3A600D09572 /* Component */,
 			);
 			path = BasketProduct;
@@ -513,8 +516,8 @@
 		CA7E9DF22B585CD9008EC221 /* PromoBanerCollectViewCell */ = {
 			isa = PBXGroup;
 			children = (
-				CA7E9E032B585DF5008EC221 /* PromoBanerCollectVeiwCellModel.swift */,
-				CA7E9E052B585E11008EC221 /* PromoBanerCollectViewCell.swift */,
+				CA7E9E032B585DF5008EC221 /* PromoBanerCollectionCellModel.swift */,
+				CA7E9E052B585E11008EC221 /* PromoBanerCollectionCell.swift */,
 			);
 			path = PromoBanerCollectViewCell;
 			sourceTree = "<group>";
@@ -773,11 +776,12 @@
 				CA7E9DD32B583D45008EC221 /* ProductModel.swift in Sources */,
 				CA4E8C9B2AE98F0500CE8D16 /* ProfileUserModel.swift in Sources */,
 				CA7E9DFA2B585D94008EC221 /* MenuTypeCollectionCellModel.swift in Sources */,
-				CA7E9E042B585DF5008EC221 /* PromoBanerCollectVeiwCellModel.swift in Sources */,
+				CA7E9E042B585DF5008EC221 /* PromoBanerCollectionCellModel.swift in Sources */,
 				CA7E9DFC2B585DAE008EC221 /* ProductCell.swift in Sources */,
 				CA81CA682AE54E9E00F4B4D9 /* ExtensionViewController.swift in Sources */,
 				CAF7328E2B11EAD600820E0D /* AuthViewModel.swift in Sources */,
 				CA110FEC2AE5000700BD4C7C /* RFontStyle.swift in Sources */,
+				CA6442882B8BAC39008F4D11 /* BasketProductViewModel.swift in Sources */,
 				CA23F7042B3F3815004AAA42 /* PositionModel.swift in Sources */,
 				CA7E9E002B585DD1008EC221 /* PromoBanerCellModel.swift in Sources */,
 				CA6B20C42B3AE79700D09572 /* BasketProductManager.swift in Sources */,
@@ -788,7 +792,7 @@
 				CA12F7B62B0D17E300394CF5 /* HomePageViewModel.swift in Sources */,
 				CAF732922B12188500820E0D /* CodeValidViewController.swift in Sources */,
 				CA9DCEBD2B03572B00A2253C /* EntranceViewModel.swift in Sources */,
-				CA7E9E062B585E11008EC221 /* PromoBanerCollectViewCell.swift in Sources */,
+				CA7E9E062B585E11008EC221 /* PromoBanerCollectionCell.swift in Sources */,
 				CA6B20C62B3AE7C300D09572 /* BasketProductViewController.swift in Sources */,
 				CA86CFC72AFCE6B400149053 /* RegistrationViewModel.swift in Sources */,
 				CA6DF6E92AEAAE6600AC6F22 /* RegistrationUserViewController.swift in Sources */,

@@ -64,7 +64,6 @@ class CodeValidViewController: BaseViewController {
     // MARK: - Life Cycle View Controller
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(viewModel.verificCode)
         configure()
         setupTextView()
         receivingAlert()
@@ -111,12 +110,10 @@ private extension CodeValidViewController {
         viewModel.alertSucceessTrigger.sink { [weak self] () in
             guard let self else { return }
             self.alertChange(titleAlertTwo: "Спасибо за авторизацию", messageAlert:  nil) { _ in
-                self.navigationController?.popViewController(animated: true)
-                self.navigationController?.popViewController(animated: true)
+                self.navigationController?.popToRootViewController(animated: true)
                 self.navigationController?.tabBarController?.selectedIndex = 2
             } comletionNo: { _ in
-                self.navigationController?.popViewController(animated: true)
-                self.navigationController?.popViewController(animated: true)
+                self.navigationController?.popToRootViewController(animated: true)
                 self.navigationController?.tabBarController?.selectedIndex = 3
             }
         }.store(in: &cancelable)

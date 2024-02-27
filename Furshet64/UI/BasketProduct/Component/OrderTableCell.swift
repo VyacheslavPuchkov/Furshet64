@@ -30,14 +30,14 @@ class OrderTableCell: FTableViewCell {
             static let insets = UIEdgeInsets(top: 16, left: .zero, bottom: -16, right: -32)
         }
     }
-    // MARK: - Manager
-    var basketManager: BasketProductManager = .shared
     
     // MARK: - Combine variable
     private var cancelable = Set<AnyCancellable>()
     
     // MARK: - View
     let countProductView = CountProductView()
+    var pos: [Position] = []
+    var cost = 0
     
     // MARK: - ViewModel
     var currentViewModel: OrderTableCellModel? {
@@ -74,6 +74,8 @@ class OrderTableCell: FTableViewCell {
         label.font = .systemFont(ofSize: 20, weight: .regular)
         return label
     }()
+    
+    // MARK: - Func
     
 
     // MARK: - Init
@@ -178,21 +180,15 @@ class OrderTableCell: FTableViewCell {
         productImageView.image = UIImage()
     }
     
-    @objc func addProduct() {
+    @objc func addProduct () {
         guard let currentViewModel else { return }
-        currentViewModel.count += 1
-        countProductView.label.text = "\(currentViewModel.count)"
-        currentViewModel.cost = currentViewModel.count * currentViewModel.product.price
-        priceProduct.text = "\(currentViewModel.cost) р."
+        currentViewModel.delegate?.addProduct(viewModel: currentViewModel, view: countProductView)
     }
     
     @objc func deleteProduct() {
         guard let currentViewModel else { return }
-        guard currentViewModel.count > 1 else { return }
-        currentViewModel.count -= 1
-        countProductView.label.text = "\(currentViewModel.count)"
-        currentViewModel.cost = currentViewModel.count * currentViewModel.product.price
-        priceProduct.text = "\(currentViewModel.cost) р."
+        currentViewModel.delegate?.deleteProduct(viewModel: currentViewModel, view: countProductView)
     }
  
 }
+

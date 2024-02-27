@@ -108,8 +108,7 @@ class DatabaseService {
             } else {
                 self.setPositions(to: order.id, positions: order.posiotions) { result in
                     switch result {
-                    case .success(let positions):
-                        print(positions.count)
+                    case .success(_):
                         completion(.success(order))
                     case .failure(let error):
                         print(error.localizedDescription)

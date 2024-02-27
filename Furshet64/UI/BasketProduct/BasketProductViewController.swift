@@ -130,6 +130,15 @@ class BasketProductViewController: BaseViewController {
     
     @objc func setOrder() {
         basketManager.addOrder()
+        basketManager.alertSucceessTrigger.sink { [weak self ] () in
+            guard let self else { return }
+            self.alertChange(titleAlert: "Внимание", messageAlert: "Для заказа необходимо авторизоваться") { _ in
+                let vc = AuthViewController()
+                self.navigationController?.pushViewController(vc, animated: true)
+            } comletionNo: { _ in
+                self.navigationController?.tabBarController?.selectedIndex = 0
+            }
+        }.store(in: &cancelable)
         basketManager.alertTwoSucceessTrigger.sink { [weak self] () in
             guard let self else { return }
             self.alertChange(titleAlert: "Спасибо за заказ", messageAlert: "В ближайшее время с вами свяжется оператор") { _ in
@@ -161,7 +170,6 @@ private extension BasketProductViewController {
             guard let self else { return }
             self.totalPriceLabel.text = "\(self.basketManager.cost) р."
         }.store(in: &cancelable)
-        
         basketManager.$positions.sink { [weak self] _ in
             guard let self else { return }
             self.tableView.reloadData()

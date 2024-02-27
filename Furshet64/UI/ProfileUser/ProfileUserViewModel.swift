@@ -39,7 +39,7 @@ class ProfileUserViewModel: NSObject {
             guard self != nil else { return }
             switch result {
             case .success(let user):
-                print(user.phone, user.name)
+                print(user)
             case .failure(let error):
                 print(error.localizedDescription)
             }

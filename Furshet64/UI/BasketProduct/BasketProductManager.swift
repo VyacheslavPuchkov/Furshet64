@@ -23,15 +23,17 @@ class BasketProductManager: NSObject {
     private var cancelable = Set<AnyCancellable>()
     var alertSucceessTrigger = PassthroughSubject<Void, Never>()
     var alertTwoSucceessTrigger = PassthroughSubject<Void, Never>()
+    var test: ChangeCountProduct?
     
     // MARK: - Init
     override init() {
         super.init()
-        bind()
+        receivingPosition()
+        print(positions)
     }
     
     // MARK: - Func
-    func bind() {
+    func receivingPosition() {
         $positions.sink { [weak self] order in
             guard let self else { return }
             var sum = 0
@@ -52,7 +54,8 @@ class BasketProductManager: NSObject {
     }
     
     func addOrder() {
-        let order = OrderModel(id: UUID().uuidString, positions: positions, userID: Auth.auth().currentUser!.uid, date: Date(), cost: cost)
+        guard let userId = Auth.auth().currentUser?.uid else { return self.alertSucceessTrigger.send() }
+        let order = OrderModel(id: UUID().uuidString, positions: positions, userID: userId, date: Date(), cost: cost)
         DatabaseService.shared.setOrder(order: order) { [weak self] result in
             guard let self else { return }
             switch result {

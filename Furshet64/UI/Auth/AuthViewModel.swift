@@ -29,7 +29,6 @@ class AuthViewModel: NSObject {
                 print(error?.localizedDescription ?? "")
             } else {
                 self.authSuccessTrigger.send(verificationID)
-                print(verificationID ?? "")
             }
         }
     }

@@ -8,7 +8,7 @@
 import Foundation
 
 class MenuTypeCollectionCellModel: FCellViewModel {
-    var selected: Bool
+    @Published var selected: Bool
     var id: String
     var title: String
     init(selected: Bool, id: String, title: String) {

@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import Combine
 
 class MenuTypeCollectionCell: FCollectionViewCell {
     
@@ -26,6 +27,8 @@ class MenuTypeCollectionCell: FCollectionViewCell {
     var currentViewModel: MenuTypeCollectionCellModel? {
         viewModel as? MenuTypeCollectionCellModel
     }
+    
+    private var cancelable = Set<AnyCancellable>()
     
     // MARK: - UI
     private let mainView: UIView = {
@@ -76,13 +79,18 @@ class MenuTypeCollectionCell: FCollectionViewCell {
     // MARK: - Override
     override func fill(viewModel: FCellViewModel) {
         super.fill(viewModel: viewModel)
+        cancelable.removeAll()
         guard let currentViewModel else { return }
-        let selected = currentViewModel.selected
-        mainView.backgroundColor = selected ? UIColor.green : UIColor.clear
-        mainView.layer.borderWidth = selected ? .zero : Constants.Label.borderWidth
-        label.textColor = selected ? UIColor.black : UIColor.systemGreen
+        
         label.text = currentViewModel.title
         contentView.backgroundColor = .clear
         backgroundColor = .clear
+        
+        currentViewModel.$selected.sink { [weak self] flag in
+            guard let self else { return }
+            self.mainView.backgroundColor = flag ? UIColor.green : UIColor.clear
+            self.mainView.layer.borderWidth = flag ? .zero : Constants.Label.borderWidth
+            self.label.textColor = flag ? UIColor.black : UIColor.systemGreen
+        }.store(in: &cancelable)
     }
 }

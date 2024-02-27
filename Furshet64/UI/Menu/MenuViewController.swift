@@ -24,6 +24,8 @@ class MenuViewController: UIViewController {
         return tableView
     }()
     
+ //   var header: MenuTypeView?
+    
     // MARK: - Init
     init() {
         super.init(nibName: nil, bundle: nil)
@@ -40,7 +42,6 @@ class MenuViewController: UIViewController {
         configure()
         setupTableView()
         receivingProduct()
-        receivingTypeProduct()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -68,13 +69,6 @@ class MenuViewController: UIViewController {
     }
     
         // MARK: - Combine
-        func receivingTypeProduct() {
-            viewModel.dataSourseTypeProduct.sink { [weak self] _ in
-                guard let self else { return }
-                self.tableView.reloadData()
-            }.store(in: &cancelable)
-        }
-    
         func receivingProduct() {
             viewModel.$cellModels.sink { [weak self] _ in
                 guard let self else { return }
@@ -90,7 +84,16 @@ extension MenuViewController: UITableViewDelegate, UITableViewDataSource {
         if section == .zero {
             return nil
         } else {
-            return MenuTypeView(filters: viewModel.dataSourseTypeProduct.value, delegate: self)
+            if let header {
+                return header
+            } else {
+                if viewModel.dataSourseTypeProduct.value.isEmpty {
+                    return nil
+                } else {
+                    header = MenuTypeView(filters: viewModel.dataSourseTypeProduct.value, delegate: self)
+                    return header
+                }
+            }
         }
     }
     
@@ -106,6 +109,7 @@ extension MenuViewController: UITableViewDelegate, UITableViewDataSource {
         if section == .zero {
             return 1
         } else {
+            print(viewModel.cellModels.count)
             return viewModel.cellModels.count
         }
     }
@@ -129,13 +133,10 @@ extension MenuViewController: UITableViewDelegate, UITableViewDataSource {
 // MARK - FiltersViewAction
 extension MenuViewController: MenuTypeViewAction {
     func didTap(id: String) {
-        viewModel.dataSourseTypeProduct.value.indices.forEach({ index in
-            if viewModel.dataSourseTypeProduct.value[index].title == id {
-                viewModel.dataSourseTypeProduct.value[index].selected = true
-            } else {
-                viewModel.dataSourseTypeProduct.value[index].selected = false
-            }
-        })
+        guard let header else { return }
+        header.cellModels.compactMap { $0 as? MenuTypeCollectionCellModel }.indices.forEach { value in
+            header.cellModels.compactMap { $0 as? MenuTypeCollectionCellModel }[value].selected = header.cellModels.compactMap({ $0 as? MenuTypeCollectionCellModel })[value].title == id
+        }
         viewModel.getProduct(productType: id)
     }
 }
