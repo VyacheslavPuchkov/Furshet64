@@ -61,6 +61,22 @@ class CodeValidViewController: BaseViewController {
         return button
     }()
     
+    lazy var privacyPolicyButton: UIButton = {
+        let button: UIButton = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle("При входе вы автоматически принимаете политику конфиденциальности", for: .normal)
+        button.backgroundColor = .clear
+        button.setTitleColor(.black, for: .normal)
+        button.titleLabel?.numberOfLines = 2
+        button.titleLabel?.font = .systemFont(ofSize: 15)
+        button.titleLabel?.textAlignment = .center
+        button.widthAnchor.constraint(equalToConstant: Constants.size.width).isActive = true
+        button.heightAnchor.constraint(equalToConstant: Constants.size.height).isActive = true
+        button.addTarget(self, action: #selector(actionButton), for: .touchUpInside)
+        
+        return button
+    }()
+    
     // MARK: - Life Cycle View Controller
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -83,6 +99,11 @@ class CodeValidViewController: BaseViewController {
         viewModel.showCodeValid()
     }
     
+    @objc func actionButton() {
+        let vc = PrivacyPolicyViewController()
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
 }
 
 // MARK: - Private func
@@ -102,6 +123,11 @@ private extension CodeValidViewController {
         NSLayoutConstraint.activate([
             stack.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             stack.centerYAnchor.constraint(equalTo:view.centerYAnchor)
+        ])
+        view.addSubview(privacyPolicyButton)
+        NSLayoutConstraint.activate([
+            privacyPolicyButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            privacyPolicyButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -90)
         ])
     }
     

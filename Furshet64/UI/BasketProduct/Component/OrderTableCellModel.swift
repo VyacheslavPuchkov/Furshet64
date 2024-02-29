@@ -11,16 +11,16 @@ class OrderTableCellModel: FCellViewModel {
     
     var id: String
     var product: Product
-    var count: Int
+    @Published var count: Int
     var cost: Int
-    var delegate: ChangeCountProduct?
+    var delegate: ChangeCountProduct
     
-    init(id: String, product: Product, count: Int, cost: Int) {
+    init(id: String, product: Product, count: Int, cost: Int, delegate: ChangeCountProduct) {
         self.id = id
         self.product = product
         self.count = count
         self.cost = cost
-//        self.delegate = delegate
+        self.delegate = delegate
         super.init(cellIdentifier: "OrderTableCell")
     }
     

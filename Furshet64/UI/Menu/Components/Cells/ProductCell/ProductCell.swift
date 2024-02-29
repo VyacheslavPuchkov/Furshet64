@@ -9,6 +9,10 @@ import Foundation
 import UIKit
 import Combine
 
+protocol ProductToBasketDelegate {
+    func productToBasket(position: Position)
+}
+
 class ProductCell: FTableViewCell {
     
     // MARK: - Constants
@@ -43,7 +47,9 @@ class ProductCell: FTableViewCell {
     var tapPublisher = PassthroughSubject<(Product?, Int), Never>()
     
     var product: Product?
-    @Published var count: Int = 1
+    var count: Int = 1
+    private var cancelable = Set<AnyCancellable>()
+//    var delegate: ProductToBasketDelegate?
     
     // MARK: - UI
     let productImageView: UIImageView = {
@@ -154,15 +160,22 @@ class ProductCell: FTableViewCell {
     // MARK: - Override
     override func fill(viewModel: FCellViewModel) {
         super.fill(viewModel: viewModel)
+        cancelable.removeAll()
         guard let currentViewModel else { return }
-        nameLabel.text = currentViewModel.name
+        nameLabel.text = currentViewModel.title
         descriptionLabel.text = currentViewModel.compound
         addProductView.label.text = "\(currentViewModel.price) р."
-        addProductView.button.addTarget(self, action: #selector(actionButton), for: .touchUpInside)
+        addProductView.button.addTarget(self, action: #selector(productToBasket), for: .touchUpInside)
         //setFoto(title: currentViewModel.id + ".jpg")  //На сервере нет фото
         productImageView.image = UIImage(named: "productFoto")
         countProductView.buttonPlus.addTarget(self, action: #selector(addProduct), for: .touchUpInside)
         countProductView.buttonMinus.addTarget(self, action: #selector(deleteProduct), for: .touchUpInside)
+        currentViewModel.$count.sink { [weak self, weak currentViewModel] count in
+            guard let self else { return }
+            self.count = count
+            self.countProductView.label.text = "\(count)"
+            self.addProductView.label.text = "\((currentViewModel?.price ?? .zero) * count) р."
+        }.store(in: &cancelable)
     }
     
     override func prepareForReuse() {
@@ -173,30 +186,25 @@ class ProductCell: FTableViewCell {
     }
     
     @objc func addProduct() {
-        count += 1
-        countProductView.label.text = "\(count)"
-        guard let price = currentViewModel?.price else { return }
-        addProductView.label.text = "\(price * count) р."
+        guard let currentViewModel else { return }
+        currentViewModel.addProduct()
     }
     
-    @objc func deleteProduct() {
-        if count > 1 {
-            count -= 1
-        }
-        countProductView.label.text = "\(count)"
-        guard let price = currentViewModel?.price else { return }
-        addProductView.label.text = "\(price * count) р."
+    @objc func deleteProduct(){
+        guard let currentViewModel else { return }
+        currentViewModel.deleteProduct()
     }
     
-    @objc func actionButton() {
+    @objc func productToBasket() {
         guard let currentViewModel else { return }
         let id = currentViewModel.id
-        let title = currentViewModel.name
+        let title = currentViewModel.title
         let price = currentViewModel.price
         let typeProduct = currentViewModel.typeProduct
         let weight = currentViewModel.weight
         let compound = currentViewModel.compound
-        BasketProductManager.shared.addPosition(.init(id: UUID().uuidString, product: .init(id: id, title: title, price: price, typeProduct: typeProduct, weight: weight, compound: compound), count: count))
+        currentViewModel.delegate.productToBasket(position: .init(id: UUID().uuidString, product: .init(id: id, title: title, price: price, typeProduct: typeProduct, weight: weight, compound: compound), count: count))
     }
-    
+
 }
+    

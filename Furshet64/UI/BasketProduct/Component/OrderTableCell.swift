@@ -182,12 +182,12 @@ class OrderTableCell: FTableViewCell {
     
     @objc func addProduct () {
         guard let currentViewModel else { return }
-        currentViewModel.delegate?.addProduct(viewModel: currentViewModel, view: countProductView)
+        currentViewModel.delegate.addProduct()
     }
     
     @objc func deleteProduct() {
         guard let currentViewModel else { return }
-        currentViewModel.delegate?.deleteProduct(viewModel: currentViewModel, view: countProductView)
+        currentViewModel.delegate.deleteProduct()
     }
  
 }

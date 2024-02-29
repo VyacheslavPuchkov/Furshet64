@@ -10,16 +10,18 @@ import FirebaseFirestore
 import Combine
 import UIKit
 
+
 class MenuViewModel: NSObject {
     
     // MARK: - Combine
     var dataSourseTypeProduct = CurrentValueSubject<[MenuType], Never>([])
     var dataSourseProduct = CurrentValueSubject<[Product], Never>([])
-    
+
     // MARK - Model
     @Published var cellModels: [FCellViewModel] = []
     
     let promoCellModel = PromoBanerCellModel()
+    var delegate: ProductToBasketDelegate?
     
     // MARK: - Init
     override init() {
@@ -60,13 +62,22 @@ class MenuViewModel: NSObject {
     
     
     // MARK: - Private func
-    private func makeViewModels(for products: [Product]) {
+    private func makeViewModels(for products: [Product]) {  //Исправить данный метод
 //        var testCellModels: [FCellViewModel] = []
         cellModels = []
         products.forEach { cellModels.append(
-            ProductCellModel(image: UIImage(named: "productFoto"), name: $0.title, compound: $0.compound, price: $0.price, id: $0.id, count: 1, typeProduct: $0.typeProduct, weight: $0.weight))
+            ProductCellModel(image: UIImage(named: "productFoto"), name: $0.title, compound: $0.compound, price: $0.price, id: $0.id, count: 1, typeProduct: $0.typeProduct, weight: $0.weight, delegate: self))
         }
 //        cellModels = testCellModels
     }
-        
+
 }
+
+extension MenuViewModel: ProductToBasketDelegate {
+    func productToBasket(position: Position) {
+        BasketProductManager.shared.addPosition(position)
+    }
+    
+}
+
+

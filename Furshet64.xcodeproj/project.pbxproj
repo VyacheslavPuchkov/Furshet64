@@ -52,6 +52,9 @@
 		CA3D65B32B700203002F124B /* FirebaseFirestore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA3D65B22B700203002F124B /* FirebaseFirestore.framework */; };
 		CA3D65B52B700209002F124B /* FirebaseDatabase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA3D65B42B700209002F124B /* FirebaseDatabase.framework */; };
 		CA3D65B72B700215002F124B /* FirebaseStorage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA3D65B62B700215002F124B /* FirebaseStorage.framework */; };
+		CA48E31F2B8F5553004B121A /* PrivacyPolicyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA48E31E2B8F5553004B121A /* PrivacyPolicyViewController.swift */; };
+		CA48E3212B8F599C004B121A /* PrivacyPolicyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA48E3202B8F599C004B121A /* PrivacyPolicyViewModel.swift */; };
+		CA48E3232B8FB2F3004B121A /* privacyPolicy.pdf in Resources */ = {isa = PBXBuildFile; fileRef = CA48E3222B8FB2F2004B121A /* privacyPolicy.pdf */; };
 		CA4E8C9B2AE98F0500CE8D16 /* ProfileUserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA4E8C9A2AE98F0500CE8D16 /* ProfileUserModel.swift */; };
 		CA4E8C9D2AE99B7A00CE8D16 /* FurshetInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA4E8C9C2AE99B7A00CE8D16 /* FurshetInfoModel.swift */; };
 		CA50356B2B41A3CB00571266 /* HistoryOrdersViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA50356A2B41A3CB00571266 /* HistoryOrdersViewModel.swift */; };
@@ -160,6 +163,9 @@
 		CA3D65B22B700203002F124B /* FirebaseFirestore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FirebaseFirestore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA3D65B42B700209002F124B /* FirebaseDatabase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FirebaseDatabase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA3D65B62B700215002F124B /* FirebaseStorage.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FirebaseStorage.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CA48E31E2B8F5553004B121A /* PrivacyPolicyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyViewController.swift; sourceTree = "<group>"; };
+		CA48E3202B8F599C004B121A /* PrivacyPolicyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyViewModel.swift; sourceTree = "<group>"; };
+		CA48E3222B8FB2F2004B121A /* privacyPolicy.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = privacyPolicy.pdf; sourceTree = "<group>"; };
 		CA4E8C9A2AE98F0500CE8D16 /* ProfileUserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileUserModel.swift; sourceTree = "<group>"; };
 		CA4E8C9C2AE99B7A00CE8D16 /* FurshetInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FurshetInfoModel.swift; sourceTree = "<group>"; };
 		CA50356A2B41A3CB00571266 /* HistoryOrdersViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryOrdersViewModel.swift; sourceTree = "<group>"; };
@@ -303,6 +309,15 @@
 			path = Components;
 			sourceTree = "<group>";
 		};
+		CA48E31D2B8F54DD004B121A /* WKWebView */ = {
+			isa = PBXGroup;
+			children = (
+				CA48E31E2B8F5553004B121A /* PrivacyPolicyViewController.swift */,
+				CA48E3202B8F599C004B121A /* PrivacyPolicyViewModel.swift */,
+			);
+			path = WKWebView;
+			sourceTree = "<group>";
+		};
 		CA5035692B41A37800571266 /* HistoryOrders */ = {
 			isa = PBXGroup;
 			children = (
@@ -414,6 +429,7 @@
 		CA6B20BF2B3AE4EC00D09572 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				CA48E3222B8FB2F2004B121A /* privacyPolicy.pdf */,
 				CAB2558D2AE053D4002EA4DB /* LaunchScreen.storyboard */,
 				CAB2558B2AE053D4002EA4DB /* Assets.xcassets */,
 			);
@@ -590,6 +606,7 @@
 		CAF7328C2B11EA0000820E0D /* Auth */ = {
 			isa = PBXGroup;
 			children = (
+				CA48E31D2B8F54DD004B121A /* WKWebView */,
 				CA598CD12B0FAD430024B9CE /* AuthViewController.swift */,
 				CAF7328D2B11EAD600820E0D /* AuthViewModel.swift */,
 				CAF732912B12188500820E0D /* CodeValidViewController.swift */,
@@ -709,6 +726,7 @@
 				CA1110112AE5008F00BD4C7C /* MyriadPro-LightIt.ttf in Resources */,
 				CA1110242AE5008F00BD4C7C /* MyriadPro-LightCond.ttf in Resources */,
 				CA110FF42AE5004100BD4C7C /* MyriadPro-SemiCn.ttf in Resources */,
+				CA48E3232B8FB2F3004B121A /* privacyPolicy.pdf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -782,6 +800,7 @@
 				CAF7328E2B11EAD600820E0D /* AuthViewModel.swift in Sources */,
 				CA110FEC2AE5000700BD4C7C /* RFontStyle.swift in Sources */,
 				CA6442882B8BAC39008F4D11 /* BasketProductViewModel.swift in Sources */,
+				CA48E3212B8F599C004B121A /* PrivacyPolicyViewModel.swift in Sources */,
 				CA23F7042B3F3815004AAA42 /* PositionModel.swift in Sources */,
 				CA7E9E002B585DD1008EC221 /* PromoBanerCellModel.swift in Sources */,
 				CA6B20C42B3AE79700D09572 /* BasketProductManager.swift in Sources */,
@@ -793,6 +812,7 @@
 				CAF732922B12188500820E0D /* CodeValidViewController.swift in Sources */,
 				CA9DCEBD2B03572B00A2253C /* EntranceViewModel.swift in Sources */,
 				CA7E9E062B585E11008EC221 /* PromoBanerCollectionCell.swift in Sources */,
+				CA48E31F2B8F5553004B121A /* PrivacyPolicyViewController.swift in Sources */,
 				CA6B20C62B3AE7C300D09572 /* BasketProductViewController.swift in Sources */,
 				CA86CFC72AFCE6B400149053 /* RegistrationViewModel.swift in Sources */,
 				CA6DF6E92AEAAE6600AC6F22 /* RegistrationUserViewController.swift in Sources */,

@@ -36,6 +36,9 @@ class BasketProductViewController: BaseViewController {
     // MARK: - Manager
     var basketManager: BasketProductManager = .shared
     
+    // MARK: - ViewModel
+    let viewModel = BasketProductViewModel()
+    
     // MARK: - Combine variable
     private var cancelable = Set<AnyCancellable>()
     
@@ -112,34 +115,25 @@ class BasketProductViewController: BaseViewController {
         configure()
         setupTabletView()
         receivingAlert()
-        self.basketManager.displayView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
+        self.viewModel.displayView()
         tableView.reloadData()
         receivingCost()
     }
     
     @objc func removeOrder() {
-        basketManager.cellModels.removeAll()
+        viewModel.cellModels.removeAll()
         basketManager.positions.removeAll()
         tableView.reloadData()
         totalPriceLabel.text = "0 р."
     }
     
     @objc func setOrder() {
-        basketManager.addOrder()
-        basketManager.alertSucceessTrigger.sink { [weak self ] () in
-            guard let self else { return }
-            self.alertChange(titleAlert: "Внимание", messageAlert: "Для заказа необходимо авторизоваться") { _ in
-                let vc = AuthViewController()
-                self.navigationController?.pushViewController(vc, animated: true)
-            } comletionNo: { _ in
-                self.navigationController?.tabBarController?.selectedIndex = 0
-            }
-        }.store(in: &cancelable)
-        basketManager.alertTwoSucceessTrigger.sink { [weak self] () in
+        viewModel.addOrder()
+        viewModel.alertTwoSucceessTrigger.sink { [weak self] () in
             guard let self else { return }
             self.alertChange(titleAlert: "Спасибо за заказ", messageAlert: "В ближайшее время с вами свяжется оператор") { _ in
                 self.navigationController?.tabBarController?.selectedIndex = 0
@@ -154,7 +148,7 @@ class BasketProductViewController: BaseViewController {
 private extension BasketProductViewController {
 
     func receivingAlert() {
-        basketManager.alertSucceessTrigger.sink { [weak self] () in
+        viewModel.alertSucceessTrigger.sink { [weak self] () in
             guard let self else { return }
             self.alertChange(titleAlert: "Внимание", messageAlert: "Для заказа необходимо авторизоваться") { _ in
                 let vc = AuthViewController()
@@ -166,9 +160,9 @@ private extension BasketProductViewController {
     }
     
     func receivingCost() {
-        basketManager.$cost.sink { [weak self] cost in
+        viewModel.$cost.sink { [weak self] cost in
             guard let self else { return }
-            self.totalPriceLabel.text = "\(self.basketManager.cost) р."
+            self.totalPriceLabel.text = "\(self.viewModel.cost) р."
         }.store(in: &cancelable)
         basketManager.$positions.sink { [weak self] _ in
             guard let self else { return }
@@ -220,11 +214,11 @@ private extension BasketProductViewController {
 
 extension BasketProductViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return basketManager.cellModels.count
+        return viewModel.cellModels.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cellModel = basketManager.cellModels[indexPath.item]
+        let cellModel = viewModel.cellModels[indexPath.item]
         let cell = tableView.dequeueReusableCell(withIdentifier: cellModel.cellIdentifier, for: indexPath)
         guard let baseCell = cell as? FTableViewCell else { return cell }
         cellModel.fillableCell = baseCell

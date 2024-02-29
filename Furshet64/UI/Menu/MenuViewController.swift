@@ -11,7 +11,7 @@ import Combine
 class MenuViewController: UIViewController {
     
     // MARK: - ViewModel
-    var viewModel: MenuViewModel = .init()
+    var viewModel = MenuViewModel()
     
     // MARK: - Combine
     private var cancelable = Set<AnyCancellable>()

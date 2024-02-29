@@ -18,7 +18,7 @@ class AuthViewController: BaseViewController {
     }
     
     // MARK: - ViewModel
-    var viewModel: AuthViewModel = .init()
+    let viewModel = AuthViewModel()
     // MARK: - Private variable
     private var listController: FPNCountryListViewController!
     private var cancelable = Set<AnyCancellable>()
@@ -74,10 +74,26 @@ class AuthViewController: BaseViewController {
         return button
     }()
     
+    lazy var privacyPolicyButton: UIButton = {
+        let button: UIButton = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle("При входе вы автоматически принимаете политику конфиденциальности", for: .normal)
+        button.backgroundColor = .clear
+        button.setTitleColor(.black, for: .normal)
+        button.titleLabel?.numberOfLines = 2
+        button.titleLabel?.font = .systemFont(ofSize: 15)
+        button.titleLabel?.textAlignment = .center
+        button.widthAnchor.constraint(equalToConstant: Constants.size.width).isActive = true
+        button.heightAnchor.constraint(equalToConstant: Constants.size.height).isActive = true
+        button.addTarget(self, action: #selector(actionButtonThree), for: .touchUpInside)
+        
+        return button
+    }()
+    
     // MARK: - Life Cycle View Controller
     override func viewDidLoad() {
         super.viewDidLoad()
-        setConstraint()
+        configure()
         setupTextField()
         setupConfig()
         bind()
@@ -91,6 +107,11 @@ class AuthViewController: BaseViewController {
     
     @objc func actionButtonTwo() {
         let vc = EntranceUserViewController()
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    @objc func actionButtonThree() {
+        let vc = PrivacyPolicyViewController()
         navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -129,7 +150,7 @@ private extension AuthViewController {
     }
     
     // MARK: - Constraints
-    func setConstraint() {
+    func configure() {
         let stack = UIStackView(views: [authButton, authEmailButton], axis: .vertical, spacing: 16)
         let finalStack = UIStackView(views: [phoneUserTextField, stack], axis: .vertical, spacing: 45)
         view.addSubview(finalStack)
@@ -137,6 +158,11 @@ private extension AuthViewController {
         NSLayoutConstraint.activate([
             finalStack.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             finalStack.centerYAnchor.constraint(equalTo:view.centerYAnchor)
+        ])
+        view.addSubview(privacyPolicyButton)
+        NSLayoutConstraint.activate([
+            privacyPolicyButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            privacyPolicyButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -90)
         ])
     }
     
