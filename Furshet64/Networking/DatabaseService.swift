@@ -19,6 +19,8 @@ class DatabaseService {
     private var typeProductRef: CollectionReference { db.collection("typeProduct") }
     private var productRef: CollectionReference { db.collection("menu") }
     private var orderRef: CollectionReference { db.collection("orders") }
+    private var promotionRef: CollectionReference { db.collection("promotion")}
+    private var promotionImageRef: CollectionReference { db.collection("promotionImage") }
     
     func setProfile(user: ProfileUser, completion: @escaping (Result<ProfileUser, Error>) -> ()) {
         usersRef.document(user.id).setData(user.representation) { error in
@@ -47,7 +49,7 @@ class DatabaseService {
     func getFurshetInfo(completion: @escaping(Result<[FurshetInfo], Error>) -> ()) {
         furshetInfoRef.getDocuments { docSnapshot, error in
             if let docSnapshot = docSnapshot {
-                var furshetInfos = [FurshetInfo]()
+                var furshetInfos: [FurshetInfo] = []
                 for doc in docSnapshot.documents {
                     if let furshetInfo = FurshetInfo(doc: doc) {
                         furshetInfos.append(furshetInfo)
@@ -63,7 +65,7 @@ class DatabaseService {
     func getTypeProduct(completion: @escaping(Result<[MenuType], Error>) -> ()){
         typeProductRef.getDocuments { docSnapshot, error in
             if let docSnapshot = docSnapshot {
-                var typeProducts = [MenuType]()
+                var typeProducts: [MenuType] = []
                 for doc in docSnapshot.documents {
                     if let typeProduct = MenuType(doc: doc) {
                         typeProducts.append(typeProduct)
@@ -80,7 +82,7 @@ class DatabaseService {
         let predicate = NSPredicate(format: "typeProduct == %@", productType)
         productRef.filter(using: predicate).getDocuments { docSnapshot, error in
             if let docSnapshot = docSnapshot {
-                var products = [Product]()
+                var products: [Product] = []
                 for doc in docSnapshot.documents {
                     if let product = Product(doc: doc) {
                         products.append(product)
@@ -152,5 +154,35 @@ class DatabaseService {
         }
     }
     
+   func getPromotion(imageId: String, completion: @escaping(Result<Promotion, Error>) -> ()) {
+       let predicate = NSPredicate(format: "id == &@", imageId)
+       promotionRef.filter(using: predicate).getDocuments { docSnapshot, error in
+           if let docSnapshot = docSnapshot {
+               for doc in docSnapshot.documents {
+                   if let promotion = Promotion(doc: doc) {
+                       completion(.success(promotion))
+                   } else if let error = error {
+                       completion(.failure(error))
+                   }
+               }
+           }
+       }
+    }
+    
+    func getImagePromotion(completion: @escaping(Result<[PromotionImage], Error>) -> ()) {
+        promotionImageRef.getDocuments { docSnapshot, error in
+            if let docSnapshot = docSnapshot {
+                var promotionImages: [PromotionImage] = []
+                for doc in docSnapshot.documents {
+                    if let promotionImage = PromotionImage(doc: doc) {
+                        promotionImages.append(promotionImage)
+                    }
+                }
+                completion(.success(promotionImages))
+            } else if let error {
+                completion(.failure(error))
+            }
+        }
+    }
+    
 }
-

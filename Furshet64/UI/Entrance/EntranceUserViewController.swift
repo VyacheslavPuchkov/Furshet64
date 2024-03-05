@@ -33,7 +33,7 @@ class EntranceUserViewController: BaseViewController {
         label.text = "Авторизация"
         label.textAlignment = .center
         label.font = .defaultLargeTitleBold
-        label.textColor = .black
+        label.textColor = .systemGreen
         label.backgroundColor = .clear
         return label
     }()
@@ -46,7 +46,7 @@ class EntranceUserViewController: BaseViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.layer.masksToBounds = true
         button.setTitle("Войти", for: .normal)
-        button.backgroundColor = .black.withAlphaComponent(0.8)
+        button.backgroundColor = .systemGreen.withAlphaComponent(0.8)
         button.titleLabel?.font = .bodyLarge2
         button.setTitleColor(.white, for: .normal)
         button.widthAnchor.constraint(equalToConstant: Constants.size.width).isActive = true
@@ -64,12 +64,12 @@ class EntranceUserViewController: BaseViewController {
         button.setTitle("Нет аккаунта?", for: .normal)
         button.backgroundColor = .clear
         button.titleLabel?.font = .bodyLarge2
-        button.setTitleColor(.black, for: .normal)
+        button.setTitleColor(.systemGreen, for: .normal)
         button.widthAnchor.constraint(equalToConstant: Constants.size.width).isActive = true
         button.heightAnchor.constraint(equalToConstant: Constants.size.height).isActive = true
         button.layer.cornerRadius = 6
         button.layer.borderWidth = 2
-        button.layer.borderColor = UIColor.black.cgColor
+        button.layer.borderColor = UIColor.systemGreen.cgColor
         button.addTarget(self, action: #selector(registrationActionButton), for: .touchUpInside)
         
         return button
@@ -80,7 +80,7 @@ class EntranceUserViewController: BaseViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.layer.masksToBounds = true
         button.setTitle("Авторизоваться с помощью телефона", for: .normal)
-        button.backgroundColor = .black.withAlphaComponent(0.8)
+        button.backgroundColor = .systemGreen.withAlphaComponent(0.8)
         button.titleLabel?.font = .bodyLarge
         button.setTitleColor(.white, for: .normal)
         button.widthAnchor.constraint(equalToConstant: Constants.size.width).isActive = true
@@ -96,7 +96,7 @@ class EntranceUserViewController: BaseViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("При входе вы автоматически принимаете политику конфиденциальности", for: .normal)
         button.backgroundColor = .clear
-        button.setTitleColor(.black, for: .normal)
+        button.setTitleColor(.systemGreen, for: .normal)
         button.titleLabel?.numberOfLines = 2
         button.titleLabel?.font = .systemFont(ofSize: 15)
         button.titleLabel?.textAlignment = .center

@@ -7,8 +7,11 @@
 
 import Foundation
 import UIKit
+import Combine
 
 class PromoBanerCell: FTableViewCell {
+    
+    var cancelable = Set<AnyCancellable>()
     
     // MARK: - ViewModel
     var currentViewModel: PromoBanerCellModel? {
@@ -42,6 +45,7 @@ class PromoBanerCell: FTableViewCell {
         configureCollectView()
         configureView()
         setupCollectionView()
+        collectViewReload()
     }
     
     private func configureCollectView() {
@@ -70,6 +74,14 @@ class PromoBanerCell: FTableViewCell {
     
     override func fill(viewModel: FCellViewModel) {
         super.fill(viewModel: viewModel)
+        collectViewReload()
+    }
+    
+    func collectViewReload() {
+        cancelable.removeAll()
+        currentViewModel?.$cellModels.sink(receiveValue: { [weak self]_ in
+            self?.collectionView.reloadData()
+        }).store(in: &cancelable)
     }
     
 }

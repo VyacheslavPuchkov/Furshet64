@@ -10,8 +10,8 @@ import Combine
 import FirebaseAuth
 
 protocol ChangeCountProduct {
-    func addProduct()
-    func deleteProduct()
+    func addProduct(id: String)
+    func deleteProduct(id: String)
 }
 
 class BasketProductViewModel: NSObject {
@@ -51,7 +51,7 @@ class BasketProductViewModel: NSObject {
     
     func addOrder() {
         guard let userId = Auth.auth().currentUser?.uid else { return }
-        let order = OrderModel(id: UUID().uuidString, positions: positions, userID: userId, date: Date(), cost: cost)
+        let order = OrderModel(id: UUID().uuidString, positions: BasketProductManager.shared.positions, userID: userId, date: Date(), cost: cost)
         DatabaseService.shared.setOrder(order: order) { [weak self] result in
             guard let self else { return }
             switch result {
@@ -66,41 +66,30 @@ class BasketProductViewModel: NSObject {
     func makeViewModels(for order: [Position]) {
         cellModels = []
         order.forEach { cellModels.append(
-            OrderTableCellModel(id: UUID().uuidString, product: .init(id: UUID().uuidString, title: $0.product.title, price: $0.product.price, typeProduct: $0.product.typeProduct, weight: $0.product.weight, compound: $0.product.compound), count: $0.count, cost: $0.cost, delegate: self))
+            OrderTableCellModel(id: $0.id, product: .init(id: $0.product.id, title: $0.product.title, price: $0.product.price, typeProduct: $0.product.typeProduct, weight: $0.product.weight, compound: $0.product.compound), count: $0.count, cost: $0.cost, delegate: self))
         }
     }
     
 }
 
 extension BasketProductViewModel: ChangeCountProduct {
-    func addProduct() {
-       print("plus")
+    func addProduct(id: String) {
+        BasketProductManager.shared.positions.indices.forEach { index in
+            guard BasketProductManager.shared.positions[index].id == id else { return }
+                BasketProductManager.shared.positions[index].count += 1
+        }
+        receivingPosition()
     }
     
-    func deleteProduct() {
-        print("minus")
+    func deleteProduct(id: String) {
+        BasketProductManager.shared.positions.indices.forEach { index in
+            guard BasketProductManager.shared.positions[index].id == id && BasketProductManager.shared.positions[index].count > 1 else { return BasketProductManager.shared.positions[index].count = 1 }
+            BasketProductManager.shared.positions[index].count -= 1
+        }
+        receivingPosition()
     }
-    
     
 }
-
-//extension BasketProductViewModel: ChangeCountProduct {
-//    func deleteProduct(viewModel: OrderTableCellModel?, view: CountProductView) {
-//        guard let viewModel else { return }
-//        viewModel.count += 1
-//        view.label.text = "\(viewModel.count)"
-//        viewModel.cost = viewModel.count * viewModel.product.price
-//    }
-//
-//    func addProduct(viewModel: OrderTableCellModel?, view: CountProductView) {
-//        guard let viewModel else { return }
-//        guard viewModel.count > 1 else { return }
-//        viewModel.count -= 1
-//        view.label.text = "\(viewModel.count)"
-//        viewModel.cost = viewModel.count * viewModel.product.price
-//    }
-//
-//}
 
     
 

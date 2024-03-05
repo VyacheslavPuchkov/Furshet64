@@ -109,7 +109,6 @@ extension MenuViewController: UITableViewDelegate, UITableViewDataSource {
         if section == .zero {
             return 1
         } else {
-            print(viewModel.cellModels.count)
             return viewModel.cellModels.count
         }
     }

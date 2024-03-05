@@ -10,9 +10,6 @@ import WebKit
 
 class PrivacyPolicyViewController: UIViewController {
     
-    // MARK: - ViewModel
-    let viewModel = PrivacyPolicyViewModel()
-    
     // MARK: - UI
     var webView: WKWebView = {
         let webView: WKWebView = WKWebView()
@@ -24,7 +21,7 @@ class PrivacyPolicyViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configure()
-        viewModel.getRequest(webView: webView)
+        getRequest()
     }
     
     private func configure() {
@@ -36,45 +33,10 @@ class PrivacyPolicyViewController: UIViewController {
             webView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
     }
-
+    func getRequest() {
+        guard let url = URL(string: "http://furshet64.ru/conf.html") else { return }
+        let urlRequest = URLRequest(url: url)
+        webView.load(urlRequest)
+    }
+    
 }
-//class ViewController: UIViewController, WKNavigationDelegate {
-//
-//    let webView = WKWebView()
-//
-//    override func viewDidLoad() {
-//        super.viewDidLoad()
-//
-//        webView.frame = view.bounds
-//        webView.navigationDelegate = self
-//
-//        let url = URL(string: "https://www.google.com")!
-//        let urlRequest = URLRequest(url: url)
-//
-//        webView.load(urlRequest)
-//        webView.autoresizingMask = [.flexibleWidth,.flexibleHeight]
-//        view.addSubview(webView)
-//    }
-//
-//    func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
-//        if navigationAction.navigationType == .linkActivated  {
-//            if let url = navigationAction.request.url,
-//                let host = url.host, !host.hasPrefix("www.google.com"),
-//                UIApplication.shared.canOpenURL(url) {
-//                UIApplication.shared.open(url)
-//                print(url)
-//                print("Redirected to browser. No need to open it locally")
-//                decisionHandler(.cancel)
-//                return
-//            } else {
-//                print("Open it locally")
-//                decisionHandler(.allow)
-//                return
-//            }
-//        } else {
-//            print("not a user click")
-//            decisionHandler(.allow)
-//            return
-//        }
-//    }
-//}

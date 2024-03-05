@@ -6,15 +6,32 @@
 //
 
 import UIKit
+import Combine
 
 class PromoBanerCellModel: FCellViewModel {
     
-    var cellModels: [FCellViewModel] = []
+    @Published var cellModels: [FCellViewModel] = []
     
     init() {
         super.init(cellIdentifier: "PromoBanerCell")
-        let imageName: [String] = ["banner1.jpg","banner2.jpg","banner3.jpg"]
-        imageName.forEach { cellModels.append(PromoBanerCollectionCellModel(image: UIImage(named: "productFoto") ?? UIImage(), imageName: $0))}
+        getPromotionImage()
+    }
+    
+    func getPromotionImage() {
+        DatabaseService.shared.getImagePromotion { [weak self] result in
+            guard let self else { return }
+            switch result {
+            case .success(let promotionImage):
+                self.makeViewModels(for: promotionImage)
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+    }
+    
+    func makeViewModels(for promotionImage: [PromotionImage]) {
+        promotionImage.forEach { cellModels.append(PromoBanerCollectionCellModel(image: UIImage(named: "productFoto") ?? UIImage(), imageName: $0.title))
+        }
     }
 
     

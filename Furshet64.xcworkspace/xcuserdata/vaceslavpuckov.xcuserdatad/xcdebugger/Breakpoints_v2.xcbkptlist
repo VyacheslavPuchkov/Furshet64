@@ -71,54 +71,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "159E6769-571A-4448-AF7F-EEEE7326FD74"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Furshet64/UI/Menu/Components/Cells/PromoBanerCell/PromoBanerCellModel.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "17"
-            endingLineNumber = "17"
-            landmarkName = "init()"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "159E6769-571A-4448-AF7F-EEEE7326FD74 - d729251bec77a0cd"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Furshet64.PromoBanerCellModel.init() -&gt; Furshet64.PromoBanerCellModel"
-                  moduleName = "Furshet64"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/vaceslavpuckov/Desktop/Furshet64/Furshet64/UI/Menu/Components/Cells/PromoBanerCell/PromoBanerCellModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "17"
-                  endingLineNumber = "17"
-                  offsetFromSymbolStart = "531">
-               </Location>
-               <Location
-                  uuid = "159E6769-571A-4448-AF7F-EEEE7326FD74 - 26e0d6d139ec6045"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.String) -&gt; () in Furshet64.PromoBanerCellModel.init() -&gt; Furshet64.PromoBanerCellModel"
-                  moduleName = "Furshet64"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/vaceslavpuckov/Desktop/Furshet64/Furshet64/UI/Menu/Components/Cells/PromoBanerCell/PromoBanerCellModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "17"
-                  endingLineNumber = "17"
-                  offsetFromSymbolStart = "107">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "81190090-0DCA-4555-9D9B-D0DF07E26102"
             shouldBeEnabled = "No"
             ignoreCount = "0"
@@ -254,8 +206,8 @@
             filePath = "Furshet64/UI/Menu/MenuViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "113"
-            endingLineNumber = "113"
+            startingLineNumber = "112"
+            endingLineNumber = "112"
             landmarkName = "tableView(_:numberOfRowsInSection:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -270,58 +222,10 @@
             filePath = "Furshet64/UI/Menu/MenuViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "125"
-            endingLineNumber = "125"
+            startingLineNumber = "124"
+            endingLineNumber = "124"
             landmarkName = "tableView(_:cellForRowAt:)"
             landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "EE0B01B0-AD59-4AEC-B31B-C26F55441F90"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Furshet64/UI/BasketProduct/BasketProductViewModel.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "98"
-            endingLineNumber = "98"
-            landmarkName = "unknown"
-            landmarkType = "0">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "DEC5CD93-D069-4469-86A6-C8E80CBB1DF6"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Furshet64/UI/BasketProduct/BasketProductViewModel.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "95"
-            endingLineNumber = "95"
-            landmarkName = "unknown"
-            landmarkType = "0">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "C871449A-DBD7-4FC4-BF29-D2F581CC17E8"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Furshet64/UI/BasketProduct/BasketProductViewModel.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "88"
-            endingLineNumber = "88"
-            landmarkName = "unknown"
-            landmarkType = "0">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -334,8 +238,8 @@
             filePath = "Furshet64/UI/Menu/MenuViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "127"
-            endingLineNumber = "127"
+            startingLineNumber = "126"
+            endingLineNumber = "126"
             landmarkName = "tableView(_:cellForRowAt:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -350,8 +254,8 @@
             filePath = "Furshet64/UI/Menu/MenuViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "128"
-            endingLineNumber = "128"
+            startingLineNumber = "127"
+            endingLineNumber = "127"
             landmarkName = "tableView(_:cellForRowAt:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -375,71 +279,8 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "6ACD9335-D3B7-42D7-94A2-957E3FFC3699"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Furshet64/UI/Auth/WKWebView/PrivacyPolicyViewModel.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "20"
-            endingLineNumber = "20"
-            landmarkName = "getRequest(webView:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "6ACD9335-D3B7-42D7-94A2-957E3FFC3699 - 8e7de11a1b18282e"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Furshet64.PrivacyPolicyViewModel.getRequest(webView: __C.WKWebView) -&gt; ()"
-                  moduleName = "Furshet64"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/vaceslavpuckov/Desktop/Furshet64/Furshet64/UI/Auth/WKWebView/PrivacyPolicyViewModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "20"
-                  endingLineNumber = "20"
-                  offsetFromSymbolStart = "244">
-               </Location>
-               <Location
-                  uuid = "6ACD9335-D3B7-42D7-94A2-957E3FFC3699 - 8e7de11a1b18282e"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Furshet64.PrivacyPolicyViewModel.getRequest(webView: __C.WKWebView) -&gt; ()"
-                  moduleName = "Furshet64"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/vaceslavpuckov/Desktop/Furshet64/Furshet64/UI/Auth/WKWebView/PrivacyPolicyViewModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "20"
-                  endingLineNumber = "20"
-                  offsetFromSymbolStart = "343">
-               </Location>
-               <Location
-                  uuid = "6ACD9335-D3B7-42D7-94A2-957E3FFC3699 - 8e7de11a1b18282e"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Furshet64.PrivacyPolicyViewModel.getRequest(webView: __C.WKWebView) -&gt; ()"
-                  moduleName = "Furshet64"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/vaceslavpuckov/Desktop/Furshet64/Furshet64/UI/Auth/WKWebView/PrivacyPolicyViewModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "20"
-                  endingLineNumber = "20"
-                  offsetFromSymbolStart = "571">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "905B3CE6-0AE6-4B5C-A956-4A1EA56B01FE"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Furshet64/UI/Menu/Components/Cells/ProductCell/ProductCell.swift"
@@ -455,7 +296,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "E4AE5DD0-1B87-4282-AA65-2D3155BE20D8"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Furshet64/UI/Menu/Components/Cells/ProductCell/ProductCell.swift"
@@ -487,7 +328,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "7FBA252B-03BA-43C4-96F5-A94E0FB9AF50"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Furshet64/UI/Menu/Components/Cells/ProductCell/ProductCell.swift"
@@ -497,6 +338,214 @@
             endingLineNumber = "176"
             landmarkName = "fill(viewModel:)"
             landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "46028B4C-00F4-4A81-BFFF-CAC418A24245"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Furshet64/UI/Menu/Components/Cells/PromoBanerCell/PromoBanerCellModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "21"
+            endingLineNumber = "21"
+            landmarkName = "getPromotionImage()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "46028B4C-00F4-4A81-BFFF-CAC418A24245 - 8aae2b73dff2b433"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Furshet64.PromoBanerCellModel.getPromotionImage() -&gt; ()"
+                  moduleName = "Furshet64"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/vaceslavpuckov/Desktop/Furshet64/Furshet64/UI/Menu/Components/Cells/PromoBanerCell/PromoBanerCellModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "21"
+                  endingLineNumber = "21"
+                  offsetFromSymbolStart = "30">
+               </Location>
+               <Location
+                  uuid = "46028B4C-00F4-4A81-BFFF-CAC418A24245 - 854b5cf87237d05d"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Result&lt;Swift.Array&lt;Furshet64.PromotionImage&gt;, Swift.Error&gt;) -&gt; () in Furshet64.PromoBanerCellModel.getPromotionImage() -&gt; ()"
+                  moduleName = "Furshet64"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/vaceslavpuckov/Desktop/Furshet64/Furshet64/UI/Menu/Components/Cells/PromoBanerCell/PromoBanerCellModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "21"
+                  endingLineNumber = "21"
+                  offsetFromSymbolStart = "145">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "1D7038C6-73CF-4250-A082-8965075131E4"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Furshet64/UI/Menu/Components/Cells/PromoBanerCollectViewCell/PromoBanerCollectionCell.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "66"
+            endingLineNumber = "66"
+            landmarkName = "setFoto(title:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "E4553A39-EBC3-4084-B46A-CFACFB8825D2"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Furshet64/UI/Menu/Components/Cells/PromoBanerCollectViewCell/PromoBanerCollectionCell.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "65"
+            endingLineNumber = "65"
+            landmarkName = "setFoto(title:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "01DCFC94-CF4D-4828-A7BE-CC0FF35FCC2E"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Furshet64/UI/Menu/Components/Cells/PromoBanerCollectViewCell/PromoBanerCollectionCell.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "74"
+            endingLineNumber = "74"
+            landmarkName = "fill(viewModel:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "9511351C-F08A-4703-886E-12EF2FC05D5B"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Furshet64/UI/Menu/Components/Cells/PromoBanerCollectViewCell/PromoBanerCollectionCell.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "71"
+            endingLineNumber = "71"
+            landmarkName = "fill(viewModel:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "E7E42F98-F5BA-4838-9999-B4D3FA2A9D5D"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Furshet64/UI/Menu/Components/Cells/ProductCell/ProductCell.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "161"
+            endingLineNumber = "161"
+            landmarkName = "fill(viewModel:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "7F0883E9-8FF0-4CDB-869E-4891B5A38E6C"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Furshet64/UI/Menu/Components/Cells/PromoBanerCell/PromoBanerCell.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "75"
+            endingLineNumber = "75"
+            landmarkName = "fill(viewModel:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "E3E1D936-B639-4C69-9079-FBFE6EB905FA"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Furshet64/UI/BasketProduct/BasketProductViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "42"
+            endingLineNumber = "42"
+            landmarkName = "receivingPosition()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "484561AF-A51A-4148-B157-2A607597C4C5"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Furshet64/UI/BasketProduct/BasketProductViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "41"
+            endingLineNumber = "41"
+            landmarkName = "receivingPosition()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "484561AF-A51A-4148-B157-2A607597C4C5 - 52dd6f8e54fd4ae4"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Furshet64.BasketProductViewModel.receivingPosition() -&gt; ()"
+                  moduleName = "Furshet64"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/vaceslavpuckov/Desktop/Furshet64/Furshet64/UI/BasketProduct/BasketProductViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "41"
+                  endingLineNumber = "41"
+                  offsetFromSymbolStart = "85">
+               </Location>
+               <Location
+                  uuid = "484561AF-A51A-4148-B157-2A607597C4C5 - ba26fafa60578674"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Array&lt;Furshet64.Position&gt;) -&gt; () in Furshet64.BasketProductViewModel.receivingPosition() -&gt; ()"
+                  moduleName = "Furshet64"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/vaceslavpuckov/Desktop/Furshet64/Furshet64/UI/BasketProduct/BasketProductViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "41"
+                  endingLineNumber = "41"
+                  offsetFromSymbolStart = "160">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

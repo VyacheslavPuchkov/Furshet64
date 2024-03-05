@@ -17,7 +17,7 @@ class PrivacyPolicyViewModel: NSObject {
     }
     
     func getRequest(webView: WKWebView) {
-        guard let url = URL(string: "http://google.com") else { return }
+        guard let url = URL(string: "http://furshet64.ru/conf.html") else { return }
         let urlRequest = URLRequest(url: url)
         webView.load(urlRequest)
     }

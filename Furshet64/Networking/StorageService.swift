@@ -15,7 +15,7 @@ class StorageService {
     
     var typeProductRef: StorageReference { storage.child("imageTypeProduct") }
     var productRef: StorageReference { storage.child("imageProduct") }
-    var bannerRef: StorageReference { storage.child("imageBanner") }
+    var bannerRef: StorageReference { storage.child("imagePromotion") }
     
     func dowloadPicture(picName: String, ref: StorageReference, completion: @escaping([UIImage]) -> ()) {
         var image: UIImage = UIImage(named: "productFoto")!
