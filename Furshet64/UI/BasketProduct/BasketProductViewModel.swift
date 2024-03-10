@@ -12,6 +12,7 @@ import FirebaseAuth
 protocol ChangeCountProduct {
     func addProduct(id: String)
     func deleteProduct(id: String)
+    func deletePosition(id: String)
 }
 
 class BasketProductViewModel: NSObject {
@@ -87,6 +88,10 @@ extension BasketProductViewModel: ChangeCountProduct {
             BasketProductManager.shared.positions[index].count -= 1
         }
         receivingPosition()
+    }
+    
+    func deletePosition(id: String) {
+        }
     }
     
 }

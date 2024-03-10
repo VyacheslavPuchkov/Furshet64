@@ -189,6 +189,11 @@ class OrderTableCell: FTableViewCell {
         guard let currentViewModel else { return }
         currentViewModel.delegate.deleteProduct(id: currentViewModel.id)
     }
+    
+    @objc func deletePosition() {
+        guard let currentViewModel else { return }
+        currentViewModel.delegate.deletePosition(id: currentViewModel.id)
+    }
  
 }
 
